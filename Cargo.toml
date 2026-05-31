@@ -72,7 +72,7 @@ sha2 = "0.10"
 # (no aho-corasick/memchr pulls) and supports the ASCII `\b`/class/repetition
 # syntax these patterns use; its MSRV (1.65) is well under the workspace's 1.78.
 regex-lite = "0.1"
-base64 = "0.21"
+base64 = "0.22"
 # UR PSBT QR transport (US-079). `ur` is dspicher/ur-rs, the PRD's required
 # BCR-2020-005 fountain-code implementation for animated QR PSBT exchange.
 ur = "0.4.1"
