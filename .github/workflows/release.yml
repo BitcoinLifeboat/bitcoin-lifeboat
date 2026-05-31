@@ -290,7 +290,7 @@ jobs:
 
       - name: Windows OV sign MSI when secrets are present
         if: matrix.platform == 'windows' && steps.windows_signing.outputs.ready == 'true'
-        uses: azure/trusted-signing-action@v0
+        uses: azure/trusted-signing-action@v2
         with:
           azure-tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           azure-client-id: ${{ secrets.AZURE_CLIENT_ID }}
