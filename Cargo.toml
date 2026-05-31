@@ -79,7 +79,7 @@ ur = "0.4.1"
 # MSRV pin for `ur`'s `crc ^3` subtree: crc 3.4.0 requires Rust 1.83, while
 # the root workspace is pinned to 1.78. Keep this as a direct version-pin
 # dependency in qr-psbt until the root MSRV moves.
-crc = "=3.2.1"
+crc = "=3.4.0"
 # QR PSBT transport (US-080): BBQr split/join plus QR image decoding. Keep
 # default QR/image generation features off in member crates unless a story needs
 # them; the root crate decodes from luminance buffers and uses its own test QR
