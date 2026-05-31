@@ -1,0 +1,23 @@
+{
+  "wallet_name": "lifeboat_test_singlesig",
+  "descriptors": [
+    {
+      "desc": "wpkh([71348c8a/84'/1'/0']tpubDCTb5JhwTc9S3pfEMNMajVPCEgCDxHTiBwmJgzLa2Znne2pPQ4dh1CjpS7ibiPBEXeJRJxddRaW1ZxxWyDvrndrQk8vqfco9Uvr7Eseo55L/0/*)#r6yctejg",
+      "timestamp": 1705276800,
+      "active": true,
+      "internal": false,
+      "range": [0, 999],
+      "next": 0,
+      "next_index": 0
+    },
+    {
+      "desc": "wpkh([71348c8a/84'/1'/0']tpubDCTb5JhwTc9S3pfEMNMajVPCEgCDxHTiBwmJgzLa2Znne2pPQ4dh1CjpS7ibiPBEXeJRJxddRaW1ZxxWyDvrndrQk8vqfco9Uvr7Eseo55L/1/*)#jwpekvzs",
+      "timestamp": 1705276800,
+      "active": true,
+      "internal": true,
+      "range": [0, 999],
+      "next": 0,
+      "next_index": 0
+    }
+  ]
+}

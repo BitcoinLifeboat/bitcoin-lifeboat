@@ -1,0 +1,178 @@
+---
+source: crates/runbook-engine/src/owner.rs
+expression: "render_markdown(template, &data, mode)"
+---
+# Bitcoin Lifeboat - Singlesig + Passphrase Recovery Runbook
+
+> ⚠️ This document contains an extended public key (xpub).
+> An xpub reveals every receive AND change address for this wallet,
+> past and future. Anyone with this xpub can see your wallet's
+> entire transaction history on the blockchain.
+> Store this where you store your seed backup. Do not email it,
+> do not upload it, do not share it on chat.
+
+## 1. Safety warning
+
+Never type your seed words into a website, an app, or a search box.
+
+Bitcoin Lifeboat never asks for your seed phrase. Anyone who does is trying to steal from you.
+
+This runbook holds no secrets. Keep your seed words on paper or metal only, never on a phone or computer.
+
+## 2. Do not panic
+
+If you are reading this during an emergency, slow down.
+
+Recovering a Bitcoin wallet is a careful, step-by-step process. Most mistakes come from rushing.
+
+Take a break before each major step. Nothing in this runbook needs to be done in a hurry.
+
+## 3. Stop and call a trusted helper
+
+If any step is unclear, stop and ask a person you trust before continuing.
+
+Do not let anyone watch you type your seed words or photograph your backups.
+
+A trusted helper can be a family member, a friend, or a Bitcoin-literate advisor. Record who to call in section 9.
+
+## 4. Required materials checklist
+
+- [ ] This runbook, printed on paper.
+
+- [ ] Your written or stamped descriptor backup.
+
+- [ ] Your hardware wallet, or your seed backup.
+
+- [ ] Your passphrase, from memory or from its separate backup (never stored with the seed).
+
+- [ ] A computer with the wallet software listed in section 10.
+
+## 5. Wallet type summary
+
+Wallet type: singlesig.
+
+- Script type: wpkh
+
+- Number of keys: 1
+
+## 6. Descriptor backup reminder
+
+Your descriptor is the map to your wallet. Without it, recovery is much harder and sometimes impossible.
+
+Keep a written or stamped copy of the descriptor with each seed backup. It contains no secrets, but it reveals your balance history, so store it as privately as your seed.
+
+Descriptor (full):
+
+```
+wpkh([f0f0f0f0/84h/1h/0h]tpubD6NzVbExampleSinglesigKey000000000000000000000000000000000000000000000000000000000000/0/*)#aaaaaaaa
+```
+
+## 7. Signer and device checklist
+
+Confirm your signing device powers on and that you hold its seed backup.
+
+- Signer A: fingerprint f0f0f0f0, path m/84h/1h/0h, device Coldcard Mk4
+
+Signer A location: ______________________
+
+## 8. Passphrase reminder
+
+This wallet uses a passphrase (sometimes called a 25th word or BIP39 passphrase).
+
+The passphrase is NOT written in this runbook, and it never will be. You must remember it or keep it in a separate backup, stored apart from the seed words.
+
+Without the exact passphrase - including capitalisation and spaces - the seed words alone will not reach this wallet.
+
+## 9. Emergency contacts
+
+Fill these in by hand. Do not store the contact details of strangers or so-called recovery services here.
+
+Trusted helper name: ______________________
+
+Trusted helper phone: ______________________
+
+Person who inherits this wallet: ______________________
+
+Attorney or executor: ______________________
+
+## 10. Wallet software dependencies
+
+Recovery may need specific wallet software. Record what this wallet depends on:
+
+- Sparrow
+
+- Bitcoin Core
+
+If that software stops working, your descriptor and seed still allow recovery with other BIP380-compatible wallet software.
+
+## 11. Verification steps
+
+1. Load this descriptor into your wallet software in WATCH-ONLY mode (no seed entered).
+
+2. Confirm the first receive address shown matches an address you already have on record.
+
+3. On a test network (signet or testnet), rehearse signing and broadcasting a small transaction with your device.
+
+4. Record today's date in section 13 once the drill succeeds.
+
+Rehearse this drill at least once every twelve months.
+
+## 12. Stop conditions
+
+Stop immediately and seek help if any of these happen:
+
+- A website, app, or person asks you to type your seed words.
+
+- A derived address does not match the address you expected.
+
+- Anyone pressures you to hurry, to share your screen, or to send a test payment.
+
+- The wallet software shows a balance or history you do not recognise.
+
+When in doubt, stop and call the trusted helper recorded in section 9.
+
+## 13. Date of last successful drill
+
+Last successful drill: 2026-05-01
+
+Write the date here each time you complete the verification steps above.
+
+## 14. Next recommended drill date
+
+Next recommended drill: 2027-05-01
+
+This is twelve months after the last successful drill. Sooner is better if your hardware or software has changed.
+
+## 15. Version and report hash
+
+- Bitcoin Lifeboat version: 0.1.0
+
+- Report hash: sha256:1111111111111111111111111111111111111111111111111111111111111111
+
+These identify the exact report this runbook was generated from, so you can reproduce it.
+
+## 16. Disclaimer
+
+```
+About this document
+
+Bitcoin Lifeboat is an open-source diagnostic and rehearsal tool.
+This document reflects only the information you provided. It cannot
+detect missing materials Lifeboat was not asked to check, it cannot
+verify the physical location or condition of your backups, and it
+cannot predict the future condition of your hardware wallets.
+
+A "Ready" status means the metadata you provided appears complete
+for the scenarios Lifeboat tested. It does not mean your bitcoin
+is safe. It does not mean recovery will succeed in a real emergency.
+
+You are responsible for verifying recovery end-to-end on a test
+network before trusting your real wallet. Consult an attorney for
+estate planning. Consult a tax professional for tax implications.
+
+Bitcoin Lifeboat does not custody funds, does not contact you,
+does not call you, and does not ask for your seed phrase.
+
+If anyone claiming to be from Bitcoin Lifeboat contacts you, it
+is a scam. Hang up.
+```

@@ -1,0 +1,188 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/lifeboat-core",
+    "crates/descriptor-audit",
+    "crates/readiness-score",
+    "crates/address-derive",
+    "crates/wallet-imports",
+    "crates/sensitive-input-detector",
+    "crates/psbt-tools",
+    "crates/qr-psbt",
+    "crates/hwi-bridge",
+    "crates/miniscript-viz",
+    "crates/report-engine",
+    "crates/runbook-engine",
+    "crates/error-taxonomy",
+    "crates/desktop-commands",
+    "cli/lifeboat",
+]
+# The cargo-fuzz crate (US-016) is its own detached workspace (it depends on
+# `libfuzzer-sys` and only builds under nightly). Exclude it so the stable
+# quality gate (`cargo build/clippy/test --workspace`) never touches it.
+#
+# The Tauri desktop app (US-041) is likewise a DETACHED workspace
+# (`apps/desktop/src-tauri`): it pulls a ~459-crate GUI tree, needs a newer
+# toolchain than the core MSRV (pinned locally via its own rust-toolchain.toml),
+# and links webkit2gtk/gtk system libraries. Excluding it keeps the core gate
+# fast, 1.78-pinned, and buildable without desktop system dependencies.
+#
+# `crates/signet-lab` is another detached workspace: `bdk_wallet 3.0.0` declares
+# Rust 1.85.0, so the Signet/regtest drill wallet code pins a local toolchain
+# without raising the core workspace's Rust 1.78 MSRV.
+#
+# `crates/psbt-drill` is paired with signet-lab for v0.2 PSBT signing drills and
+# also depends on the BDK wallet stack, so it uses the same detached Rust 1.85
+# pattern instead of raising the root core MSRV.
+exclude = [
+    "fuzz",
+    "apps/desktop/src-tauri",
+    "crates/signet-lab",
+    "crates/psbt-drill",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.78"
+license = "MIT"
+repository = "https://github.com/__GH_ORG__/bitcoin-lifeboat"
+homepage = "https://bitcoinlifeboat.org"
+authors = ["Bitcoin Lifeboat Contributors"]
+
+# Core dependencies are pinned here per PRD Appendix B.1. Member crates opt in
+# with `<dep>.workspace = true` as each story wires them up; this table is the
+# single source of truth for versions, and Cargo.lock pins the exact builds.
+[workspace.dependencies]
+# Bitcoin / output descriptors
+bitcoin = "=0.32.5"
+miniscript = "=13.0.0"
+# Secret hygiene
+zeroize = "1.8"
+secrecy = "0.10"
+# Mnemonic / sensitive-input detection (US-013+): BIP39 checksum validation
+# across all 10 official wordlists, plus the NFKD normalization the detector
+# applies before wordlist lookup. `sha2` is build-time only — it verifies the
+# pinned SHA256 of each vendored wordlist in the detector's build.rs.
+bip39 = { version = "2", features = ["all-languages"] }
+unicode-normalization = "0.1"
+sha2 = "0.10"
+# WIF / xprv / raw-hex / codex32 detection (US-014/015, §13.5.2-.6): the PRD
+# specifies anchored regexes. `regex-lite` is the dependency-free regex engine
+# (no aho-corasick/memchr pulls) and supports the ASCII `\b`/class/repetition
+# syntax these patterns use; its MSRV (1.65) is well under the workspace's 1.78.
+regex-lite = "0.1"
+base64 = "0.21"
+# UR PSBT QR transport (US-079). `ur` is dspicher/ur-rs, the PRD's required
+# BCR-2020-005 fountain-code implementation for animated QR PSBT exchange.
+ur = "0.4.1"
+# MSRV pin for `ur`'s `crc ^3` subtree: crc 3.4.0 requires Rust 1.83, while
+# the root workspace is pinned to 1.78. Keep this as a direct version-pin
+# dependency in qr-psbt until the root MSRV moves.
+crc = "=3.2.1"
+# QR PSBT transport (US-080): BBQr split/join plus QR image decoding. Keep
+# default QR/image generation features off in member crates unless a story needs
+# them; the root crate decodes from luminance buffers and uses its own test QR
+# generator.
+bbqr = { version = "0.4.1", default-features = false }
+rqrr = { version = "0.10.1", default-features = false }
+qrcode = { version = "0.14.1", default-features = false }
+# Optional hardware camera capture for qr-psbt's `camera` feature. Each member
+# enables only the native backend for the target OS so the root Rust 1.78 gate
+# never pulls unrelated platform bindings.
+nokhwa = { version = "0.10.11", default-features = false }
+# MSRV pin for the `nokhwa` capture tree: a transitive `home ^0.5` otherwise
+# resolves to 0.5.12, whose manifest uses edition 2024 and cannot even be parsed
+# by Cargo 1.78.
+home = "=0.5.9"
+# MSRV pin for `nokhwa`/`qrcode` image buffers: image 0.25.8+ raises Rust to
+# 1.85+ and pulls moxcms with an edition-2024 manifest; 0.25.6 is still Rust
+# 1.70-compatible.
+image = { version = "=0.25.6", default-features = false }
+# codex32 / BIP-93 detection (US-015, §13.5.6): Andrew Poelstra's reference
+# implementation. Zero dependencies (no bitcoin/secp churn), CC0-1.0 (in the
+# deny.toml allowlist), edition 2018, builds on 1.78. The detector uses only
+# `Codex32String::from_string` (checksum validation) — never `interpolate_at` /
+# `from_seed` / `Parts::data()`, which would reconstruct the secret.
+codex32 = "0.1.0"
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# i18n (US-097): Rust-side Project Fluent catalogs for stable error strings.
+# Pin `unic-langid` to 0.9.5 because 0.9.6 selects `tinystr 0.8`, which raises
+# MSRV to Rust 1.82 and violates the root Rust 1.78 promise.
+fluent-bundle = "=0.16.0"
+unic-langid = "=0.9.5"
+# Errors / diagnostics
+thiserror = "1"
+tracing = "0.1"
+# CLI
+clap = { version = "4", features = ["derive"] }
+# US-039: man page (`clap_mangen`) + shell completions (`clap_complete`, plus
+# `clap_complete_nushell` for the nushell generator clap_complete does not ship).
+# All three are the clap 4.5.x ecosystem and follow clap's conservative MSRV
+# (1.74, well under 1.78); they only require `clap ^4.5`, satisfied by the
+# `clap_builder = "=4.5.57"` cascade below, and pull no edition-2024 subtree
+# (clap_mangen adds only `roff`). Per the MSRV-RISK rule: if a re-resolve ever
+# selects a patch needing rustc > 1.78, step back with
+# `cargo update -p <crate> --precise <ver>`; revisit with the toolchain channel.
+clap_complete = "=4.5.38"
+clap_mangen = "=0.2.24"
+clap_complete_nushell = "=4.5.5"
+# Testing / benchmarks
+# 1.78 build pin (US-029): insta 1.45.0+ adds a `tempfile` dependency, which
+# pulls `fastrand` → `getrandom 0.4.2`; getrandom 0.4.2 uses edition 2024
+# (rust 1.85), so 1.78's Cargo cannot even parse its manifest during resolution.
+# 1.44.3 is the last release before `tempfile` (deps: only `once_cell` + `similar`
+# + the optional `console`); it requires `similar ^2.1.0`, which caps `similar`
+# below the rust-1.85 `similar 3.x`, and `console ^0.15.4`, both 1.78-safe. Per
+# the MSRV-RISK rule, revisit this pin together with the toolchain channel.
+insta = "=1.44.3"
+# `default-features = false` drops criterion's `rayon` (rust 1.80) and `plotters`
+# subtrees, which the pinned Rust 1.78 toolchain cannot build and which a simple
+# timing benchmark does not need. `cargo_bench_support` keeps `cargo bench`
+# working. A future story that wants HTML/plot output can opt features back in.
+criterion = { version = "0.5", default-features = false, features = ["cargo_bench_support"] }
+# 1.78 build pins for criterion's (and the future CLI's) transitive tree. The
+# latest clap 4.6 / clap_lex 1.1 / half 2.7 raise their MSRV to 1.81–1.85, which
+# the pinned Rust 1.78 toolchain cannot build (clap_lex 1.1 even uses edition
+# 2024, so 1.78's Cargo can't parse its manifest). `clap` pins `=clap_builder`,
+# so pinning clap_builder to 4.5.57 — the last release using `clap_lex ^0.7.4` —
+# cascades to clap 4.5.57 + clap_lex 0.7.x; `half` (via ciborium) pins to 2.4.1.
+# Consumed only as version pins (dev-deps of address-derive). Per the MSRV-RISK
+# rule, revisit these together with the toolchain channel, never bump alone.
+clap_builder = "=4.5.57"
+half = "=2.4.1"
+# PDF runbooks (US-031). `printpdf` is the pure-Rust fallback renderer (the
+# typst-cli path is an out-of-process subprocess, NOT a crate dependency). Pinned
+# exactly: printpdf 0.7.0 is the last 0.7.x, and its transitive `time` defaults to
+# 0.3.47, which pulls `time-core 0.1.8` / `deranged 0.5.x` — both use edition 2024
+# (rust 1.85), which the pinned Rust 1.78 toolchain's Cargo cannot even parse
+# during resolution (same class as the clap_lex 1.1 / getrandom 0.4.2 breakers).
+# `time =0.3.36` is the last release whose `time-core 0.1.2` / `deranged 0.3.x`
+# build on 1.78, and it satisfies printpdf's `time ^0.3.25` requirement.
+# `default-features = false` drops printpdf's wasm-only `js-sys` default. Per the
+# MSRV-RISK rule, revisit these pins together with the toolchain channel.
+printpdf = { version = "=0.7.0", default-features = false }
+time = { version = "=0.3.36", default-features = false }
+
+# Internal crates (path members), available for inter-crate wiring in later stories.
+lifeboat-core = { version = "0.1.0", path = "crates/lifeboat-core" }
+error-taxonomy = { version = "0.1.0", path = "crates/error-taxonomy" }
+descriptor-audit = { version = "0.1.0", path = "crates/descriptor-audit" }
+readiness-score = { version = "0.1.0", path = "crates/readiness-score" }
+address-derive = { version = "0.1.0", path = "crates/address-derive" }
+wallet-imports = { version = "0.1.0", path = "crates/wallet-imports" }
+sensitive-input-detector = { version = "0.1.0", path = "crates/sensitive-input-detector" }
+psbt-tools = { version = "0.1.0", path = "crates/psbt-tools" }
+qr-psbt = { version = "0.1.0", path = "crates/qr-psbt" }
+hwi-bridge = { version = "0.1.0", path = "crates/hwi-bridge" }
+miniscript-viz = { version = "0.1.0", path = "crates/miniscript-viz" }
+report-engine = { version = "0.1.0", path = "crates/report-engine" }
+runbook-engine = { version = "0.1.0", path = "crates/runbook-engine" }
+
+# Workspace-wide lint policy. The CI quality gate runs
+# `cargo clippy --workspace --all-targets -- -D warnings`, which promotes every
+# warning below to a hard error. Member crates inherit this via `[lints] workspace = true`.
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }

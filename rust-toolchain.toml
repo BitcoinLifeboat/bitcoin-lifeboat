@@ -1,0 +1,8 @@
+# Pinned workspace toolchain. Every cargo invocation in this repo uses exactly
+# this Rust version, so contributors and CI build against the same compiler.
+# 1.78 is the workspace MSRV (PRD Appendix B.1); keep it in sync with the
+# `rust-version` field in the root Cargo.toml.
+[toolchain]
+channel = "1.78.0"
+components = ["clippy", "rustfmt"]
+profile = "minimal"

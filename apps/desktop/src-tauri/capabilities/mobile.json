@@ -1,0 +1,8 @@
+{
+  "$schema": "../gen/schemas/mobile-schema.json",
+  "identifier": "mobile-camera",
+  "description": "Mobile-only camera capture for QR PSBT scanning",
+  "windows": ["main"],
+  "platforms": ["iOS", "android"],
+  "permissions": ["camera:allow-take-picture"]
+}

@@ -1,0 +1,33 @@
+[package]
+name = "report-engine"
+description = "Deterministic JSON and Markdown readiness reports."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# US-028: report-engine is the orchestration layer. It runs the readiness-score
+# analysis/scoring/status functions over a parsed descriptor, derives addresses
+# via address-derive, and assembles the §19.1 ReadinessReport. `miniscript` is
+# needed only to name `DescriptorType` for the `script_type` string (same use as
+# readiness-score). `sha2` (already in the workspace + Cargo.lock for the
+# detector's build.rs) computes the `sha256:` input/report hashes. `serde_json`
+# produces the deterministic, byte-identical JSON.
+descriptor-audit.workspace = true
+readiness-score.workspace = true
+address-derive.workspace = true
+miniscript.workspace = true
+serde = { workspace = true }
+serde_json.workspace = true
+sha2.workspace = true
+
+[dev-dependencies]
+# US-029: insta snapshot tests lock the deterministic Markdown rendering for the
+# singlesig-ready and multisig-warn fixtures.
+insta.workspace = true

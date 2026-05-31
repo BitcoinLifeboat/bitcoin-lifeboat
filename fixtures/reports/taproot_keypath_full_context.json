@@ -1,0 +1,284 @@
+{
+  "schema_version": "0.1.0",
+  "app_version": "0.1.0",
+  "scoring_engine_version": "0.1.0",
+  "created_at": "2024-01-15T00:00:00Z",
+  "mode": "readiness_check",
+  "input_hash": "sha256:8922fcd4960ebe5e1768b97cd0679f037d659424c3a4aa1da625dfb2ec5f7e0d",
+  "report_hash": "sha256:2ab4f81a15502112b96572d11eebf90de8efe694626a6e03d8f34c237b7c627b",
+  "network": "testnet",
+  "wallet_summary": {
+    "wallet_type": "taproot",
+    "script_type": "tr",
+    "threshold": null,
+    "key_count": 1,
+    "has_receive_descriptor": true,
+    "has_change_descriptor": false,
+    "uses_multipath": false,
+    "uses_taproot": true,
+    "uses_miniscript": false,
+    "uses_timelock": false,
+    "passphrase_documented": false
+  },
+  "descriptors": {
+    "receive": {
+      "raw": "tr([e2867bb6/86'/1'/0']tpubDDo5e918Y3YDz7Knv4EszbbUufUTY5cJgv1RHA8MjpCJFtLCR6AKZjykXEDMZR5Uf1oXuthEY2H1bpuRD4RzoMtSKUaaBHGwqGNSJx4bR11/0/*)#l2khzry8",
+      "raw_redacted": "tr([e2867bb6/86'/1'/0']tpubDD...bR11/0/*)#l2khzry8",
+      "canonical": "tr([e2867bb6/86h/1h/0h]tpubDDo5e918Y3YDz7Knv4EszbbUufUTY5cJgv1RHA8MjpCJFtLCR6AKZjykXEDMZR5Uf1oXuthEY2H1bpuRD4RzoMtSKUaaBHGwqGNSJx4bR11/0/*)#vmfgceny",
+      "checksum_present": true,
+      "checksum_valid": true,
+      "parse_status": "ok"
+    },
+    "change": null
+  },
+  "keys": [
+    {
+      "index": 0,
+      "fingerprint": "e2867bb6",
+      "derivation_path": "m/86h/1h/0h",
+      "xpub": "tpubDDo5e918Y3YDz7Knv4EszbbUufUTY5cJgv1RHA8MjpCJFtLCR6AKZjykXEDMZR5Uf1oXuthEY2H1bpuRD4RzoMtSKUaaBHGwqGNSJx4bR11",
+      "xpub_redacted": "tpubDD...bR11",
+      "key_origin_present": true
+    }
+  ],
+  "addresses": {
+    "receive_derived": [
+      {
+        "index": 0,
+        "address": "tb1p634lp5wrq73rt98lmgtq3v3a074ydw38w8y6nz8sku065yp8f2zqjxxkek",
+        "chain": "receive"
+      },
+      {
+        "index": 1,
+        "address": "tb1plwqvg0xshdejk5emcd6w65jlv3dg3ee9e3d5rs5q77aq42yzvzwq3tcx4x",
+        "chain": "receive"
+      },
+      {
+        "index": 2,
+        "address": "tb1p289t3065mcy2avn7zh9g7q8uemj7jlyc8gx7jw3wh6ntt2s374pqme5nj0",
+        "chain": "receive"
+      },
+      {
+        "index": 3,
+        "address": "tb1pg5fkmcq7x06ll9qduwwr084tnx27asps6mx5udeuqjqa9jzqz03szw4n35",
+        "chain": "receive"
+      },
+      {
+        "index": 4,
+        "address": "tb1pf4nvy6rgf0rtxzfl72mysm5yvkkuz6gy3crem0tgw7z6tja8d6msc0763m",
+        "chain": "receive"
+      }
+    ],
+    "change_derived": [],
+    "known_address_match": null
+  },
+  "score": {
+    "numeric": 75,
+    "status": "mostly_ready",
+    "headline": "Mostly Ready"
+  },
+  "checks": [
+    {
+      "code": "A1",
+      "category": "descriptor_parse",
+      "result": "pass",
+      "title": "Descriptor parses as BIP380"
+    },
+    {
+      "code": "A2",
+      "category": "descriptor_checksum",
+      "result": "pass",
+      "title": "Descriptor checksum present"
+    },
+    {
+      "code": "A3",
+      "category": "descriptor_checksum",
+      "result": "pass",
+      "title": "Descriptor checksum valid"
+    },
+    {
+      "code": "A4",
+      "category": "normalization",
+      "result": "pass",
+      "title": "Descriptor canonical form matches user input"
+    },
+    {
+      "code": "B1",
+      "category": "script_type",
+      "result": "pass",
+      "title": "Script type identified"
+    },
+    {
+      "code": "B2",
+      "category": "script_type",
+      "result": "na",
+      "title": "Script type matches declared wallet type"
+    },
+    {
+      "code": "C1",
+      "category": "key_origin",
+      "result": "pass",
+      "title": "Master fingerprint present for every key"
+    },
+    {
+      "code": "C2",
+      "category": "key_origin",
+      "result": "pass",
+      "title": "Derivation path present for every key"
+    },
+    {
+      "code": "C3",
+      "category": "key_origin",
+      "result": "pass",
+      "title": "Hardened markers consistent (h vs ')"
+    },
+    {
+      "code": "C4",
+      "category": "key_origin",
+      "result": "pass",
+      "title": "Account-level derivation looks standard"
+    },
+    {
+      "code": "D1",
+      "category": "wallet_type",
+      "result": "pass",
+      "title": "Wallet type detected"
+    },
+    {
+      "code": "D2",
+      "category": "multisig_quorum",
+      "result": "na",
+      "title": "Multisig threshold and key count extracted"
+    },
+    {
+      "code": "D3",
+      "category": "multisig_quorum",
+      "result": "na",
+      "title": "Multisig sortedmulti vs multi flagged"
+    },
+    {
+      "code": "D4",
+      "category": "multisig_quorum",
+      "result": "na",
+      "title": "No duplicate xpubs"
+    },
+    {
+      "code": "D5",
+      "category": "multisig_quorum",
+      "result": "na",
+      "title": "Multisig threshold sanity (1 <= M <= N <= 15)"
+    },
+    {
+      "code": "E1",
+      "category": "receive_descriptor",
+      "result": "pass",
+      "title": "Receive descriptor present"
+    },
+    {
+      "code": "E2",
+      "category": "change_descriptor",
+      "result": "warn",
+      "title": "Change descriptor present"
+    },
+    {
+      "code": "E3",
+      "category": "change_descriptor",
+      "result": "na",
+      "title": "Receive and change derive same script type"
+    },
+    {
+      "code": "E4",
+      "category": "change_descriptor",
+      "result": "na",
+      "title": "Receive and change differ only in chain index"
+    },
+    {
+      "code": "F1",
+      "category": "network",
+      "result": "unknown",
+      "title": "Network determinable from descriptor"
+    },
+    {
+      "code": "F2",
+      "category": "network",
+      "result": "unknown",
+      "title": "User confirmed network"
+    },
+    {
+      "code": "G1",
+      "category": "address_derivation",
+      "result": "pass",
+      "title": "First N receive addresses derive without error"
+    },
+    {
+      "code": "G2",
+      "category": "address_derivation",
+      "result": "na",
+      "title": "First N change addresses derive without error"
+    },
+    {
+      "code": "G3",
+      "category": "address_derivation",
+      "result": "na",
+      "title": "Known address matches a derived address"
+    }
+  ],
+  "critical_issues": [],
+  "warnings": [
+    {
+      "code": "W-NO-CHANGE-DESC",
+      "title": "Change descriptor missing",
+      "description": "A complete recovery backup should include both receive and change descriptors. Without the change descriptor, an empty wallet restore will not see funds returned to change addresses.",
+      "recommended_fix": "Export both descriptors from your wallet software. In Sparrow: File > Export Wallet > Output Descriptor. In Bitcoin Core: listdescriptors true."
+    },
+    {
+      "code": "W-NO-KNOWN-ADDRESS",
+      "title": "No known address provided",
+      "description": "You did not provide a known address to compare against the derived range, so Lifeboat could not confirm the descriptor produces addresses you recognize.",
+      "recommended_fix": "Re-run the check and paste one address you know belongs to this wallet."
+    }
+  ],
+  "passes": [
+    {
+      "code": "P-DESC-PARSEABLE",
+      "title": "Descriptor parsed successfully"
+    },
+    {
+      "code": "P-CHECKSUM-VALID",
+      "title": "Descriptor checksum is valid"
+    }
+  ],
+  "scoring_audit": [
+    {
+      "code": "W-NO-CHANGE-DESC",
+      "impact": -15,
+      "running_score": 85
+    },
+    {
+      "code": "W-NO-KNOWN-ADDRESS",
+      "impact": -10,
+      "running_score": 75
+    }
+  ],
+  "survivability": null,
+  "next_steps": [
+    {
+      "priority": 1,
+      "action": "Export your change descriptor.",
+      "effort": "5 min"
+    },
+    {
+      "priority": 2,
+      "action": "Provide one known address from this wallet to compare.",
+      "effort": "2 min"
+    }
+  ],
+  "anti_actions": [
+    "Do not email the descriptor.",
+    "Do not store the descriptor in cloud notes apps.",
+    "Do not photograph this report and send it on chat."
+  ],
+  "next_drill_recommendation": "2025-01-15",
+  "disclaimer_short": "This report is a diagnostic aid. It is not legal, tax, financial,\nor security advice. Bitcoin Lifeboat cannot guarantee that any\nwallet is recoverable.",
+  "disclaimer_long": "About this document\n\nBitcoin Lifeboat is an open-source diagnostic and rehearsal tool.\nThis document reflects only the information you provided. It cannot\ndetect missing materials Lifeboat was not asked to check, it cannot\nverify the physical location or condition of your backups, and it\ncannot predict the future condition of your hardware wallets.\n\nA \"Ready\" status means the metadata you provided appears complete\nfor the scenarios Lifeboat tested. It does not mean your bitcoin\nis safe. It does not mean recovery will succeed in a real emergency.\n\nYou are responsible for verifying recovery end-to-end on a test\nnetwork before trusting your real wallet. Consult an attorney for\nestate planning. Consult a tax professional for tax implications.\n\nBitcoin Lifeboat does not custody funds, does not contact you,\ndoes not call you, and does not ask for your seed phrase.\n\nIf anyone claiming to be from Bitcoin Lifeboat contacts you, it\nis a scam. Hang up."
+}

@@ -1,0 +1,18 @@
+[package]
+name = "descriptor-audit"
+description = "Output-descriptor parsing, validation, and analysis."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# US-003+: descriptor parsing/validation via rust-miniscript; typed errors via
+# the shared taxonomy. `bitcoin` is reached through `miniscript::bitcoin`.
+error-taxonomy.workspace = true
+miniscript.workspace = true

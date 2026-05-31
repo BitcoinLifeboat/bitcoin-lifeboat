@@ -1,0 +1,203 @@
+---
+source: crates/runbook-engine/src/heir.rs
+expression: "render_markdown(template, &data, mode)"
+---
+# Bitcoin Lifeboat - Heir Recovery Plan (Singlesig + Passphrase)
+
+_A plain-language plan for recovering a single-device wallet._
+
+```
+You are reading a recovery plan written by someone who trusts you
+to help. This document does not contain bitcoin. It does not contain
+secret recovery words. It only contains instructions.
+
+You will not be able to recover anything using only this document.
+You will also need:
+  - The wallet's hardware device(s) or backup card(s)
+  - Any secret words the owner wrote down separately (if they did)
+  - Patience: never let anyone rush you
+
+If anyone tells you they can help you "decrypt" or "unlock" this
+plan for a fee, hang up. They cannot. They are a scammer.
+
+If you get stuck, stop. Take your time. Find a trusted person who
+understands Bitcoin and ask for help. The owner has likely listed
+a trusted helper on this page.
+```
+
+## Words to know
+
+- Recovery words: the list of words (usually 12 or 24) the owner wrote down by hand. Sometimes called a seed phrase. They are the real key to the money. Never type them into a website.
+- Hardware device: a small gadget that holds the recovery words offline and approves payments. Sometimes called a hardware wallet or a signing device.
+- Recovery details: a long line of text (often starting with letters like "wpkh" or "wsh", and known to experts as a descriptor) that tells wallet software how to find this wallet. It is not a secret key, but keep it private.
+- Wallet software: a free app (for example Sparrow or Bitcoin Core) that shows the wallet and helps approve a payment.
+- Extra word (passphrase): a secret word or phrase, separate from the recovery words, that some owners add. Without the exact extra word, the recovery words alone reach a different, empty wallet.
+
+> ⚠️ This document contains an extended public key (xpub).
+> An xpub reveals every receive AND change address for this wallet,
+> past and future. Anyone with this xpub can see your wallet's
+> entire transaction history on the blockchain.
+> Store this where you store your seed backup. Do not email it,
+> do not upload it, do not share it on chat.
+
+## 1. Safety warning
+
+Never type the recovery words into a website, an app, or a search box.
+
+Bitcoin Lifeboat will never call you, message you, or ask for the recovery words. Anyone who does is trying to steal the money.
+
+This document holds no secrets. The recovery words stay on paper or metal, never on a phone or computer.
+
+## 2. Do not panic
+
+If you are reading this during a hard time, slow down.
+
+Recovering a wallet is a careful, step-by-step job. Most mistakes come from rushing. There is no deadline here.
+
+Take a break before each big step. You can do this one piece at a time.
+
+## 3. Stop and call a trusted helper
+
+If any step is confusing, stop and ask a person you trust before you go on.
+
+A trusted helper can be a family member, a friend, or an advisor who knows Bitcoin. The owner may have written one below.
+
+Trusted helper to call: ______________________
+
+Never let anyone watch you handle the recovery words, and never let anyone take a photo of them.
+
+## 4. What you will need
+
+- [ ] This plan, printed on paper.
+
+- [ ] The written or stamped copy of the recovery details.
+
+- [ ] The hardware device, or the paper or metal backup of the recovery words.
+
+- [ ] The extra word (passphrase), if the owner kept one. It is stored apart from the recovery words.
+
+- [ ] A computer with the wallet software listed in section 10.
+
+## 5. What kind of wallet this is
+
+This page explains what kind of wallet you are recovering.
+
+- This wallet needs one device (or the recovery words) to approve a payment.
+
+You need the one hardware device, or the recovery words written down.
+
+## 6. The wallet's recovery details
+
+The recovery details are like a map to the wallet. Without them, recovery is much harder and can be impossible.
+
+Keep a written or stamped copy with each backup. The recovery details hold no secret words, but they reveal the wallet's history, so keep them private.
+
+Recovery details (full):
+
+```
+wsh(sortedmulti(2,[11111111/48h/1h/0h/2h]tpubD6NzVbExampleHeirRunbookKey0000000000000000000000000000000000000000000000000000000/0/*))#cccccccc
+```
+
+## 7. The devices and backups you need
+
+Check that the device below powers on, and that you hold its backup.
+
+- Signer A: short code 11111111, device Coldcard Mk4
+
+Signer A is kept at: ______________________
+
+## 8. Is there an extra word (passphrase)?
+
+This wallet uses an extra word, also called a passphrase. It is separate from the recovery words.
+
+The extra word is NOT written here, and it never will be. You must find it where the owner kept it, apart from the recovery words.
+
+Without the exact extra word, including capital letters and spaces, the recovery words reach a different, empty wallet.
+
+## 9. People to contact
+
+Fill these in by hand. Do not write the details of strangers or so-called recovery services here.
+
+Trusted helper name: ______________________
+
+Trusted helper phone: ______________________
+
+Lawyer or executor: ______________________
+
+## 10. The app you will need
+
+You will need a free app on a computer to see the wallet and approve a payment.
+
+- Sparrow
+
+If that app stops working, the recovery details and recovery words still work with other Bitcoin apps that follow the same standard.
+
+## 11. How to check the plan works
+
+1. Open the wallet app and load the recovery details in WATCH-ONLY mode. Do not type any recovery words yet.
+
+2. Check that the first address shown matches an address the owner left on record.
+
+3. Practice approving a test payment on a test network with the device.
+
+4. Write today's date in section 13 once the practice run works.
+
+## 12. When to stop right away
+
+Stop and get help if any of these happen:
+
+- A website, app, or person asks you to type the recovery words.
+
+- An address does not match the one the owner left.
+
+- Anyone pushes you to hurry, to share your screen, or to pay a fee.
+
+- The app shows an amount or history you do not expect.
+
+When in doubt, stop and call the trusted helper in section 9.
+
+## 13. Date of the last practice run
+
+Last successful practice run: 2026-05-01
+
+Write the date here each time a practice run works.
+
+## 14. When to practice next
+
+Try again by: 2027-05-01
+
+A practice run about once a year keeps the plan fresh. Sooner is better if a device or app has changed.
+
+## 15. Version and report code
+
+- Bitcoin Lifeboat version: 0.1.0
+
+- Report code: sha256:2222222222222222222222222222222222222222222222222222222222222222
+
+These let an expert make the same report again.
+
+## 16. Important notice
+
+```
+About this document
+
+Bitcoin Lifeboat is an open-source diagnostic and rehearsal tool.
+This document reflects only the information you provided. It cannot
+detect missing materials Lifeboat was not asked to check, it cannot
+verify the physical location or condition of your backups, and it
+cannot predict the future condition of your hardware wallets.
+
+A "Ready" status means the metadata you provided appears complete
+for the scenarios Lifeboat tested. It does not mean your bitcoin
+is safe. It does not mean recovery will succeed in a real emergency.
+
+You are responsible for verifying recovery end-to-end on a test
+network before trusting your real wallet. Consult an attorney for
+estate planning. Consult a tax professional for tax implications.
+
+Bitcoin Lifeboat does not custody funds, does not contact you,
+does not call you, and does not ask for your seed phrase.
+
+If anyone claiming to be from Bitcoin Lifeboat contacts you, it
+is a scam. Hang up.
+```

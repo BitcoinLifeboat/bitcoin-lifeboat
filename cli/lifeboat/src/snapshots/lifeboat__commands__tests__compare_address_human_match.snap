@@ -1,0 +1,11 @@
+---
+source: cli/lifeboat/src/commands.rs
+expression: out.stdout
+---
+Bitcoin Lifeboat - Address Comparison
+=====================================
+
+Network: testnet
+Address: tb1qaqg0encvurl7rzt52g94d7nqrp3v7a6dhadv8f00jprrhqavtlns2x705w
+
+Result:  MATCH at receive index 0

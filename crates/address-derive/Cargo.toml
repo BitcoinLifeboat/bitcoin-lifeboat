@@ -1,0 +1,33 @@
+[package]
+name = "address-derive"
+description = "Address derivation and known-address comparison."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# US-017: derive receive/change addresses from a parsed descriptor. Parsing,
+# multipath expansion, and network inference come from `descriptor-audit`;
+# typed errors from the shared taxonomy; rust-bitcoin via `miniscript::bitcoin`.
+error-taxonomy.workspace = true
+descriptor-audit.workspace = true
+miniscript.workspace = true
+serde = { workspace = true }
+
+[dev-dependencies]
+serde_json.workspace = true
+criterion.workspace = true
+# Version pins only (not used in code): keep criterion's clap/half subtree on the
+# pinned Rust 1.78 toolchain. See the comment in the root [workspace.dependencies].
+clap_builder.workspace = true
+half.workspace = true
+
+[[bench]]
+name = "derive"
+harness = false

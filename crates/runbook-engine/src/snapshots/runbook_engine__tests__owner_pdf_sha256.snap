@@ -1,0 +1,12 @@
+---
+source: crates/runbook-engine/src/lib.rs
+expression: table
+---
+singlesig-basic        public-safe  689b28050dc7396dacfd798f504f2d03b585a963c1a89abc281c8928cba10d9d
+singlesig-basic        private      6444f37ec298b3d3065985cab8db4f8423125c85ed95fa633875bc0247e44f7d
+singlesig-passphrase   public-safe  6cb824c725869321737ddda427bb643a1e00d4f939199b2bbfacd4c3ee6b0c7a
+singlesig-passphrase   private      b14aec2796fc6ac4d6fba73d2547592aa2389bd24e13a86cff5636492b5b4f75
+multisig-2of3          public-safe  4d00ab15af6ccdc93b8d244bf4d680a08a2acde651c31988c98b03f666a26144
+multisig-2of3          private      8261b078907c37cae63ffb55db635b090a1e6e9e1f6ad1a601b0c2225a4ef15f
+multisig-3of5          public-safe  dfcc15bf08f3e1be589fd41224b68300430955d30fcf8d6b248a86edf814b17f
+multisig-3of5          private      dd000104e3f3270699f26215c9f6e31cc1627e9a126c74a1f974e923b99ff42f

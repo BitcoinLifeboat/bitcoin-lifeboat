@@ -1,0 +1,13 @@
+title = "Bitcoin Lifeboat gitleaks configuration"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Documented detector and fuzz test-vector material"
+paths = [
+  '''^fixtures/secrets/''',
+  '''^fuzz/corpus/''',
+  '''^fuzz/target/''',
+  '''^target/''',
+]

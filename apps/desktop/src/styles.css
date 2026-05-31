@@ -1,0 +1,166 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Framework-agnostic base that predates Tailwind utilities. */
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/*
+ * §15.5 item 4 — focus indicators must be visible. A single base-layer rule
+ * gives every keyboard-focused control a consistent 2px brand-color ring
+ * (`:focus-visible` so a mouse click does not draw the ring). The color comes
+ * from the `brand` Tailwind token, never a hardcoded hex.
+ */
+@layer base {
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-brand;
+  }
+}
+
+/*
+ * §15.5 item 8 / NFR-A11Y-7 — respect `prefers-reduced-motion`. When the user
+ * asks the OS to reduce motion, neutralize animations, transitions, and smooth
+ * scrolling app-wide so nothing moves or flashes.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/*
+ * §17.7.4 Print-to-PDF. The export step (US-051) offers "PDF" via the OS print
+ * dialog rather than a backend PDF renderer. `.lifeboat-print-area` holds a
+ * print-only, public-safe rendering of the report; it is hidden on screen and, when
+ * the OS print dialog runs, it is the ONLY thing inked (the visibility trick isolates
+ * it from the live wizard chrome). Colors are forced to black-on-white so the page
+ * is legible regardless of the on-screen dark/light theme and does not waste ink.
+ */
+.lifeboat-print-area {
+  display: none;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .lifeboat-print-area,
+  .lifeboat-print-area * {
+    visibility: visible;
+  }
+
+  .lifeboat-print-area {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 1.5rem;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .lifeboat-print-area * {
+    background: transparent !important;
+    color: #000 !important;
+    border-color: #999 !important;
+  }
+}
+
+/*
+ * Typography for the in-app docs viewer (Learn / US-055). markdown-it emits a
+ * plain HTML string with no classes, so these element rules style the rendered
+ * Markdown. Colors come from Tailwind tokens (brand/slate via @apply) — no
+ * hardcoded hex — and `.dark` selectors keep light/dark parity (§22.10). Base
+ * text color is inherited from the page (slate-900 / dark:slate-100), so only
+ * links, code surfaces, and rules need an explicit color.
+ */
+@layer components {
+  .markdown-body {
+    @apply leading-relaxed;
+  }
+  .markdown-body > :first-child {
+    @apply mt-0;
+  }
+  .markdown-body h1 {
+    @apply mb-4 mt-8 text-2xl font-semibold;
+  }
+  .markdown-body h2 {
+    @apply mb-3 mt-8 text-xl font-semibold;
+  }
+  .markdown-body h3 {
+    @apply mb-2 mt-6 text-lg font-semibold;
+  }
+  .markdown-body p {
+    @apply my-3;
+  }
+  .markdown-body ul {
+    @apply my-3 list-disc space-y-1 pl-6;
+  }
+  .markdown-body ol {
+    @apply my-3 list-decimal space-y-1 pl-6;
+  }
+  .markdown-body a {
+    @apply text-brand underline underline-offset-2;
+  }
+  .dark .markdown-body a {
+    @apply text-blue-300;
+  }
+  .markdown-body a:hover {
+    @apply opacity-80;
+  }
+  .markdown-body strong {
+    @apply font-semibold;
+  }
+  .markdown-body code {
+    @apply rounded bg-slate-100 px-1 py-0.5 text-sm;
+  }
+  .dark .markdown-body code {
+    @apply bg-slate-800;
+  }
+  .markdown-body pre {
+    @apply my-4 overflow-x-auto rounded bg-slate-100 p-4 text-sm;
+  }
+  .dark .markdown-body pre {
+    @apply bg-slate-800;
+  }
+  .markdown-body pre code {
+    @apply bg-transparent p-0;
+  }
+  .markdown-body blockquote {
+    @apply my-4 border-l-4 border-slate-300 pl-4 italic text-slate-600;
+  }
+  .dark .markdown-body blockquote {
+    @apply border-slate-600 text-slate-300;
+  }
+  .markdown-body hr {
+    @apply my-6 border-slate-200;
+  }
+  .dark .markdown-body hr {
+    @apply border-slate-700;
+  }
+  .markdown-body table {
+    @apply my-4 w-full border-collapse text-sm;
+  }
+  .markdown-body th,
+  .markdown-body td {
+    @apply border border-slate-300 px-3 py-1 text-left;
+  }
+  .dark .markdown-body th,
+  .dark .markdown-body td {
+    @apply border-slate-600;
+  }
+}

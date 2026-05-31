@@ -1,0 +1,8 @@
+# The desktop app is a DETACHED workspace; the core crates stay pinned to Rust
+# 1.78 (the PRD MSRV) at the repo root. Tauri 2.11 / wry 0.55 / tao 0.35 need a
+# newer toolchain than 1.78, so this override scopes the bump to the desktop
+# build ONLY — it never touches the core MSRV. Per the Codebase-Patterns MSRV
+# rule, the bump is local and documented rather than applied workspace-wide.
+[toolchain]
+channel = "1.86.0"
+components = ["rustfmt", "clippy"]

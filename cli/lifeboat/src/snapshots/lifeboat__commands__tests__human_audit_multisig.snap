@@ -1,0 +1,56 @@
+---
+source: cli/lifeboat/src/commands.rs
+expression: out.stdout
+---
+Bitcoin Lifeboat - Recovery Readiness Audit
+===========================================
+
+Status:  Not Ready  (score: 25/100)
+Network: testnet
+Wallet:  multisig, wsh(sortedmulti), 3 key(s)
+Survivability: lose 1 signer -> ok; lose 2 signers -> fail_expected_for_2of3
+
+What passed:
+  [PASS] Descriptor parsed successfully
+  [PASS] Descriptor checksum is valid
+  [PASS] Multisig threshold identified as 2-of-3
+
+Needs attention:
+  [WARN] W-NO-CHANGE-DESC  Change descriptor missing
+         Export both descriptors from your wallet software. In Sparrow: File > Export Wallet > Output Descriptor. In Bitcoin Core: listdescriptors true.
+  [WARN] W-NO-BIRTH-HEIGHT  No wallet birth height documented
+         Record the wallet's creation date or the block height at first use alongside your descriptor backup.
+  [WARN] W-NO-GAP-LIMIT  Gap limit not documented
+         Note the highest address index you have used, or your wallet's configured gap limit, with your backup.
+  [WARN] W-NO-KNOWN-ADDRESS  No known address provided
+         Re-run the check and paste one address you know belongs to this wallet.
+  [WARN] W-NO-PRINTED-BACKUP  No printed descriptor backup
+         Print at least two copies of the descriptor backup and store them in separate, secure locations.
+  [WARN] W-NO-RECENT-DRILL  No recovery drill in the last 12 months
+         Run a Disaster Drill in Lifeboat v0.3 when available, or rehearse a recovery on a test network now.
+  [WARN] W-NO-HEIR-INSTRUCTIONS  No heir instructions written
+         Write a plain-language recovery runbook for your heirs and store it with your estate documents.
+  [WARN] W-NO-EMERGENCY-CONTACT  No emergency contact named
+         Name a trusted, Bitcoin-literate contact in your recovery instructions.
+  [WARN] W-NO-HW-TEST  Hardware wallet not exercised recently
+         Sign a test transaction on a test network with each hardware device.
+  [WARN] W-WALLET-SW-UNDOCUMENTED  Wallet software not documented
+         Note the wallet software (and version) needed to use this descriptor, and prefer descriptor-based recovery that works in multiple wallets.
+
+What to do next:
+  1. Export your change descriptor.  (5 min)
+  2. Write down your wallet's creation date or block height.  (5 min)
+  3. Document your wallet's gap limit.  (5 min)
+  4. Provide one known address from this wallet to compare.  (2 min)
+  5. Print two copies of the descriptor backup.  (10 min)
+  6. Run a Disaster Drill in Lifeboat v0.3 when available.  (future)
+  7. Write recovery instructions for your heirs.  (30 min)
+  8. Name a trusted emergency contact.  (5 min)
+  9. Sign a test transaction with each hardware device.  (20 min)
+  10. Document which wallet software your setup needs.  (5 min)
+
+lifeboat v0.1.0 | scoring engine 0.1.0 | sha256:6882874fa7118bcc862bdd8a9a61ab90035214741a087ff94bcf5e04aa71d067
+
+This report is a diagnostic aid. It is not legal, tax, financial,
+or security advice. Bitcoin Lifeboat cannot guarantee that any
+wallet is recoverable.

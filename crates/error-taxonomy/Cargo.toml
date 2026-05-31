@@ -1,0 +1,21 @@
+[package]
+name = "error-taxonomy"
+description = "Typed error vocabulary with stable codes and i18n keys."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+thiserror.workspace = true
+serde.workspace = true
+fluent-bundle.workspace = true
+unic-langid.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true

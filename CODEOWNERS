@@ -1,0 +1,11 @@
+# Security-sensitive paths require two-maintainer review. The org placeholder
+# comes from project.config.toml [github].org and must be swapped before public
+# release together with the rest of the project config.
+
+/crates/descriptor-audit/ @__GH_ORG__/maintainers @__GH_ORG__/security-maintainers
+/crates/sensitive-input-detector/ @__GH_ORG__/maintainers @__GH_ORG__/security-maintainers
+/crates/hwi-bridge/ @__GH_ORG__/maintainers @__GH_ORG__/security-maintainers
+/.github/workflows/release.yml @__GH_ORG__/maintainers @__GH_ORG__/security-maintainers
+/apps/desktop/src-tauri/capabilities/ @__GH_ORG__/maintainers @__GH_ORG__/security-maintainers
+/apps/desktop/src-tauri/tauri.conf.json @__GH_ORG__/maintainers @__GH_ORG__/security-maintainers
+/apps/desktop/src-tauri/binaries/ @__GH_ORG__/maintainers @__GH_ORG__/security-maintainers

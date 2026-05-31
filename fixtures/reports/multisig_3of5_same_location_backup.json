@@ -1,0 +1,373 @@
+{
+  "schema_version": "0.1.0",
+  "app_version": "0.1.0",
+  "scoring_engine_version": "0.1.0",
+  "created_at": "2024-01-15T00:00:00Z",
+  "mode": "readiness_check",
+  "input_hash": "sha256:f5c79c7a599c38c242f3c5cdfbd8e6eb7ca3347eee21f939d5d730f3cd36509f",
+  "report_hash": "sha256:62c6098bbb065f1d4a6ddc8024a67461c55e96e70cb28d42aa381ca23949ad1f",
+  "network": "testnet",
+  "wallet_summary": {
+    "wallet_type": "multisig",
+    "script_type": "wsh(sortedmulti)",
+    "threshold": 3,
+    "key_count": 5,
+    "has_receive_descriptor": true,
+    "has_change_descriptor": false,
+    "uses_multipath": false,
+    "uses_taproot": false,
+    "uses_miniscript": false,
+    "uses_timelock": false,
+    "passphrase_documented": false
+  },
+  "descriptors": {
+    "receive": {
+      "raw": "wsh(sortedmulti(3,[4ba43603/48'/1'/0'/2']tpubDDwf2gdFxFahr9RUtDQCuZmsx34CfdZ7RALAirwC2FGeLBzW1TDiEpqFeRdxLdZD7rfsbZHYwSaT6CLM3TAcYRw6xfRv4U6KCQt4Zuhvjkz/0/*,[6e37edb9/48'/1'/0'/2']tpubDE4CYsWtymYFQ6vKa1aBYUDn8DQxNCMNBYRXN6LxbPiW2RuQfYsjHnYLeTBsYSsK7Z1LvpjGWPz3YmUL8nEcGpCf9NJcyUoDn7TFSvdUaZJ/0/*,[8dfc9b34/48'/1'/0'/2']tpubDEXiq2SVhhqALktxfVFgj3C9M3T2G7xL11iezYg2LJAf245YkNyqp2K9TrvHABDCp2232k34UegU4aKEtUZNigit8EEqoLNe2JKMzMiLwYq/0/*,[83bfab59/48'/1'/0'/2']tpubDEeDAFdob3LJDkTRZgpjYWBgUDN5DQTz5VgzrGW2bABWm3cu365PEqTZJfaeTJKvnnWfVqb1j7qcjzXgQ5y54BBcyyZfkTuPNREB3r4UeoD/0/*,[56c4fac3/48'/1'/0'/2']tpubDEg3kqr2jo5ergkJbFqRHvCpiob7wR7Hi44J7y987G1JZfbzBND77XKTyPZzGvh3uyDf8kexMJnFD9W8FuraJ4wLMsx6YuZVXRSRRcx6QdD/0/*))#t0rxkc9k",
+      "raw_redacted": "wsh(sortedmulti(3,[4ba43603/48'/1'/0'/2']tpubDD...vjkz/0/*,[6e37edb9/48'/1'/0'/2']tpubDE...UaZJ/0/*,[8dfc9b34/48'/1'/0'/2']tpubDE...LwYq/0/*,[83bfab59/48'/1'/0'/2']tpubDE...UeoD/0/*,[56c4fac3/48'/1'/0'/2']tpubDE...6QdD/0/*))#t0rxkc9k",
+      "canonical": "wsh(sortedmulti(3,[4ba43603/48h/1h/0h/2h]tpubDDwf2gdFxFahr9RUtDQCuZmsx34CfdZ7RALAirwC2FGeLBzW1TDiEpqFeRdxLdZD7rfsbZHYwSaT6CLM3TAcYRw6xfRv4U6KCQt4Zuhvjkz/0/*,[6e37edb9/48h/1h/0h/2h]tpubDE4CYsWtymYFQ6vKa1aBYUDn8DQxNCMNBYRXN6LxbPiW2RuQfYsjHnYLeTBsYSsK7Z1LvpjGWPz3YmUL8nEcGpCf9NJcyUoDn7TFSvdUaZJ/0/*,[8dfc9b34/48h/1h/0h/2h]tpubDEXiq2SVhhqALktxfVFgj3C9M3T2G7xL11iezYg2LJAf245YkNyqp2K9TrvHABDCp2232k34UegU4aKEtUZNigit8EEqoLNe2JKMzMiLwYq/0/*,[83bfab59/48h/1h/0h/2h]tpubDEeDAFdob3LJDkTRZgpjYWBgUDN5DQTz5VgzrGW2bABWm3cu365PEqTZJfaeTJKvnnWfVqb1j7qcjzXgQ5y54BBcyyZfkTuPNREB3r4UeoD/0/*,[56c4fac3/48h/1h/0h/2h]tpubDEg3kqr2jo5ergkJbFqRHvCpiob7wR7Hi44J7y987G1JZfbzBND77XKTyPZzGvh3uyDf8kexMJnFD9W8FuraJ4wLMsx6YuZVXRSRRcx6QdD/0/*))#v2gp8nvt",
+      "checksum_present": true,
+      "checksum_valid": true,
+      "parse_status": "ok"
+    },
+    "change": null
+  },
+  "keys": [
+    {
+      "index": 0,
+      "fingerprint": "4ba43603",
+      "derivation_path": "m/48h/1h/0h/2h",
+      "xpub": "tpubDDwf2gdFxFahr9RUtDQCuZmsx34CfdZ7RALAirwC2FGeLBzW1TDiEpqFeRdxLdZD7rfsbZHYwSaT6CLM3TAcYRw6xfRv4U6KCQt4Zuhvjkz",
+      "xpub_redacted": "tpubDD...vjkz",
+      "key_origin_present": true
+    },
+    {
+      "index": 1,
+      "fingerprint": "6e37edb9",
+      "derivation_path": "m/48h/1h/0h/2h",
+      "xpub": "tpubDE4CYsWtymYFQ6vKa1aBYUDn8DQxNCMNBYRXN6LxbPiW2RuQfYsjHnYLeTBsYSsK7Z1LvpjGWPz3YmUL8nEcGpCf9NJcyUoDn7TFSvdUaZJ",
+      "xpub_redacted": "tpubDE...UaZJ",
+      "key_origin_present": true
+    },
+    {
+      "index": 2,
+      "fingerprint": "8dfc9b34",
+      "derivation_path": "m/48h/1h/0h/2h",
+      "xpub": "tpubDEXiq2SVhhqALktxfVFgj3C9M3T2G7xL11iezYg2LJAf245YkNyqp2K9TrvHABDCp2232k34UegU4aKEtUZNigit8EEqoLNe2JKMzMiLwYq",
+      "xpub_redacted": "tpubDE...LwYq",
+      "key_origin_present": true
+    },
+    {
+      "index": 3,
+      "fingerprint": "83bfab59",
+      "derivation_path": "m/48h/1h/0h/2h",
+      "xpub": "tpubDEeDAFdob3LJDkTRZgpjYWBgUDN5DQTz5VgzrGW2bABWm3cu365PEqTZJfaeTJKvnnWfVqb1j7qcjzXgQ5y54BBcyyZfkTuPNREB3r4UeoD",
+      "xpub_redacted": "tpubDE...UeoD",
+      "key_origin_present": true
+    },
+    {
+      "index": 4,
+      "fingerprint": "56c4fac3",
+      "derivation_path": "m/48h/1h/0h/2h",
+      "xpub": "tpubDEg3kqr2jo5ergkJbFqRHvCpiob7wR7Hi44J7y987G1JZfbzBND77XKTyPZzGvh3uyDf8kexMJnFD9W8FuraJ4wLMsx6YuZVXRSRRcx6QdD",
+      "xpub_redacted": "tpubDE...6QdD",
+      "key_origin_present": true
+    }
+  ],
+  "addresses": {
+    "receive_derived": [
+      {
+        "index": 0,
+        "address": "tb1q4usypnxk72t8nwn68kqyfzmsx77lg8h5nwzwesgql3h038uhcfzstjj0ux",
+        "chain": "receive"
+      },
+      {
+        "index": 1,
+        "address": "tb1qftugt74mnucuv5x6ns98w0cdfsq3fhvsrz5geeuufaqjaumx6avsl2x3un",
+        "chain": "receive"
+      },
+      {
+        "index": 2,
+        "address": "tb1qt009eqkrwsq7ye48pat44dy9yqsuyf5qdhel7xfm85mfzltn7gyqagutzr",
+        "chain": "receive"
+      },
+      {
+        "index": 3,
+        "address": "tb1q5n4355wqte3gz8ehhtsn3ht23rxajp5strkkk24d52mldremu0gsn6mx3d",
+        "chain": "receive"
+      },
+      {
+        "index": 4,
+        "address": "tb1q8fue6g6sjrgmrxvn97ejpuff6f2zrslxgsvysp6de7js0txlq3cq8z6tqe",
+        "chain": "receive"
+      }
+    ],
+    "change_derived": [],
+    "known_address_match": null
+  },
+  "score": {
+    "numeric": 54,
+    "status": "needs_attention",
+    "headline": "Needs Attention"
+  },
+  "checks": [
+    {
+      "code": "A1",
+      "category": "descriptor_parse",
+      "result": "pass",
+      "title": "Descriptor parses as BIP380"
+    },
+    {
+      "code": "A2",
+      "category": "descriptor_checksum",
+      "result": "pass",
+      "title": "Descriptor checksum present"
+    },
+    {
+      "code": "A3",
+      "category": "descriptor_checksum",
+      "result": "pass",
+      "title": "Descriptor checksum valid"
+    },
+    {
+      "code": "A4",
+      "category": "normalization",
+      "result": "pass",
+      "title": "Descriptor canonical form matches user input"
+    },
+    {
+      "code": "B1",
+      "category": "script_type",
+      "result": "pass",
+      "title": "Script type identified"
+    },
+    {
+      "code": "B2",
+      "category": "script_type",
+      "result": "pass",
+      "title": "Script type matches declared wallet type"
+    },
+    {
+      "code": "C1",
+      "category": "key_origin",
+      "result": "pass",
+      "title": "Master fingerprint present for every key"
+    },
+    {
+      "code": "C2",
+      "category": "key_origin",
+      "result": "pass",
+      "title": "Derivation path present for every key"
+    },
+    {
+      "code": "C3",
+      "category": "key_origin",
+      "result": "pass",
+      "title": "Hardened markers consistent (h vs ')"
+    },
+    {
+      "code": "C4",
+      "category": "key_origin",
+      "result": "pass",
+      "title": "Account-level derivation looks standard"
+    },
+    {
+      "code": "D1",
+      "category": "wallet_type",
+      "result": "pass",
+      "title": "Wallet type detected"
+    },
+    {
+      "code": "D2",
+      "category": "multisig_quorum",
+      "result": "pass",
+      "title": "Multisig threshold and key count extracted"
+    },
+    {
+      "code": "D3",
+      "category": "multisig_quorum",
+      "result": "pass",
+      "title": "Multisig sortedmulti vs multi flagged"
+    },
+    {
+      "code": "D4",
+      "category": "multisig_quorum",
+      "result": "pass",
+      "title": "No duplicate xpubs"
+    },
+    {
+      "code": "D5",
+      "category": "multisig_quorum",
+      "result": "pass",
+      "title": "Multisig threshold sanity (1 <= M <= N <= 15)"
+    },
+    {
+      "code": "E1",
+      "category": "receive_descriptor",
+      "result": "pass",
+      "title": "Receive descriptor present"
+    },
+    {
+      "code": "E2",
+      "category": "change_descriptor",
+      "result": "warn",
+      "title": "Change descriptor present"
+    },
+    {
+      "code": "E3",
+      "category": "change_descriptor",
+      "result": "na",
+      "title": "Receive and change derive same script type"
+    },
+    {
+      "code": "E4",
+      "category": "change_descriptor",
+      "result": "na",
+      "title": "Receive and change differ only in chain index"
+    },
+    {
+      "code": "F1",
+      "category": "network",
+      "result": "unknown",
+      "title": "Network determinable from descriptor"
+    },
+    {
+      "code": "F2",
+      "category": "network",
+      "result": "unknown",
+      "title": "User confirmed network"
+    },
+    {
+      "code": "G1",
+      "category": "address_derivation",
+      "result": "pass",
+      "title": "First N receive addresses derive without error"
+    },
+    {
+      "code": "G2",
+      "category": "address_derivation",
+      "result": "na",
+      "title": "First N change addresses derive without error"
+    },
+    {
+      "code": "G3",
+      "category": "address_derivation",
+      "result": "na",
+      "title": "Known address matches a derived address"
+    }
+  ],
+  "critical_issues": [],
+  "warnings": [
+    {
+      "code": "W-NO-CHANGE-DESC",
+      "title": "Change descriptor missing",
+      "description": "A complete recovery backup should include both receive and change descriptors. Without the change descriptor, an empty wallet restore will not see funds returned to change addresses.",
+      "recommended_fix": "Export both descriptors from your wallet software. In Sparrow: File > Export Wallet > Output Descriptor. In Bitcoin Core: listdescriptors true."
+    },
+    {
+      "code": "W-NO-KNOWN-ADDRESS",
+      "title": "No known address provided",
+      "description": "You did not provide a known address to compare against the derived range, so Lifeboat could not confirm the descriptor produces addresses you recognize.",
+      "recommended_fix": "Re-run the check and paste one address you know belongs to this wallet."
+    },
+    {
+      "code": "W-NO-EMERGENCY-CONTACT",
+      "title": "No emergency contact named",
+      "description": "No trusted person is recorded to help an heir who gets stuck during recovery.",
+      "recommended_fix": "Name a trusted, Bitcoin-literate contact in your recovery instructions."
+    },
+    {
+      "code": "W-NO-HW-TEST",
+      "title": "Hardware wallet not exercised recently",
+      "description": "A hardware signer that has not signed anything in over a year may have a dead battery, corrupted firmware, or a forgotten PIN.",
+      "recommended_fix": "Sign a test transaction on a test network with each hardware device."
+    },
+    {
+      "code": "W-SAME-LOCATION-BACKUP",
+      "title": "Backup and device in the same location",
+      "description": "Storing the backup and the signing device together means a single fire, flood, or theft can destroy both.",
+      "recommended_fix": "Move one copy of the backup to a separate, secure location."
+    }
+  ],
+  "passes": [
+    {
+      "code": "P-DESC-PARSEABLE",
+      "title": "Descriptor parsed successfully"
+    },
+    {
+      "code": "P-CHECKSUM-VALID",
+      "title": "Descriptor checksum is valid"
+    },
+    {
+      "code": "P-THRESHOLD-CLEAR",
+      "title": "Multisig threshold identified as 3-of-5"
+    }
+  ],
+  "scoring_audit": [
+    {
+      "code": "W-NO-CHANGE-DESC",
+      "impact": -15,
+      "running_score": 85
+    },
+    {
+      "code": "W-NO-KNOWN-ADDRESS",
+      "impact": -10,
+      "running_score": 75
+    },
+    {
+      "code": "W-NO-EMERGENCY-CONTACT",
+      "impact": -3,
+      "running_score": 72
+    },
+    {
+      "code": "W-NO-HW-TEST",
+      "impact": -8,
+      "running_score": 64
+    },
+    {
+      "code": "W-SAME-LOCATION-BACKUP",
+      "impact": -10,
+      "running_score": 54
+    }
+  ],
+  "survivability": {
+    "tested": true,
+    "lose_1_signer": "ok",
+    "lose_2_signers": "ok",
+    "lose_descriptor_only": "ok_if_xpubs_retained"
+  },
+  "next_steps": [
+    {
+      "priority": 1,
+      "action": "Export your change descriptor.",
+      "effort": "5 min"
+    },
+    {
+      "priority": 2,
+      "action": "Provide one known address from this wallet to compare.",
+      "effort": "2 min"
+    },
+    {
+      "priority": 3,
+      "action": "Name a trusted emergency contact.",
+      "effort": "5 min"
+    },
+    {
+      "priority": 4,
+      "action": "Sign a test transaction with each hardware device.",
+      "effort": "20 min"
+    },
+    {
+      "priority": 5,
+      "action": "Move a backup copy to a separate location.",
+      "effort": "1 day"
+    }
+  ],
+  "anti_actions": [
+    "Do not email the descriptor.",
+    "Do not store the descriptor in cloud notes apps.",
+    "Do not photograph this report and send it on chat."
+  ],
+  "next_drill_recommendation": "2024-07-15",
+  "disclaimer_short": "This report is a diagnostic aid. It is not legal, tax, financial,\nor security advice. Bitcoin Lifeboat cannot guarantee that any\nwallet is recoverable.",
+  "disclaimer_long": "About this document\n\nBitcoin Lifeboat is an open-source diagnostic and rehearsal tool.\nThis document reflects only the information you provided. It cannot\ndetect missing materials Lifeboat was not asked to check, it cannot\nverify the physical location or condition of your backups, and it\ncannot predict the future condition of your hardware wallets.\n\nA \"Ready\" status means the metadata you provided appears complete\nfor the scenarios Lifeboat tested. It does not mean your bitcoin\nis safe. It does not mean recovery will succeed in a real emergency.\n\nYou are responsible for verifying recovery end-to-end on a test\nnetwork before trusting your real wallet. Consult an attorney for\nestate planning. Consult a tax professional for tax implications.\n\nBitcoin Lifeboat does not custody funds, does not contact you,\ndoes not call you, and does not ask for your seed phrase.\n\nIf anyone claiming to be from Bitcoin Lifeboat contacts you, it\nis a scam. Hang up."
+}

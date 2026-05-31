@@ -1,0 +1,25 @@
+[package]
+name = "desktop-commands"
+description = "GUI-agnostic command logic for the Tauri desktop app (PRD §21.3)."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# The §21.3 commands are thin wrappers over the core analysis crates, reached
+# through the `lifeboat-core` façade (parse/derive/compare/checksum/detect/report)
+# — exactly the surface the CLI uses. `secrecy` wraps pasted input before the
+# detector screens it (§13.5); `serde` derives the boundary DTOs. NO `tauri` dep:
+# the Tauri `#[tauri::command]` wrappers in `apps/desktop/src-tauri` delegate here,
+# so this logic builds and is tested under the fast core gate (Rust 1.78) without
+# the webkit2gtk/GTK system libraries the desktop crate links (§13.7 / §20).
+lifeboat-core.workspace = true
+secrecy.workspace = true
+serde = { workspace = true }
+serde_json = { workspace = true }

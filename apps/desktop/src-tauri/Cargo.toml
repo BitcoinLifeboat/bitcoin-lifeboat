@@ -1,0 +1,78 @@
+# DETACHED workspace. The Tauri desktop app is its own Cargo workspace (like
+# `fuzz/`) so the core quality gate — `cargo {build,clippy,test} --workspace`
+# run from the repo root under the pinned Rust 1.78 — never pulls Tauri's
+# ~435-crate tree and stays fast and green. The parent Cargo.toml also lists this
+# path under `exclude`, and `rust-toolchain.toml` here pins the (newer) toolchain
+# Tauri 2.11 needs WITHOUT touching the core MSRV. See CLAUDE.md.
+[workspace]
+
+[package]
+name = "bitcoin-lifeboat"
+version = "0.1.0"
+description = "Bitcoin Lifeboat — local-first Bitcoin self-custody recovery drills"
+authors = ["Bitcoin Lifeboat Contributors"]
+edition = "2021"
+# Tauri 2.11 / wry 0.55 / tao 0.35 require a newer toolchain than the core MSRV
+# (1.78); this is the desktop app's independent floor. Pinned conservatively.
+rust-version = "1.82"
+license = "MIT"
+repository = "https://github.com/__GH_ORG__/bitcoin-lifeboat"
+homepage = "https://bitcoinlifeboat.org"
+
+[lib]
+# A thin library crate holds the runtime so `main.rs` stays a one-liner (and the
+# same entry point is reusable for a future mobile target).
+name = "bitcoin_lifeboat_lib"
+crate-type = ["lib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2.11", features = [] }
+# The §13.7 capability set references the dialog / fs / os / process permission
+# namespaces; those namespaces are provided by these plugins, registered in
+# lib.rs. US-084 adds the shell plugin ONLY for `shell:allow-execute` scoped to
+# the bundled HWI sidecar. NOTHING broader is added here — no http,
+# clipboard-manager, notification, global-shortcut, or updater plugin
+# (§13.7 / §13.10).
+tauri-plugin-dialog = "2"
+tauri-plugin-fs = "2"
+tauri-plugin-os = "2"
+tauri-plugin-process = "2"
+tauri-plugin-shell = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+base64 = "0.21"
+# US-042: the §21.3 command logic lives in this GUI-agnostic core crate (a member
+# of the repo-root workspace). The `#[tauri::command]` wrappers in `src/commands.rs`
+# delegate to it; keeping the logic out of this (detached, webkit-linking) crate
+# means it builds and is tested under the fast core gate (`cargo test --workspace`,
+# Rust 1.78) without the desktop system libraries. The path dep pulls the core
+# analysis crates (via `lifeboat-core`); their `workspace = true` deps resolve
+# against the repo-root workspace, not this one.
+desktop-commands = { path = "../../../crates/desktop-commands" }
+# M3 practice drill commands stay in the detached Rust 1.85 drill layer because
+# they depend on BDK through signet-lab/psbt-drill. The Tauri wrappers below call
+# the tested psbt-drill helpers directly; the root 1.78 workspace remains clean.
+psbt-drill = { path = "../../../crates/psbt-drill" }
+# US-081: QR PSBT transport command wrappers. The core transport stays in
+# `qr-psbt`; this app only exposes frames and camera-captured payloads to React.
+qr-psbt = { path = "../../../crates/qr-psbt", features = ["camera"] }
+# US-085: USB hardware-wallet support stays in the root Rust 1.78 HWI bridge.
+# The Tauri wrapper only exposes its typed subprocess API to React.
+hwi-bridge = { path = "../../../crates/hwi-bridge" }
+
+# US-080: Tauri's camera plugin is mobile-only in the current crate, so keep it
+# behind cfg(mobile). Desktop QR capture uses the Rust `nokhwa` path in qr-psbt.
+[target.'cfg(mobile)'.dependencies]
+tauri-plugin-camera = "0.1.4"
+
+# Release profile: a recovery tool ships small and stripped. Optimised for size;
+# packaging stories (US-062+) may extend this.
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true

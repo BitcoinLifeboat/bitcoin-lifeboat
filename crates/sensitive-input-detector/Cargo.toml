@@ -1,0 +1,51 @@
+[package]
+name = "sensitive-input-detector"
+description = "Detects pasted secrets (seeds, WIF, xprv, and more) without leaking their contents."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# The safe-calling convention (PRD §13.5.8): callers wrap input in a
+# `SecretString` that zeroizes on drop. `serde` is needed because the
+# `DetectorReport` is the only value that crosses the Tauri boundary (US-042).
+secrecy = { workspace = true }
+serde = { workspace = true }
+# Action semantics + user-facing messages (US-016, §13.5.7): each finding maps to
+# a stable `E-SECRET-*` `ErrorCode`, the single i18n-keyed source of its
+# title/description/action text. Mapping a finding to a code does NOT make
+# `detect` fallible — it still returns a `DetectorReport`, never a `Result`.
+error-taxonomy = { workspace = true }
+# BIP39 detection (US-013, §13.5.1): `bip39` validates the mnemonic checksum
+# across all 10 official wordlists; `unicode-normalization` applies the NFKD
+# normalization §13.5.1 mandates before wordlist lookup; `zeroize` wipes the
+# secret-derived normalized/lowercased buffers the detector builds.
+bip39 = { workspace = true }
+unicode-normalization = { workspace = true }
+zeroize = { workspace = true }
+# WIF + extended-private-key detection (US-014, §13.5.2-.3): `regex-lite`
+# implements the anchored candidate patterns; `bitcoin` (reached via
+# `miniscript::bitcoin`, the workspace convention) provides `PrivateKey::from_wif`
+# and `base58` Base58Check verification of matched candidates. `regex-lite` is
+# reused for the US-015 raw-hex and codex32 candidate patterns.
+regex-lite = { workspace = true }
+miniscript = { workspace = true }
+# codex32 / BIP-93 detection (US-015, §13.5.6): validates a candidate's bech32
+# checksum + length + case via `Codex32String::from_string`. Zero-dependency,
+# so it adds no version churn. We never call its share-interpolation / seed APIs.
+codex32 = { workspace = true }
+
+[build-dependencies]
+# Verifies the pinned SHA256 of each vendored BIP39 wordlist at build time
+# (§13.5.1): a corrupted or swapped wordlist fails the build.
+sha2 = { workspace = true }
+
+[dev-dependencies]
+# No-leak and JSON-shape assertions in the unit tests.
+serde_json = { workspace = true }

@@ -1,0 +1,47 @@
+# Bitcoin Lifeboat — project configuration
+#
+# Single source of truth for the deferred implementation choices from PRD §30.6.
+# Every later story reads these values; no story may hardcode the org, domain,
+# disclosure route, or PGP key. See docs/CONFIGURATION.md for the meaning of
+# each value and the exact placeholder-swap procedure.
+#
+# Placeholder tokens (__GH_ORG__, __MAINTAINER_PGP_FINGERPRINT__,
+# __MAINTAINER_PGP_KEY_BLOCK__) are used verbatim until you replace them. Builds
+# proceed normally with placeholders in place. US-099 blocks any public
+# (non-alpha/beta) release while any placeholder remains.
+
+schema_version = "1.0.0"
+
+[github]
+org = "__GH_ORG__"
+repo = "bitcoin-lifeboat"
+url_base = "https://github.com/__GH_ORG__/bitcoin-lifeboat"
+
+[site]
+domain = "bitcoinlifeboat.org"
+security_contact = "GitHub private vulnerability reporting"
+
+[maintainer]
+# 40-hex OpenPGP fingerprint and the path (relative to repo root) of the public
+# key block used to verify release signatures.
+pgp_fingerprint = "__MAINTAINER_PGP_FINGERPRINT__"
+pgp_key_block_file = "__MAINTAINER_PGP_KEY_BLOCK__"
+
+[code_signing]
+# Paid OS code-signing is wired only when the corresponding CI secrets exist;
+# minisign + cosign signing is always on and needs no paid certificate.
+mode = "conditional-on-ci-secrets"
+apple_notarization = "deferred-to-beta"
+windows_ov_signing = "deferred-to-beta"
+minisign_and_cosign = "always-on"
+
+[docs]
+framework = "astro-starlight"
+host = "github-pages"
+
+[release]
+channel_default = "alpha"
+
+[placeholders]
+# Tokens that block a public (non-alpha/beta) release until replaced (enforced by US-099).
+tokens = ["__GH_ORG__", "__MAINTAINER_PGP_FINGERPRINT__", "__MAINTAINER_PGP_KEY_BLOCK__"]

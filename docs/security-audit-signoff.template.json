@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "status": "complete",
+  "auditor": "Auditor name",
+  "report_date": "YYYY-MM-DD",
+  "scope": "Bitcoin Lifeboat v1.0 Stable release",
+  "report_sha256": "sha256:64-lowercase-hex-report-hash",
+  "findings": [
+    {
+      "id": "AUD-001",
+      "severity": "medium",
+      "resolution": "resolved",
+      "fixed_in": "commit sha or pull request URL"
+    }
+  ],
+  "signoff": {
+    "all_findings_remediated": true,
+    "stable_release_approved": true
+  }
+}

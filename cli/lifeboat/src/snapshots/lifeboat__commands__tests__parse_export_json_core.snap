@@ -1,0 +1,5 @@
+---
+source: cli/lifeboat/src/commands.rs
+expression: out.stdout
+---
+{"source_wallet":"bitcoin_core","source_wallet_version":null,"imported_at":"2024-01-15T00:00:00Z","descriptors":{"receive":"wpkh([71348c8a/84'/1'/0']tpubDCTb5JhwTc9S3pfEMNMajVPCEgCDxHTiBwmJgzLa2Znne2pPQ4dh1CjpS7ibiPBEXeJRJxddRaW1ZxxWyDvrndrQk8vqfco9Uvr7Eseo55L/0/*)#r6yctejg","change":"wpkh([71348c8a/84'/1'/0']tpubDCTb5JhwTc9S3pfEMNMajVPCEgCDxHTiBwmJgzLa2Znne2pPQ4dh1CjpS7ibiPBEXeJRJxddRaW1ZxxWyDvrndrQk8vqfco9Uvr7Eseo55L/1/*)#jwpekvzs"},"keys":[{"index":0,"fingerprint":"71348c8a","derivation_path":"m/84h/1h/0h","xpub":"tpubDCTb5JhwTc9S3pfEMNMajVPCEgCDxHTiBwmJgzLa2Znne2pPQ4dh1CjpS7ibiPBEXeJRJxddRaW1ZxxWyDvrndrQk8vqfco9Uvr7Eseo55L","key_origin_present":true}],"birth_height":null,"birth_timestamp":"2024-01-15T00:00:00Z","gap_limit":null,"labels":[],"wallet_type":"singlesig","threshold":null,"key_count":null,"raw_source_filename":"bitcoin_core_listdescriptors.json"}

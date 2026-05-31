@@ -1,0 +1,29 @@
+{
+  "multisig_name": "lifeboat2of3",
+  "network": "testnet",
+  "descriptor": {
+    "variant": "wsh(multi(k))",
+    "sorted": true,
+    "threshold": 2,
+    "signers": [
+      {
+        "fingerprint": "4ba43603",
+        "derivation": [2147483696, 2147483649, 2147483648, 2147483650],
+        "xpub": "tpubDDwf2gdFxFahr9RUtDQCuZmsx34CfdZ7RALAirwC2FGeLBzW1TDiEpqFeRdxLdZD7rfsbZHYwSaT6CLM3TAcYRw6xfRv4U6KCQt4Zuhvjkz",
+        "path": []
+      },
+      {
+        "fingerprint": "6e37edb9",
+        "derivation": [2147483696, 2147483649, 2147483648, 2147483650],
+        "xpub": "tpubDE4CYsWtymYFQ6vKa1aBYUDn8DQxNCMNBYRXN6LxbPiW2RuQfYsjHnYLeTBsYSsK7Z1LvpjGWPz3YmUL8nEcGpCf9NJcyUoDn7TFSvdUaZJ",
+        "path": []
+      },
+      {
+        "fingerprint": "8dfc9b34",
+        "derivation": [2147483696, 2147483649, 2147483648, 2147483650],
+        "xpub": "tpubDEXiq2SVhhqALktxfVFgj3C9M3T2G7xL11iezYg2LJAf245YkNyqp2K9TrvHABDCp2232k34UegU4aKEtUZNigit8EEqoLNe2JKMzMiLwYq",
+        "path": []
+      }
+    ]
+  }
+}

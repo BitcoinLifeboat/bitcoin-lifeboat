@@ -1,0 +1,149 @@
+---
+source: crates/runbook-engine/src/heir.rs
+expression: "render_markdown(template, &data, mode)"
+---
+# Bitcoin Lifeboat - Business Treasury Runbook
+
+_A recovery plan for a business that holds its own bitcoin._
+
+## 1. Safety warning
+
+No employee or officer should ever enter a seed phrase into a website or send it over chat or email.
+
+Bitcoin Lifeboat never asks for seed phrases. Treat any such request as fraud and report it through your security process.
+
+## 2. Do not panic
+
+In an incident, follow this runbook step by step. Rushing causes errors that can lock funds.
+
+Convene the authorized signers calmly and confirm roles before acting.
+
+## 3. Stop and call a trusted helper
+
+If a step is unclear or a signer is unavailable, stop and escalate to the treasury owner or your security advisor.
+
+Escalation contact: ______________________
+
+## 4. Required materials checklist
+
+- [ ] This runbook, stored with corporate continuity documents.
+
+- [ ] The descriptor backup held in company records.
+
+- [ ] Access to a quorum of officer signing devices.
+
+- [ ] A company computer with the wallet software in section 10.
+
+- [ ] The treasury policy and authorized-signer list.
+
+## 5. Wallet type summary
+
+- Script type: wsh(sortedmulti)
+
+- Number of keys: 3
+
+- Signatures required: 2 of 3
+
+Treasury policy requires 2 of 3 authorized officers to approve any movement of funds.
+
+## 6. Descriptor backup reminder
+
+The descriptor is the company's record of how to find and rebuild this wallet. Store it with the same controls as other critical records.
+
+Recovery details: [descriptor redacted, see private export]
+
+## 7. Signer/device checklist
+
+Record each authorized signer, their device, and where it is held under custody.
+
+- Signer A: fingerprint 11111111, path m/48h/1h/0h/2h
+
+Signer A custody location: ______________________
+
+- Signer B: fingerprint 22222222, path m/48h/1h/0h/2h
+
+Signer B custody location: ______________________
+
+- Signer C: fingerprint 33333333, path m/48h/1h/0h/2h
+
+Signer C custody location: ______________________
+
+## 8. Passphrase existence reminder
+
+If treasury policy uses a passphrase, store it under dual control, apart from the seed backups. Never record the passphrase value in this runbook.
+
+## 9. Emergency contacts
+
+Maintain current contacts; review whenever an officer changes.
+
+Treasury owner: ______________________
+
+Legal / general counsel: ______________________
+
+Security advisor: ______________________
+
+## 10. Wallet software dependency list
+
+Document the approved wallet software for treasury operations:
+
+- Sparrow
+
+## 11. Verification steps
+
+1. Load the descriptor in watch-only mode and reconcile the balance.
+
+2. Confirm a known receive address matches treasury records.
+
+3. Run a Signet drill: assemble a quorum and sign a test transaction.
+
+4. Record the drill outcome in the treasury log and in section 13.
+
+## 12. Stop conditions
+
+Halt and escalate if:
+
+- A quorum of signers cannot be assembled.
+
+- A derived address does not match treasury records.
+
+- Anyone requests an out-of-policy or urgent transfer.
+
+## 13. Date of last successful drill
+
+Last treasury drill: 2026-05-01
+
+## 14. Next recommended drill date
+
+Next treasury drill: 2027-05-01
+
+## 15. Version and report hash
+
+- Bitcoin Lifeboat version: 0.1.0
+
+- Report hash: sha256:2222222222222222222222222222222222222222222222222222222222222222
+
+## 16. Disclaimer
+
+```
+About this document
+
+Bitcoin Lifeboat is an open-source diagnostic and rehearsal tool.
+This document reflects only the information you provided. It cannot
+detect missing materials Lifeboat was not asked to check, it cannot
+verify the physical location or condition of your backups, and it
+cannot predict the future condition of your hardware wallets.
+
+A "Ready" status means the metadata you provided appears complete
+for the scenarios Lifeboat tested. It does not mean your bitcoin
+is safe. It does not mean recovery will succeed in a real emergency.
+
+You are responsible for verifying recovery end-to-end on a test
+network before trusting your real wallet. Consult an attorney for
+estate planning. Consult a tax professional for tax implications.
+
+Bitcoin Lifeboat does not custody funds, does not contact you,
+does not call you, and does not ask for your seed phrase.
+
+If anyone claiming to be from Bitcoin Lifeboat contacts you, it
+is a scam. Hang up.
+```

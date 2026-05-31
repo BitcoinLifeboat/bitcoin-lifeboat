@@ -1,0 +1,668 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: "Release tag to publish, for example v0.1.0-alpha.1"
+        required: false
+        type: string
+      prerelease:
+        description: "Mark the GitHub Release as a prerelease"
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+  INSTA_UPDATE: never
+  NODE_VERSION: 22.x
+  ROOT_RUST_TOOLCHAIN: 1.78.0
+  DESKTOP_RUST_TOOLCHAIN: 1.86.0
+
+jobs:
+  metadata:
+    name: Resolve release metadata
+    runs-on: ubuntu-24.04
+    outputs:
+      tag_name: ${{ steps.metadata.outputs.tag_name }}
+      prerelease: ${{ steps.metadata.outputs.prerelease }}
+      release_channel: ${{ steps.metadata.outputs.release_channel }}
+      source_date_epoch: ${{ steps.metadata.outputs.source_date_epoch }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Resolve tag, channel, and deterministic timestamp
+        id: metadata
+        shell: bash
+        env:
+          INPUT_TAG_NAME: ${{ inputs.tag_name }}
+          INPUT_PRERELEASE: ${{ inputs.prerelease }}
+        run: |
+          set -euo pipefail
+
+          tag_name="${GITHUB_REF_NAME}"
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" && -n "${INPUT_TAG_NAME}" ]]; then
+            tag_name="${INPUT_TAG_NAME}"
+          fi
+          if [[ ! "${tag_name}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+([-+][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Release tag must look like v0.1.0 or v0.1.0-alpha.1; got ${tag_name}" >&2
+            exit 1
+          fi
+
+          prerelease="${INPUT_PRERELEASE}"
+          if [[ -z "${prerelease}" ]]; then
+            prerelease="false"
+            if [[ "${tag_name}" == *"-alpha."* || "${tag_name}" == *"-beta."* || "${tag_name}" == *"-rc."* ]]; then
+              prerelease="true"
+            fi
+          fi
+          release_channel="stable"
+          if [[ "${tag_name}" =~ -alpha(\.|$) ]]; then
+            release_channel="alpha"
+          elif [[ "${tag_name}" =~ -beta(\.|$) ]]; then
+            release_channel="beta"
+          fi
+
+          grep -q '^mode = "conditional-on-ci-secrets"$' project.config.toml
+          source_date_epoch="$(git log -1 --format=%ct)"
+
+          {
+            echo "tag_name=${tag_name}"
+            echo "prerelease=${prerelease}"
+            echo "release_channel=${release_channel}"
+            echo "source_date_epoch=${source_date_epoch}"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Release gate checks
+        shell: bash
+        run: scripts/verify-release-gates.sh --tag "${{ steps.metadata.outputs.tag_name }}"
+
+  quality-gate:
+    name: Full release quality gate
+    runs-on: ubuntu-24.04
+    needs: metadata
+    env:
+      RUSTUP_TOOLCHAIN: 1.78.0
+      SOURCE_DATE_EPOCH: ${{ needs.metadata.outputs.source_date_epoch }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install Rust toolchain
+        shell: bash
+        run: rustup toolchain install "$RUSTUP_TOOLCHAIN" --profile minimal --component clippy rustfmt
+
+      - name: Configure deterministic Rust paths
+        shell: bash
+        run: |
+          printf 'RUSTFLAGS=--remap-path-prefix=%s=. --remap-path-prefix=%s=~\n' "$GITHUB_WORKSPACE" "$HOME" >> "$GITHUB_ENV"
+          printf 'CARGO_INCREMENTAL=0\n' >> "$GITHUB_ENV"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: |
+            apps/desktop/package-lock.json
+            apps/docs-site/package-lock.json
+
+      - name: Release gate script self-test
+        run: scripts/verify-release-gates.sh --self-test
+
+      - name: Rust format check
+        run: cargo fmt --all -- --check
+
+      - name: Rust clippy
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings
+
+      - name: Rust tests
+        run: cargo test --workspace --all-targets --locked
+
+      - name: Packaging metadata gate
+        run: scripts/verify-packaging.sh
+
+      - name: Desktop quality gate
+        working-directory: apps/desktop
+        run: |
+          npm ci
+          npm run typecheck
+          npm test
+          npm run build
+          npm run verify:security
+
+      - name: Docs site quality gate
+        working-directory: apps/docs-site
+        env:
+          LIFEBOAT_RELEASE_CHANNEL: ${{ needs.metadata.outputs.release_channel }}
+        run: |
+          npm ci
+          npm run typecheck
+          npm run build
+
+  desktop:
+    name: Desktop installer (${{ matrix.name }})
+    needs: [metadata, quality-gate]
+    runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: read
+      id-token: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: macos-universal
+            runner: macos-14
+            platform: macos
+            args: --target universal-apple-darwin --bundles dmg
+            asset_slug: macos-universal
+            rust_targets: aarch64-apple-darwin x86_64-apple-darwin
+            sidecar_target: universal-apple-darwin
+          - name: windows-x86_64
+            runner: windows-latest
+            platform: windows
+            args: --target x86_64-pc-windows-msvc --bundles msi
+            asset_slug: windows-x86_64
+            rust_targets: x86_64-pc-windows-msvc
+            sidecar_target: x86_64-pc-windows-msvc
+          - name: linux-x86_64
+            runner: ubuntu-22.04
+            platform: linux
+            args: --target x86_64-unknown-linux-gnu --bundles appimage,deb
+            asset_slug: linux-x86_64
+            rust_targets: x86_64-unknown-linux-gnu
+            sidecar_target: x86_64-unknown-linux-gnu
+    env:
+      RUSTUP_TOOLCHAIN: 1.86.0
+      SOURCE_DATE_EPOCH: ${{ needs.metadata.outputs.source_date_epoch }}
+      TAG_NAME: ${{ needs.metadata.outputs.tag_name }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install Rust toolchain and targets
+        shell: bash
+        run: |
+          rustup toolchain install "$RUSTUP_TOOLCHAIN" --profile minimal
+          rustup target add --toolchain "$RUSTUP_TOOLCHAIN" ${{ matrix.rust_targets }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: apps/desktop/package-lock.json
+
+      - name: Install Linux desktop dependencies
+        if: matrix.platform == 'linux'
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            libappindicator3-dev \
+            libayatana-appindicator3-dev \
+            libfuse2 \
+            libgtk-3-dev \
+            libjavascriptcoregtk-4.1-dev \
+            librsvg2-dev \
+            libsoup-3.0-dev \
+            libssl-dev \
+            libwebkit2gtk-4.1-dev \
+            patchelf
+          scripts/check-native-desktop-deps.sh
+
+      - name: Install HWI sidecar
+        shell: bash
+        run: scripts/install-hwi-sidecar.sh --target "${{ matrix.sidecar_target }}"
+
+      - name: Install frontend dependencies
+        working-directory: apps/desktop
+        run: npm ci
+
+      - name: Configure deterministic desktop build paths
+        shell: bash
+        run: |
+          printf 'RUSTFLAGS=--remap-path-prefix=%s=. --remap-path-prefix=%s=~\n' "$GITHUB_WORKSPACE" "$HOME" >> "$GITHUB_ENV"
+          printf 'CARGO_INCREMENTAL=0\n' >> "$GITHUB_ENV"
+
+      - name: Detect Apple notarization secrets
+        id: apple_signing
+        if: matrix.platform == 'macos'
+        shell: bash
+        env:
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          set -euo pipefail
+          ready=false
+          if [[ -n "${APPLE_CERTIFICATE}" && -n "${APPLE_CERTIFICATE_PASSWORD}" && -n "${APPLE_SIGNING_IDENTITY}" && -n "${APPLE_ID}" && -n "${APPLE_PASSWORD}" && -n "${APPLE_TEAM_ID}" ]]; then
+            ready=true
+          fi
+          echo "ready=${ready}" >> "$GITHUB_OUTPUT"
+
+      - name: Detect Windows OV signing secrets
+        id: windows_signing
+        if: matrix.platform == 'windows'
+        shell: pwsh
+        env:
+          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+          AZURE_TRUSTED_SIGNING_ENDPOINT: ${{ secrets.AZURE_TRUSTED_SIGNING_ENDPOINT }}
+          AZURE_TRUSTED_SIGNING_ACCOUNT: ${{ secrets.AZURE_TRUSTED_SIGNING_ACCOUNT }}
+          AZURE_TRUSTED_SIGNING_CERTIFICATE_PROFILE: ${{ secrets.AZURE_TRUSTED_SIGNING_CERTIFICATE_PROFILE }}
+        run: |
+          $ready = "false"
+          if ($env:AZURE_TENANT_ID -and $env:AZURE_CLIENT_ID -and $env:AZURE_CLIENT_SECRET -and $env:AZURE_TRUSTED_SIGNING_ENDPOINT -and $env:AZURE_TRUSTED_SIGNING_ACCOUNT -and $env:AZURE_TRUSTED_SIGNING_CERTIFICATE_PROFILE) {
+            $ready = "true"
+          }
+          "ready=$ready" >> $env:GITHUB_OUTPUT
+
+      - name: Build Tauri bundle
+        uses: tauri-apps/tauri-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        with:
+          projectPath: apps/desktop
+          tauriScript: npm run tauri
+          uploadUpdaterJson: false
+          args: ${{ matrix.args }}
+
+      - name: Windows OV sign MSI when secrets are present
+        if: matrix.platform == 'windows' && steps.windows_signing.outputs.ready == 'true'
+        uses: azure/trusted-signing-action@v0
+        with:
+          azure-tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          azure-client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          azure-client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+          endpoint: ${{ secrets.AZURE_TRUSTED_SIGNING_ENDPOINT }}
+          trusted-signing-account-name: ${{ secrets.AZURE_TRUSTED_SIGNING_ACCOUNT }}
+          certificate-profile-name: ${{ secrets.AZURE_TRUSTED_SIGNING_CERTIFICATE_PROFILE }}
+          files-folder: ${{ github.workspace }}\apps\desktop\src-tauri\target\x86_64-pc-windows-msvc\release\bundle\msi
+          files-folder-filter: msi
+          files-folder-recurse: true
+          file-digest: SHA256
+          timestamp-rfc3161: http://timestamp.acs.microsoft.com
+          timestamp-digest: SHA256
+
+      - name: Collect macOS desktop artifact
+        if: matrix.platform == 'macos'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-artifacts
+          dmg="$(find apps/desktop/src-tauri/target -type f -name '*.dmg' | sort | head -n 1)"
+          test -n "${dmg}"
+          cp "${dmg}" "release-artifacts/bitcoin-lifeboat-${TAG_NAME}-${{ matrix.asset_slug }}.dmg"
+          if [[ "${{ steps.apple_signing.outputs.ready }}" == "true" ]]; then
+            echo "macOS Developer ID notarization: enabled" > "release-artifacts/bitcoin-lifeboat-${TAG_NAME}-${{ matrix.asset_slug }}.os-signing.txt"
+          else
+            echo "macOS Developer ID notarization: OS-unsigned (Apple signing secrets absent)" > "release-artifacts/bitcoin-lifeboat-${TAG_NAME}-${{ matrix.asset_slug }}.os-signing.txt"
+          fi
+
+      - name: Collect Linux desktop artifacts
+        if: matrix.platform == 'linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-artifacts
+          found=false
+          while IFS= read -r file; do
+            found=true
+            case "${file}" in
+              *.AppImage) ext="AppImage" ;;
+              *.deb) ext="deb" ;;
+              *) continue ;;
+            esac
+            cp "${file}" "release-artifacts/bitcoin-lifeboat-${TAG_NAME}-${{ matrix.asset_slug }}.${ext}"
+          done < <(find apps/desktop/src-tauri/target -type f \( -name '*.AppImage' -o -name '*.deb' \) | sort)
+          [[ "${found}" == "true" ]]
+          echo "Linux desktop artifact: OS-unsigned; minisign and cosign are applied in the publish job" > "release-artifacts/bitcoin-lifeboat-${TAG_NAME}-${{ matrix.asset_slug }}.os-signing.txt"
+
+      - name: Collect Windows desktop artifact
+        if: matrix.platform == 'windows'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path release-artifacts | Out-Null
+          $msi = Get-ChildItem -Path apps/desktop/src-tauri/target -Filter *.msi -Recurse | Sort-Object FullName | Select-Object -First 1
+          if (-not $msi) {
+            throw "MSI artifact was not produced"
+          }
+          Copy-Item $msi.FullName "release-artifacts/bitcoin-lifeboat-$env:TAG_NAME-${{ matrix.asset_slug }}.msi"
+          if ("${{ steps.windows_signing.outputs.ready }}" -eq "true") {
+            "Windows OV signing: enabled" | Out-File -Encoding utf8 "release-artifacts/bitcoin-lifeboat-$env:TAG_NAME-${{ matrix.asset_slug }}.os-signing.txt"
+          } else {
+            "Windows OV signing: OS-unsigned (Windows signing secrets absent)" | Out-File -Encoding utf8 "release-artifacts/bitcoin-lifeboat-$env:TAG_NAME-${{ matrix.asset_slug }}.os-signing.txt"
+          }
+
+      - name: Upload desktop artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: desktop-${{ matrix.asset_slug }}
+          path: release-artifacts/*
+          if-no-files-found: error
+
+  cli:
+    name: CLI binary (${{ matrix.name }})
+    needs: [metadata, quality-gate]
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: linux-x86_64
+            runner: ubuntu-24.04
+            target: x86_64-unknown-linux-gnu
+            archive: tar.gz
+          - name: windows-x86_64
+            runner: windows-latest
+            target: x86_64-pc-windows-msvc
+            archive: zip
+          - name: macos-universal
+            runner: macos-14
+            target: universal-apple-darwin
+            archive: tar.gz
+    env:
+      RUSTUP_TOOLCHAIN: 1.78.0
+      SOURCE_DATE_EPOCH: ${{ needs.metadata.outputs.source_date_epoch }}
+      TAG_NAME: ${{ needs.metadata.outputs.tag_name }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install Rust toolchain
+        shell: bash
+        run: |
+          rustup toolchain install "$RUSTUP_TOOLCHAIN" --profile minimal
+          if [[ "${{ matrix.target }}" == "universal-apple-darwin" ]]; then
+            rustup target add --toolchain "$RUSTUP_TOOLCHAIN" aarch64-apple-darwin x86_64-apple-darwin
+          else
+            rustup target add --toolchain "$RUSTUP_TOOLCHAIN" ${{ matrix.target }}
+          fi
+
+      - name: Configure deterministic Rust paths
+        shell: bash
+        run: |
+          printf 'RUSTFLAGS=--remap-path-prefix=%s=. --remap-path-prefix=%s=~\n' "$GITHUB_WORKSPACE" "$HOME" >> "$GITHUB_ENV"
+          printf 'CARGO_INCREMENTAL=0\n' >> "$GITHUB_ENV"
+
+      - name: Build CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ matrix.target }}" == "universal-apple-darwin" ]]; then
+            cargo build -p lifeboat --release --locked --target aarch64-apple-darwin
+            cargo build -p lifeboat --release --locked --target x86_64-apple-darwin
+            mkdir -p target/universal-apple-darwin/release
+            lipo -create \
+              target/aarch64-apple-darwin/release/lifeboat \
+              target/x86_64-apple-darwin/release/lifeboat \
+              -output target/universal-apple-darwin/release/lifeboat
+          else
+            cargo build -p lifeboat --release --locked --target ${{ matrix.target }}
+          fi
+
+      - name: Package CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "release-artifacts/bitcoin-lifeboat-${TAG_NAME}-cli-${{ matrix.name }}"
+          binary="target/${{ matrix.target }}/release/lifeboat"
+          if [[ "${{ matrix.name }}" == "windows-x86_64" ]]; then
+            binary="${binary}.exe"
+          fi
+          cp "${binary}" "release-artifacts/bitcoin-lifeboat-${TAG_NAME}-cli-${{ matrix.name }}/"
+          cp README.md LICENSE "release-artifacts/bitcoin-lifeboat-${TAG_NAME}-cli-${{ matrix.name }}/"
+          cd release-artifacts
+          if [[ "${{ matrix.archive }}" == "zip" ]]; then
+            7z a "bitcoin-lifeboat-${TAG_NAME}-cli-${{ matrix.name }}.zip" "bitcoin-lifeboat-${TAG_NAME}-cli-${{ matrix.name }}" >/dev/null
+          else
+            tar -czf "bitcoin-lifeboat-${TAG_NAME}-cli-${{ matrix.name }}.tar.gz" "bitcoin-lifeboat-${TAG_NAME}-cli-${{ matrix.name }}"
+          fi
+          rm -rf "bitcoin-lifeboat-${TAG_NAME}-cli-${{ matrix.name }}"
+
+      - name: Upload CLI artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: cli-${{ matrix.name }}
+          path: release-artifacts/*
+          if-no-files-found: error
+
+  source-and-sbom:
+    name: Source archive and SBOMs
+    needs: [metadata, quality-gate]
+    runs-on: ubuntu-24.04
+    env:
+      TAG_NAME: ${{ needs.metadata.outputs.tag_name }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Create source tarball
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-artifacts
+          git archive --format=tar.gz --prefix="bitcoin-lifeboat-${TAG_NAME}/" -o "release-artifacts/bitcoin-lifeboat-${TAG_NAME}-source.tar.gz" HEAD
+
+      - name: Generate SPDX SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          path: .
+          format: spdx-json
+          output-file: release-artifacts/bitcoin-lifeboat-${{ env.TAG_NAME }}.spdx.json
+          upload-artifact: false
+          upload-release-assets: false
+
+      - name: Generate CycloneDX SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          path: .
+          format: cyclonedx-json
+          output-file: release-artifacts/bitcoin-lifeboat-${{ env.TAG_NAME }}.cyclonedx.json
+          upload-artifact: false
+          upload-release-assets: false
+
+      - name: Upload source and SBOM artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: source-and-sbom
+          path: release-artifacts/*
+          if-no-files-found: error
+
+  publish:
+    name: Sign, verify, and publish release assets
+    needs: [metadata, desktop, cli, source-and-sbom]
+    runs-on: ubuntu-24.04
+    environment:
+      name: release-two-maintainer
+      url: https://github.com/${{ github.repository }}/releases/tag/${{ needs.metadata.outputs.tag_name }}
+    permissions:
+      contents: write
+      id-token: write
+    outputs:
+      base64_subjects: ${{ steps.subjects.outputs.base64_subjects }}
+    env:
+      COSIGN_YES: true
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      MINISIGN_PRIVATE_KEY: ${{ secrets.MINISIGN_PRIVATE_KEY }}
+      MINISIGN_PUBLIC_KEY: ${{ vars.MINISIGN_PUBLIC_KEY }}
+      RELEASE_CHANNEL: ${{ needs.metadata.outputs.release_channel }}
+      SOURCE_DATE_EPOCH: ${{ needs.metadata.outputs.source_date_epoch }}
+      TAG_NAME: ${{ needs.metadata.outputs.tag_name }}
+      PRERELEASE: ${{ needs.metadata.outputs.prerelease }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Download release artifacts
+        uses: actions/download-artifact@v6
+        with:
+          path: downloaded-artifacts
+
+      - name: Install signing tools
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y minisign
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@v4
+
+      - name: Prepare release directory and checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          find downloaded-artifacts -type f -print0 | while IFS= read -r -d '' file; do
+            cp "${file}" "dist/$(basename "${file}")"
+          done
+          cd dist
+          find . -type f ! -name '*.minisig' ! -name '*.sigstore.json' -printf '%P\0' \
+            | sort -z \
+            | xargs -0 sha256sum > SHA256SUMS
+
+      - name: Minisign release artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "${MINISIGN_PRIVATE_KEY}" || -z "${MINISIGN_PUBLIC_KEY}" ]]; then
+            echo "MINISIGN_PRIVATE_KEY secret and MINISIGN_PUBLIC_KEY repository variable are required for every release." >&2
+            exit 1
+          fi
+
+          key_path="${RUNNER_TEMP}/minisign.key"
+          umask 077
+          printf '%s\n' "${MINISIGN_PRIVATE_KEY}" > "${key_path}"
+
+          while IFS= read -r -d '' file; do
+            minisign -S -s "${key_path}" -m "${file}" -x "${file}.minisig" -t "Bitcoin Lifeboat ${TAG_NAME} $(basename "${file}")"
+            minisign -V -P "${MINISIGN_PUBLIC_KEY}" -m "${file}" -x "${file}.minisig"
+          done < <(find dist -type f ! -name '*.minisig' ! -name '*.sigstore.json' -print0 | sort -z)
+
+      - name: Cosign keyless sign release artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            cosign sign-blob --yes --bundle "${file}.sigstore.json" "${file}"
+          done < <(find dist -type f ! -name '*.minisig' ! -name '*.sigstore.json' -print0 | sort -z)
+
+      - name: Write release notes
+        shell: bash
+        run: |
+          set -euo pipefail
+          {
+            echo "# Bitcoin Lifeboat ${TAG_NAME}"
+            echo
+            echo "This release was approved through the protected \`release-two-maintainer\` GitHub Environment."
+            echo
+            echo "## Release Channel"
+            echo
+            if [[ "${RELEASE_CHANNEL}" == "alpha" || "${RELEASE_CHANNEL}" == "beta" ]]; then
+              echo "This is a ${RELEASE_CHANNEL} release for testing. The public site keeps the ${RELEASE_CHANNEL} banner, and placeholder project metadata may still be present."
+            else
+              echo "This is a Stable release. The release gate confirmed the external audit sign-off and found no configured placeholder tokens in tracked files."
+            fi
+            echo
+            echo "## Artifacts"
+            echo
+            echo "- macOS universal DMG"
+            echo "- Windows x86_64 MSI"
+            echo "- Linux x86_64 AppImage and deb"
+            echo "- CLI archives for macOS universal, Windows x86_64, and Linux x86_64"
+            echo "- Source tarball"
+            echo "- SHA256SUMS"
+            echo "- SPDX and CycloneDX SBOM JSON"
+            echo "- minisign signatures and cosign keyless bundles"
+            echo
+            echo "## OS Signing Status"
+            echo
+            cat dist/*.os-signing.txt | sed 's/^/- /'
+            echo
+            echo "## Minisign Public Key"
+            echo
+            echo '```text'
+            echo "${MINISIGN_PUBLIC_KEY}"
+            echo '```'
+            echo
+            echo "Verify the checksum file before running an installer:"
+            echo
+            echo '```sh'
+            echo "minisign -V -P '${MINISIGN_PUBLIC_KEY}' -m SHA256SUMS -x SHA256SUMS.minisig"
+            echo "sha256sum --check SHA256SUMS"
+            echo '```'
+          } > release-notes.md
+
+      - name: Create or update draft GitHub Release
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view "${TAG_NAME}" >/dev/null 2>&1; then
+            gh release edit "${TAG_NAME}" --draft --notes-file release-notes.md --title "Bitcoin Lifeboat ${TAG_NAME}"
+            if [[ "${PRERELEASE}" == "true" ]]; then
+              gh release edit "${TAG_NAME}" --prerelease
+            else
+              gh release edit "${TAG_NAME}" --prerelease=false
+            fi
+          else
+            args=(--draft --target "${GITHUB_SHA}" --title "Bitcoin Lifeboat ${TAG_NAME}" --notes-file release-notes.md)
+            if [[ "${PRERELEASE}" == "true" ]]; then
+              args+=(--prerelease)
+            fi
+            gh release create "${TAG_NAME}" "${args[@]}"
+          fi
+          gh release upload "${TAG_NAME}" dist/* --clobber
+
+      - name: Export SLSA subjects
+        id: subjects
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd dist
+          find . -type f -printf '%P\0' \
+            | sort -z \
+            | xargs -0 sha256sum > ../slsa-subjects.txt
+          {
+            printf 'base64_subjects='
+            base64 -w0 ../slsa-subjects.txt
+            printf '\n'
+          } >> "$GITHUB_OUTPUT"
+
+  provenance:
+    name: SLSA L3 provenance
+    needs: [metadata, publish]
+    permissions:
+      actions: read
+      contents: write
+      id-token: write
+    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v2.1.0
+    with:
+      base64-subjects: ${{ needs.publish.outputs.base64_subjects }}
+      upload-assets: true
+      upload-tag-name: ${{ needs.metadata.outputs.tag_name }}
+      draft-release: true

@@ -1,0 +1,220 @@
+---
+source: crates/runbook-engine/src/heir.rs
+expression: "render_markdown(template, &data, mode)"
+---
+# Bitcoin Lifeboat - Heir Recovery Plan (Liana Timelock)
+
+_A plain-language plan for a Liana wallet with a timelocked recovery path._
+
+```
+You are reading a recovery plan written by someone who trusts you
+to help. This document does not contain bitcoin. It does not contain
+secret recovery words. It only contains instructions.
+
+You will not be able to recover anything using only this document.
+You will also need:
+  - The wallet's hardware device(s) or backup card(s)
+  - Any secret words the owner wrote down separately (if they did)
+  - Patience: never let anyone rush you
+
+If anyone tells you they can help you "decrypt" or "unlock" this
+plan for a fee, hang up. They cannot. They are a scammer.
+
+If you get stuck, stop. Take your time. Find a trusted person who
+understands Bitcoin and ask for help. The owner has likely listed
+a trusted helper on this page.
+```
+
+## Words to know
+
+- Recovery words: the list of words (usually 12 or 24) the owner wrote down by hand. Sometimes called a seed phrase. They are the real key to the money. Never type them into a website.
+- Hardware device: a small gadget that holds the recovery words offline and approves payments. Sometimes called a hardware wallet or a signing device.
+- Recovery details: a long line of text (often starting with letters like "wpkh" or "wsh", and known to experts as a descriptor) that tells wallet software how to find this wallet. It is not a secret key, but keep it private.
+- Wallet software: a free app (for example Sparrow or Bitcoin Core) that shows the wallet and helps approve a payment.
+- Timelock: a waiting period measured in Bitcoin blocks or time. The recovery path should be tried only after the wallet software says the waiting period has passed.
+- Primary path and recovery path: the primary path is the owner's normal way to spend. The recovery path is the backup route for the heir after the timelock.
+
+> ⚠️ This document contains an extended public key (xpub).
+> An xpub reveals every receive AND change address for this wallet,
+> past and future. Anyone with this xpub can see your wallet's
+> entire transaction history on the blockchain.
+> Store this where you store your seed backup. Do not email it,
+> do not upload it, do not share it on chat.
+
+## 1. Safety warning
+
+Never type recovery words into a website, chat, email, or a tool that is not the wallet software named by the owner.
+
+This plan does not contain recovery words or private keys. It explains which materials to gather and when the recovery path may be used.
+
+Anyone who asks to "unlock" this plan for a fee is trying to steal from the wallet.
+
+## 2. Do not panic
+
+A timelocked recovery cannot be rushed. Read the whole plan before using any signing device.
+
+If the recovery path is not active yet, wait. Trying early can create confusing errors and wasted work.
+
+Take a break before each signing step. The goal is a correct rehearsal, not a fast one.
+
+## 3. Stop and call a trusted helper
+
+If any path, block height, or wallet message is unclear, stop before signing.
+
+Ask a trusted helper who understands Liana or Bitcoin recovery to review the plan with you.
+
+Trusted helper to call: ______________________
+
+Second reviewer, if required: ______________________
+
+## 4. What you will need
+
+- [ ] This plan, printed on paper.
+
+- [ ] The Liana backup file or written recovery details.
+
+- [ ] The primary-path signing device, if it is still available.
+
+- [ ] The recovery-path device or backup named by the owner.
+
+- [ ] The wallet software listed in section 10.
+
+- [ ] A current block height from a trusted source, written by hand.
+
+## 5. What kind of wallet this is
+
+This is a Liana-style timelock wallet. It has a normal owner path and at least one recovery path that waits for a timelock.
+
+- Script type: wsh(or_d timelock)
+
+- Number of keys listed: 2
+
+Use the primary path first if the owner is available and the primary device still works. Use the recovery path only when the owner planned for it and the waiting period has passed.
+
+## 6. The wallet's recovery details
+
+The recovery details describe both the primary path and the recovery path. Without them, Liana may not be able to show when recovery is available.
+
+Keep a written or stamped copy with the Liana backup package. The details are not recovery words, but they reveal wallet structure, so keep them private.
+
+Recovery details (full):
+
+```
+wsh(or_d(pk([4ba43603/48'/1'/0'/2']tpubDDwf2gdFxFahr9RUtDQCuZmsx34CfdZ7RALAirwC2FGeLBzW1TDiEpqFeRdxLdZD7rfsbZHYwSaT6CLM3TAcYRw6xfRv4U6KCQt4Zuhvjkz/<0;1>/*),and_v(v:pkh([6e37edb9/48'/1'/0'/2']tpubDE4CYsWtymYFQ6vKa1aBYUDn8DQxNCMNBYRXN6LxbPiW2RuQfYsjHnYLeTBsYSsK7Z1LvpjGWPz3YmUL8nEcGpCf9NJcyUoDn7TFSvdUaZJ/<0;1>/*),older(65535))))#d3zjscz4
+```
+
+## 7. Primary and recovery paths
+
+Fill in the path roles by hand after printing. Do not write recovery words, private keys, or passphrases here.
+
+Primary path signer or device: ______________________
+
+Primary path material is kept at: ______________________
+
+Recovery path signer or device: ______________________
+
+Recovery path material is kept at: ______________________
+
+- Signer A: short code 11111111, path m/48h/1h/0h/2h, device Coldcard Mk4
+
+- Signer B: short code 22222222, path m/48h/1h/0h/2h, device Coldcard Mk4
+
+## 8. Passphrase reminder
+
+If the owner used an extra word (passphrase), it is not written here and never should be.
+
+Find any extra word only where the owner stored it separately. Without the exact extra word, the recovery words can point to a different wallet.
+
+## 9. People to contact
+
+Fill these in by hand. Avoid strangers, paid recovery services, and anyone who contacts you first.
+
+Trusted helper name: ______________________
+
+Trusted helper phone: ______________________
+
+Executor or attorney: ______________________
+
+Second family reviewer: ______________________
+
+## 10. The app you will need
+
+Use Liana or another wallet that can understand this timelock policy. Open the wallet in watch-only mode before using any recovery words.
+
+- Liana
+
+Liana backup file name or paper reference: ______________________
+
+## 11. How to check the timelock
+
+1. Open the recovery details in watch-only mode and find the policy or recovery tree.
+
+2. Find the primary path and the recovery path. Confirm which signer belongs to each.
+
+3. Write down the current block height from a trusted source, then compare it with the recovery-path countdown.
+
+4. If the wallet says the recovery path is not active yet, stop and wait until the printed or wallet-shown date or block height.
+
+5. Practice with a test wallet before attempting any real recovery.
+
+## 12. When to stop right away
+
+Stop and get help if any of these happen:
+
+- A website, app, or person asks you to type recovery words.
+
+- The wallet app shows no recovery path or a different policy.
+
+- The current block height is below the recovery-path block height.
+
+- An address or wallet history does not match the owner's records.
+
+- Anyone pressures you to hurry, share your screen, or pay a fee.
+
+## 13. Date of the last practice run
+
+Last successful Liana practice run: 2026-05-01
+
+Current block height during the last drill: ______________________
+
+Recovery path active at block or date: ______________________
+
+## 14. When to practice next
+
+Try again by: 2027-05-01
+
+Run a new drill after changing a device, updating Liana, moving the backup file, or changing who will help with recovery.
+
+## 15. Version and report code
+
+- Bitcoin Lifeboat version: 0.1.0
+
+- Report code: sha256:2222222222222222222222222222222222222222222222222222222222222222
+
+These let a helper reproduce the same runbook inputs and check which Lifeboat version created it.
+
+## 16. Important notice
+
+```
+About this document
+
+Bitcoin Lifeboat is an open-source diagnostic and rehearsal tool.
+This document reflects only the information you provided. It cannot
+detect missing materials Lifeboat was not asked to check, it cannot
+verify the physical location or condition of your backups, and it
+cannot predict the future condition of your hardware wallets.
+
+A "Ready" status means the metadata you provided appears complete
+for the scenarios Lifeboat tested. It does not mean your bitcoin
+is safe. It does not mean recovery will succeed in a real emergency.
+
+You are responsible for verifying recovery end-to-end on a test
+network before trusting your real wallet. Consult an attorney for
+estate planning. Consult a tax professional for tax implications.
+
+Bitcoin Lifeboat does not custody funds, does not contact you,
+does not call you, and does not ask for your seed phrase.
+
+If anyone claiming to be from Bitcoin Lifeboat contacts you, it
+is a scam. Hang up.
+```

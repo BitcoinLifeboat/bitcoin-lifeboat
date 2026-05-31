@@ -1,0 +1,5 @@
+---
+source: cli/lifeboat/src/commands.rs
+expression: out.stdout
+---
+{"matched":true,"matched_at":{"chain":"receive","index":0},"network":"testnet","provided":"tb1qaqg0encvurl7rzt52g94d7nqrp3v7a6dhadv8f00jprrhqavtlns2x705w"}

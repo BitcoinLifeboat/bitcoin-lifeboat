@@ -1,0 +1,6 @@
+Types: deb
+URIs: https://bitcoinlifeboat.org/apt
+Suites: stable
+Components: main
+Architectures: amd64
+Signed-By: /usr/share/keyrings/bitcoin-lifeboat-archive-keyring.gpg

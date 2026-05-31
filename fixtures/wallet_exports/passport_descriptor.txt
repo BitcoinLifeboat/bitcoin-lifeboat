@@ -1,0 +1,3 @@
+# Passport Core
+# Exported watch-only descriptor (native segwit, single-sig)
+wpkh([71348c8a/84'/1'/0']tpubDCTb5JhwTc9S3pfEMNMajVPCEgCDxHTiBwmJgzLa2Znne2pPQ4dh1CjpS7ibiPBEXeJRJxddRaW1ZxxWyDvrndrQk8vqfco9Uvr7Eseo55L/<0;1>/*)

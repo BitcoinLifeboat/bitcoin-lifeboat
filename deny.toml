@@ -1,0 +1,64 @@
+# cargo-deny — license allowlist and supply-chain policy (PRD Appendix B).
+# Usage: cargo deny check
+#
+# License policy: only the permissive / weak-copyleft licenses listed under
+# `allow` are accepted. Any license not listed — notably the strong-copyleft
+# GPL-* and AGPL-* families — fails the check. This satisfies the PRD's
+# "license allowlist MIT/Apache-2.0/BSD-2/BSD-3/ISC/Unlicense/0BSD/MPL-2.0/
+# CC0-1.0/Zlib; deny GPL/AGPL" requirement (denied here by omission).
+
+[licenses]
+version = 2
+allow = [
+    "MIT",
+    "Apache-2.0",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "Unlicense",
+    "0BSD",
+    "MPL-2.0",
+    "CC0-1.0",
+    "Zlib",
+]
+confidence-threshold = 0.8
+# Per-crate license exceptions require maintainer review before being added.
+exceptions = [
+    # rust-bitcoin's hex_lit dependency uses the MIT no-false-attribution variant.
+    { allow = ["MITNFA"], crate = "hex_lit" },
+    # unicode-ident's license is OSI-approved and carried by proc-macro tooling.
+    { allow = ["Unicode-3.0"], crate = "unicode-ident" },
+    # tinystr is pulled by Project Fluent's language-id stack; Unicode-3.0 is
+    # OSI-approved and materially equivalent to the existing unicode-ident exception.
+    { allow = ["Unicode-3.0"], crate = "tinystr" },
+    # minicbor is pulled by the BCR UR PSBT transport. BlueOak-1.0.0 is
+    # OSI-approved and permissive; keep it crate-scoped rather than widening the
+    # global allowlist.
+    { allow = ["BlueOak-1.0.0"], crate = "minicbor" },
+]
+
+[advisories]
+version = 2
+yanked = "deny"
+ignore = [
+    # `time >=0.3.47` fixes RUSTSEC-2026-0009 but requires rustc 1.88.0, which
+    # is incompatible with the root 1.78 MSRV. The current printpdf fallback uses
+    # only `OffsetDateTime::UNIX_EPOCH` for deterministic metadata, not untrusted
+    # date parsing. Revisit when the root MSRV moves or the PDF backend changes.
+    { id = "RUSTSEC-2026-0009", reason = "MSRV-blocked until root Rust can move past 1.78 or printpdf is replaced" },
+]
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+
+[sources.allow-org]
+github = []
+gitlab = []
+bitbucket = []
+
+[bans]
+# Flag duplicate versions of a crate; tighten to "deny" once the tree stabilizes.
+multiple-versions = "warn"
+wildcards = "deny"
+allow-wildcard-paths = true

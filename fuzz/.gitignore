@@ -1,0 +1,6 @@
+# cargo-fuzz build artifacts and run state (regenerated; not source).
+/target
+/corpus
+/artifacts
+/coverage
+Cargo.lock

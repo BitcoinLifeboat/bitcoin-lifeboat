@@ -1,0 +1,228 @@
+---
+source: crates/report-engine/tests/golden_corpus.rs
+expression: manifest
+---
+singlesig_wpkh_cannot_determine_no_network
+    status=Cannot Determine numeric=25 criticals=0 warnings=10 survivability=false
+    input_hash=sha256:f5bf25f336ad6513525cba70105542e52f2e09d85b9a542c19e6c0aaf78eb863
+    report_hash=sha256:7a2daa3600fe1851fdd2fc2c754a1df7de45f8c01fcdb8997453ffa748940809
+singlesig_wpkh_testnet_bare
+    status=Not Ready numeric=25 criticals=0 warnings=10 survivability=false
+    input_hash=sha256:20a93b8e6c93e803dd20b55fc18a70ff0e9349be7b127c62545d291d2156a3e4
+    report_hash=sha256:a98b35f7efc855698eb152829bfc3488b7c3f63cd23d090dbfe03f10423ec9ac
+singlesig_wpkh_signet_bare
+    status=Not Ready numeric=25 criticals=0 warnings=10 survivability=false
+    input_hash=sha256:f07f96fca6b37ce7c2968690a27499048056fe01f2d8ac95bd47c27ba106ac33
+    report_hash=sha256:405ca6b5ed6f645d4fabcfd04a20edd3c1083e6e3643cde805d2264c3d55b716
+singlesig_wpkh_regtest_bare
+    status=Not Ready numeric=25 criticals=0 warnings=10 survivability=false
+    input_hash=sha256:67844670e655dc938017bf051554e53023229e17ea8773383f834b1e077deb3d
+    report_hash=sha256:1c04c5cb098c25980ff6ade38e2a8e00f770ed9557d3fcbbeb1268e198af23cb
+singlesig_wpkh_testnet_network_confirmed
+    status=Not Ready numeric=25 criticals=0 warnings=10 survivability=false
+    input_hash=sha256:c15327a05355911a0fc6e4993078afbe5bf3e897d2a7f8b6f217c01442d4b0b7
+    report_hash=sha256:0d0b45eee203596a3373dd8f55f22b7d9fef21d1a7feeb71d453386d61d614cb
+singlesig_pkh_testnet_bare
+    status=Not Ready numeric=25 criticals=0 warnings=10 survivability=false
+    input_hash=sha256:e92f4bd7ae8fd883867a58f158c5586ea72bf2d1969a4bef38cd74f08af9f27f
+    report_hash=sha256:9caf85fd9adb940f8620e0db17d9b3d42f8e5eae001a717694a42d3ec3ceb5ca
+singlesig_pkh_cannot_determine_no_network
+    status=Cannot Determine numeric=25 criticals=0 warnings=10 survivability=false
+    input_hash=sha256:4bdfd1ce34246669f0c68b1f0f12189b189a65992bcb7afee07149af98c2626d
+    report_hash=sha256:bd828525b059f1148248d3b8177970c1bb7799be56ec2f5dfb86bf9c92ce9f96
+singlesig_sh_wpkh_testnet_bare
+    status=Not Ready numeric=25 criticals=0 warnings=10 survivability=false
+    input_hash=sha256:0145fc89c8e9879419636ddc8fceda5205fe349f7a0e0b1c811cc2157902dab3
+    report_hash=sha256:179811b43472717010b167a9ff3e69394dc62317044dc10b17f9ed23e8d31e29
+singlesig_wpkh_testnet_partial_checklist
+    status=Needs Attention numeric=46 criticals=0 warnings=6 survivability=false
+    input_hash=sha256:bd35687e77b107fcc6909048f1e8c6139b8e9a749d7e2505e3a24c9fc93391dd
+    report_hash=sha256:3e8b09e57dd657289177576b1a5d2898898e531ed12e236ab27b8bfb4824b6bb
+singlesig_wpkh_testnet_full_yes_checklist
+    status=Needs Attention numeric=64 criticals=0 warnings=4 survivability=false
+    input_hash=sha256:17f2a824e1c9823a2dcc0014646d6436c79b4c0c9cd8ceb931c73b19f64f54bb
+    report_hash=sha256:8aa18d6ac0b6a895594c8a5756e86d47eabae813911ec9273a96ec33ad483bd0
+singlesig_wpkh_testnet_emergency_contact_only
+    status=Not Ready numeric=28 criticals=0 warnings=9 survivability=false
+    input_hash=sha256:f94d0fda5bf49a1f98d8fe2ed0de1f3fec1c4af5047c4a1e54d54ce0dd147dc3
+    report_hash=sha256:c2bad736ad6da09ef3adebad51718cfd82a469f416bd6b3cdf7623d1e8cc57d1
+singlesig_wpkh_testnet_hardware_signed_only
+    status=Not Ready numeric=33 criticals=0 warnings=9 survivability=false
+    input_hash=sha256:a0b16840cc03166c22a758c7b3807061277c17aa5bcbd9def3f7d0723459a881
+    report_hash=sha256:61023a84b4e947f741d4f056de63e459ae1744eb4f80e619199272bbeee8898c
+singlesig_wpkh_testnet_backup_same_location
+    status=Not Ready numeric=15 criticals=0 warnings=11 survivability=false
+    input_hash=sha256:8499b4776471bf0c6bb059af893546b6cf8e1f40aead74589a2d1f368c1a45eb
+    report_hash=sha256:e129e36a313d9da2c3ce123853fec00b94eea300b8967dfe903da53cd719f357
+singlesig_wpkh_testnet_derive_count_1
+    status=Not Ready numeric=25 criticals=0 warnings=10 survivability=false
+    input_hash=sha256:20a93b8e6c93e803dd20b55fc18a70ff0e9349be7b127c62545d291d2156a3e4
+    report_hash=sha256:6d64bd2b2c71abfd61b596b21df98850554c56946884042a3a6276cfa150c810
+singlesig_wpkh_testnet_derive_count_10
+    status=Not Ready numeric=25 criticals=0 warnings=10 survivability=false
+    input_hash=sha256:20a93b8e6c93e803dd20b55fc18a70ff0e9349be7b127c62545d291d2156a3e4
+    report_hash=sha256:cd602c285da5340bf3be25c1e3f91037e7f802078fa73b47f72f9735201ebecd
+singlesig_wpkh_with_explicit_change_descriptor
+    status=Not Ready numeric=38 criticals=0 warnings=10 survivability=false
+    input_hash=sha256:919f4029517a9d3cfeec13fe35fef8dc297216e14bf06c1634624aec46e97f20
+    report_hash=sha256:c62684b2accccdf1d4c5c630c54c0bee8c1da9a46d7069710ca9cf89a981b7d4
+singlesig_sh_wpkh_with_explicit_change_descriptor
+    status=Not Ready numeric=38 criticals=0 warnings=10 survivability=false
+    input_hash=sha256:34d050a2b0af5f36dcc2a5e74a800e17d5e233ba468fcea5d6d8e19828923897
+    report_hash=sha256:a572a2a79172ca4e5b03c83001ad833d12bc08445b10ec6ab40a6fe57a12c13c
+singlesig_multipath_cannot_determine_no_network
+    status=Cannot Determine numeric=40 criticals=0 warnings=9 survivability=false
+    input_hash=sha256:19112c49f05816cf8334f508021e16b357fce0276d38c1e34afef8d81fbc7ab1
+    report_hash=sha256:28ca9771fa5a149e39c6f50bdd0e5c6bcda83c01de37ea3276b68d9a13f13a5a
+singlesig_multipath_testnet_bare
+    status=Needs Attention numeric=40 criticals=0 warnings=9 survivability=false
+    input_hash=sha256:b240345cb6eba4ce39563ce681c985cfa8eedcb15a8cb441533a8ef3d9b2b462
+    report_hash=sha256:fb93bd467b76fe6af72f0b356edbdbb5a936383be51483da908628957cc5122d
+singlesig_multipath_ready_full
+    status=Ready numeric=100 criticals=0 warnings=0 survivability=false
+    input_hash=sha256:c35ce4c8048e4a227c148b40fbd0b5192ca0d6aee43ee6f44f637ceecb780fdc
+    report_hash=sha256:7896f8c89959511e354a7e9898aebe5cfd57b518cc5c452be4973832022411f3
+singlesig_multipath_ready_documented_passphrase
+    status=Ready numeric=100 criticals=0 warnings=0 survivability=false
+    input_hash=sha256:1e7f8602c37aeb8c600bbc5ad79c64f8718a896ba3c7c1d1e8fd2150a991abdd
+    report_hash=sha256:7870d449f5512eb898e19422e656cf24bcc22d06fbd683be8a578f833fbbf254
+singlesig_multipath_ready_drill_skipped
+    status=Ready numeric=90 criticals=0 warnings=1 survivability=false
+    input_hash=sha256:402d9099ff2da028f1d4c264dac791c33cdfdb8e62aa78fdd914eb607103398f
+    report_hash=sha256:bde83f83db81399ef3f0c1b5839c23a84c3ee708055b00bba3df6c5b5f346e35
+singlesig_multipath_mostly_ready_no_address
+    status=Mostly Ready numeric=90 criticals=0 warnings=1 survivability=false
+    input_hash=sha256:86d75869a51f49db3a4e48696936ea34e8c6b99fff4cc25071a8f5adf97fe003
+    report_hash=sha256:02ea057e54e11d368dd44600d64fc5935beefb0e53e2f168a7dadff6066c30ec
+multisig_2of3_cannot_determine_no_network
+    status=Cannot Determine numeric=25 criticals=0 warnings=10 survivability=true
+    input_hash=sha256:bc1078e2a7a1b0a78bf4f22f3f135eefc946c9606fba382ab5e7a9afc9aeab49
+    report_hash=sha256:3b16f944b8eda9cd515f2d4e09e74d98f8f4a81c0c0fd7793873d764b82a7a34
+multisig_2of3_testnet_bare
+    status=Not Ready numeric=25 criticals=0 warnings=10 survivability=true
+    input_hash=sha256:28d33fe07c86f87fe5607587cf0059c7d4618b7cb712b440ab03117658cf18fa
+    report_hash=sha256:e429fe57f11c837d5e50a65aad5fe755caf377a97e6a8eba4dac1674b8ee7603
+multisig_2of3_signet_bare
+    status=Not Ready numeric=25 criticals=0 warnings=10 survivability=true
+    input_hash=sha256:e4e8a03db27e4799258f7fc6c4888bace7b158d135d0d5ec9a23fdf5501e588e
+    report_hash=sha256:a6cff1a6ae9e540b16be06b091d4d400957f7cccee4a56301d88566cc24ae4f3
+multisig_2of3_declared_full_yes
+    status=Needs Attention numeric=64 criticals=0 warnings=4 survivability=true
+    input_hash=sha256:ab18faeacd440eaf916fa16760549b5eb4aca48ae0460415c6bb4e3b5b764632
+    report_hash=sha256:9c2916cd97a1be64d029eda9db803ed589bc14e7302b1f177dc0c050a380f063
+multisig_2of3_partial_checklist
+    status=Needs Attention numeric=46 criticals=0 warnings=6 survivability=true
+    input_hash=sha256:769218289eff8e59eb147f956340a6d0356f0e613b8d67ae4f5e447ae7dd5a11
+    report_hash=sha256:d2d65f2c5b140655cd7987b1b910b0b439390c3274edf6ccfdef02c8e4c12bb4
+multisig_2of3_passphrase_documented
+    status=Needs Attention numeric=64 criticals=0 warnings=4 survivability=true
+    input_hash=sha256:7eecfe5835d761e17592d2d9db0fc809cc7e80edf9b079be9ddd93b5b3685c94
+    report_hash=sha256:ddcb281cf60ee98fbb3dfc0b27ce35f415bac505c8082e18f448034da69e2d7c
+multisig_2of3_network_confirmed_declared
+    status=Not Ready numeric=25 criticals=0 warnings=10 survivability=true
+    input_hash=sha256:c7de37864374f4e4730efbbcc1ecffa0ff38a8840d8a7dfb098e890f9f939ef1
+    report_hash=sha256:6a753e437852eb7fbf58325d883a9953a346a5f35abc993e397dae2d8143f99e
+multisig_2of3_multipath_cannot_determine
+    status=Cannot Determine numeric=40 criticals=0 warnings=9 survivability=true
+    input_hash=sha256:a70f58d8e434892bb5ef5a5c8d5a7c671239f70fc5e92a5342645ff9b7911762
+    report_hash=sha256:f76a20148e28e717dd867946efc1ad541725d7549a3967a68770bfee12b8e81b
+multisig_2of3_multipath_testnet_bare
+    status=Needs Attention numeric=40 criticals=0 warnings=9 survivability=true
+    input_hash=sha256:6e4f6a0c2d4d752fb89b1737c9376d283aef5bf2e842a92ab75eea43fa34127e
+    report_hash=sha256:c3db832b647d115c1fba28f60456a3975af036d422e9b79f3599d4fe34efe477
+multisig_2of3_multipath_ready_full
+    status=Ready numeric=100 criticals=0 warnings=0 survivability=true
+    input_hash=sha256:27a38d916f1f8069ba445b3e9540615f4f3077c88646d9c803285c228a10e483
+    report_hash=sha256:9199e9c8d4566e7301617db7609dd83e479d091c636b6a9598482b49efab08a2
+multisig_2of3_multipath_mostly_ready_no_address
+    status=Mostly Ready numeric=90 criticals=0 warnings=1 survivability=true
+    input_hash=sha256:e7c9cb71332ef9e738e48248290362cc695bbb8059dc1f8852f002aed900e3a4
+    report_hash=sha256:27e4c6b2e164762ae4d6e8911260b27f5c6c73eb4f11fb802ede13ded6635b94
+multisig_3of5_cannot_determine_no_network
+    status=Cannot Determine numeric=25 criticals=0 warnings=10 survivability=true
+    input_hash=sha256:8803e06466da9d756712d3a4f6a3cd93c47968d708e4f9e75040774fa1f78742
+    report_hash=sha256:11e2ec2f33372f1ad599ac5a167b54457a2cf7a024fe46474ae63460730495cc
+multisig_3of5_testnet_bare
+    status=Not Ready numeric=25 criticals=0 warnings=10 survivability=true
+    input_hash=sha256:2b99a4e677ceb60640c4378eff30bb1c22ff319151ba67b1da8c3085f473d147
+    report_hash=sha256:ad7cc2439333aedd9c73de80affb0e8b8b0b05ac957d06bcef6d751c9bbd4802
+multisig_3of5_declared_full_yes
+    status=Needs Attention numeric=64 criticals=0 warnings=4 survivability=true
+    input_hash=sha256:dde0e43d2ed3e3a56b8c697bac57dacf8714ca4c28c3f0c52f4aa067cb5184f9
+    report_hash=sha256:b0ca9ba8acd02a5771068fe59842989f2877168af092992061334f2f23d33df6
+multisig_3of5_same_location_backup
+    status=Needs Attention numeric=54 criticals=0 warnings=5 survivability=true
+    input_hash=sha256:f5c79c7a599c38c242f3c5cdfbd8e6eb7ca3347eee21f939d5d730f3cd36509f
+    report_hash=sha256:62c6098bbb065f1d4a6ddc8024a67461c55e96e70cb28d42aa381ca23949ad1f
+multisig_3of5_partial_checklist
+    status=Needs Attention numeric=46 criticals=0 warnings=6 survivability=true
+    input_hash=sha256:e77d837720bdddda96a6345fe5756e147b28314ca0c62345b91461ad33724e1e
+    report_hash=sha256:9b605c74bc92417eeb1b9a6027fa88ed3859011e89117e9a94b55a10fb35f437
+taproot_keypath_cannot_determine_no_network
+    status=Cannot Determine numeric=25 criticals=0 warnings=10 survivability=false
+    input_hash=sha256:e9c634c6058baa81d01b705df521317d6847e95270809145fb2374e3f920089a
+    report_hash=sha256:b42af60c9f973f7e972684cea6034c1b35db360f237731f9a9f21de7e93e39a2
+taproot_keypath_testnet_bare
+    status=Not Ready numeric=25 criticals=0 warnings=10 survivability=false
+    input_hash=sha256:4e0b6bfb2d484bd67f94311e3befdba55b7a7c120d944476f73945bcc5124612
+    report_hash=sha256:6a060520ea4332a929f29ec2a5017e2f64ca6c59816c695fd38b7e440ca1e4af
+taproot_keypath_signet_bare
+    status=Not Ready numeric=25 criticals=0 warnings=10 survivability=false
+    input_hash=sha256:e9ef1cd3212b0ac93866330b022d06754ac4e14a05870355e9878d76f8efa281
+    report_hash=sha256:892ba5b6e0553dea8162c2da75e21d91396625ebddfe0ff40851ce13c7c9a3c4
+taproot_keypath_partial_checklist
+    status=Needs Attention numeric=46 criticals=0 warnings=6 survivability=false
+    input_hash=sha256:a9e803a4e89ce0a955ef10290ea5b89d224719b7454ae12eb726014b206c5e9b
+    report_hash=sha256:6ef7594c4cbe698d6682eb4d72e5ee324ea9311061fc11df291cfa94a1ac42d9
+taproot_keypath_full_context
+    status=Mostly Ready numeric=75 criticals=0 warnings=2 survivability=false
+    input_hash=sha256:8922fcd4960ebe5e1768b97cd0679f037d659424c3a4aa1da625dfb2ec5f7e0d
+    report_hash=sha256:2ab4f81a15502112b96572d11eebf90de8efe694626a6e03d8f34c237b7c627b
+taproot_scriptpath_multi_a_testnet_bare
+    status=Not Ready numeric=25 criticals=0 warnings=10 survivability=true
+    input_hash=sha256:876773882c34613c2efca27d43848f461346225be5e6f793d48ed030c1ff9703
+    report_hash=sha256:514ea080511c3df073f54efe77a97238b8dc850f313dab1fd12f9cb4c4d9a398
+taproot_scriptpath_multi_a_cannot_determine
+    status=Cannot Determine numeric=25 criticals=0 warnings=10 survivability=true
+    input_hash=sha256:83ab1b68766fab3b23d5f1e4a80345a82b7cd8b12e5f4fb758a03b9bb179fd5b
+    report_hash=sha256:f83b3d9f097155406f44bbb11850cc4dc04ae600c8db955e291ef4ac4949dd99
+critical_duplicate_xpub_testnet
+    status=Not Ready numeric=25 criticals=1 warnings=10 survivability=true
+    input_hash=sha256:215110a2be1fb33810a9cac16570bce4c3aa559deea8f5ce6e2649fab7039468
+    report_hash=sha256:ee86d05a4184ba0b3a28941d1112d664adc4ce9774bc255f7250e1f55eafad46
+critical_duplicate_xpub_full_context
+    status=Not Ready numeric=64 criticals=1 warnings=4 survivability=true
+    input_hash=sha256:33c36cf50c394f30172b3104ec4e02b51428ee6a2f3b75c13270fe594dbbe787
+    report_hash=sha256:97f2d0d647589c77ff5be2cff4d897a36a078db7b2bae66eeccb6624319cf051
+critical_wallet_type_mismatch_singlesig_declared_multisig
+    status=Not Ready numeric=25 criticals=1 warnings=10 survivability=false
+    input_hash=sha256:290b1d1c54bdaceddd33ab9f4e0b6dda9ecf3efc55c1d3231a408a02952dec62
+    report_hash=sha256:03be83f7db8faae4fd6fcfbf9240e3d65d21f7b7b6dff67e19243f022b23ffcb
+multisig_2of3_declared_singlesig
+    status=Not Ready numeric=25 criticals=1 warnings=10 survivability=true
+    input_hash=sha256:977bd155faee650a01de6784a328993742d679337dd73df1c12aaf62688afdd5
+    report_hash=sha256:0203d12bbb297e68b7b397271aed871e8ee9655d0a9cb9aaae2dcab5cd3a433a
+critical_passphrase_undocumented_singlesig
+    status=Not Ready numeric=25 criticals=1 warnings=10 survivability=false
+    input_hash=sha256:0c11c6348bfcc674e87b7465a669bdc3a4298e1095da6f0efe72ab61fd6558e6
+    report_hash=sha256:a683b1916157626b70315935955490cd04fae5f72eb55c371821b132be2ad016
+critical_passphrase_undocumented_multisig
+    status=Not Ready numeric=64 criticals=1 warnings=4 survivability=true
+    input_hash=sha256:a30837b682ad680b3a006ef8fba1824102dbea6f8b28c6213bd5698f7615d5be
+    report_hash=sha256:202a2e817a7d76cb0665d87d76da53adf750e10629e2f63977f5ba09864e896f
+critical_change_desc_required_singlesig
+    status=Not Ready numeric=25 criticals=1 warnings=10 survivability=false
+    input_hash=sha256:414fe2c0527e7e4524700af0b29895cc1f994a823d55f749b28f547a96a05489
+    report_hash=sha256:ef23b34727616217b7592f501d4337e38a9b8c7c3444783cb635f1590ab81a9a
+critical_change_desc_required_multisig
+    status=Not Ready numeric=25 criticals=1 warnings=10 survivability=true
+    input_hash=sha256:f39c207558bad46cb65dc1396919f06cde34cdabc26535dd0918c37e3baaedf4
+    report_hash=sha256:f68d7ab8d75087da7a6a6d243803c7c53d0ab5daae10c97ad9b9d5147e19902a
+critical_address_mismatch_singlesig
+    status=Not Ready numeric=35 criticals=1 warnings=9 survivability=false
+    input_hash=sha256:6393c48b66c6df75c9f6a83d35f051419ca627751910e3a1cd363a9f2198e0f5
+    report_hash=sha256:e7be41e67be1d08c511602e827b2642d42ddc9e5bde0c9e886d3479ce572a50f
+critical_address_mismatch_multisig
+    status=Not Ready numeric=35 criticals=1 warnings=9 survivability=true
+    input_hash=sha256:a48241e9d76694663bceedf3326bb1fc4269b762cb6c1a01a040d929ee67d02c
+    report_hash=sha256:e341a621a758f0c9722677281702bc5669aa9e536616c9c1e52e68baafbb4fa7

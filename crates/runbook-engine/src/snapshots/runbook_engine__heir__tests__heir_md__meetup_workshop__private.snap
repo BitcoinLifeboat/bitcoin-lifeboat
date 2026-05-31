@@ -1,0 +1,146 @@
+---
+source: crates/runbook-engine/src/heir.rs
+expression: "render_markdown(template, &data, mode)"
+---
+# Bitcoin Lifeboat - Meetup Workshop Kit
+
+_A hands-on self-custody class for up to fifteen people._
+
+> ⚠️ This document contains an extended public key (xpub).
+> An xpub reveals every receive AND change address for this wallet,
+> past and future. Anyone with this xpub can see your wallet's
+> entire transaction history on the blockchain.
+> Store this where you store your seed backup. Do not email it,
+> do not upload it, do not share it on chat.
+
+## 1. Safety warning
+
+Never enter a real seed phrase into a website or this workshop's software. This class uses test wallets only.
+
+Bitcoin Lifeboat never asks for a seed phrase. Teach attendees that anyone who does is a scammer.
+
+## 2. Do not panic
+
+Remind attendees that recovery is a slow, careful process and that this class is a safe place to make and discuss mistakes.
+
+Keep the pace relaxed. Allow time for questions after each step.
+
+## 3. Stop and call a trusted helper
+
+Teach the habit: when a step is unclear, stop and ask. In real recovery the helper is a trusted person; in this class it is the instructor.
+
+Instructor / helper on the day: ______________________
+
+## 4. Required materials checklist
+
+- [ ] Up to 15 printed copies of this kit.
+
+- [ ] A projector or large screen for the live demo.
+
+- [ ] Test (Signet or regtest) descriptors and sample wallet files.
+
+- [ ] A computer per small group with the wallet software in section 10.
+
+- [ ] Spare paper and pens for blank fields.
+
+## 5. Wallet type summary
+
+Run the class with a simple single-signature test wallet first, then a 2-of-3 multisig if time allows.
+
+- Script type used today: wpkh
+
+- Number of keys: 1
+
+## 6. Descriptor backup reminder
+
+Walk attendees through reading a descriptor and explaining each part. Use only test descriptors in class.
+
+Recovery details (full):
+
+```
+wsh(sortedmulti(2,[11111111/48h/1h/0h/2h]tpubD6NzVbExampleHeirRunbookKey0000000000000000000000000000000000000000000000000000000/0/*))#cccccccc
+```
+
+## 7. Signer/device checklist
+
+For the multisig demo, show how each signer device contributes one signature.
+
+- Demo signer A: short code ________
+
+Demo device location / owner: ______________________
+
+## 8. Passphrase existence reminder
+
+Explain that a passphrase (a 25th word) is optional and, if used, must be stored apart from the seed. Never demonstrate with a real passphrase.
+
+## 9. Emergency contacts
+
+Attendees fill these in for their own real setup after class.
+
+My trusted helper: ______________________
+
+My attorney or executor: ______________________
+
+## 10. Wallet software dependency list
+
+Install these before class so attendees can follow along:
+
+- Sparrow
+
+## 11. Verification steps
+
+1. Load a test descriptor in watch-only mode and read it together.
+
+2. Derive the first address and confirm everyone sees the same one.
+
+3. Sign and broadcast a Signet transaction as a group.
+
+4. Have each attendee write their own next-step plan.
+
+## 12. Stop conditions
+
+Pause the class and reset if:
+
+- Anyone is about to use a real seed phrase or real funds.
+
+- An attendee feels lost; slow down and review.
+
+## 13. Date of last successful drill
+
+Workshop last run: 2026-05-01
+
+## 14. Next recommended drill date
+
+Next workshop: 2027-05-01
+
+## 15. Version and report hash
+
+- Bitcoin Lifeboat version: 0.1.0
+
+- Report hash: sha256:2222222222222222222222222222222222222222222222222222222222222222
+
+## 16. Disclaimer
+
+```
+About this document
+
+Bitcoin Lifeboat is an open-source diagnostic and rehearsal tool.
+This document reflects only the information you provided. It cannot
+detect missing materials Lifeboat was not asked to check, it cannot
+verify the physical location or condition of your backups, and it
+cannot predict the future condition of your hardware wallets.
+
+A "Ready" status means the metadata you provided appears complete
+for the scenarios Lifeboat tested. It does not mean your bitcoin
+is safe. It does not mean recovery will succeed in a real emergency.
+
+You are responsible for verifying recovery end-to-end on a test
+network before trusting your real wallet. Consult an attorney for
+estate planning. Consult a tax professional for tax implications.
+
+Bitcoin Lifeboat does not custody funds, does not contact you,
+does not call you, and does not ask for your seed phrase.
+
+If anyone claiming to be from Bitcoin Lifeboat contacts you, it
+is a scam. Hang up.
+```

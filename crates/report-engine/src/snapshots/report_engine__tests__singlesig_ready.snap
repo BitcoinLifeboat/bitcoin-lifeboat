@@ -1,0 +1,116 @@
+---
+source: crates/report-engine/src/lib.rs
+expression: ready_singlesig_report().to_markdown()
+---
+# Bitcoin Lifeboat — Recovery Readiness Report
+
+> Bitcoin Lifeboat is not a wallet, not a custody service, not a
+> seed phrase manager, not an inheritance legal service, and not a
+> recovery company. It is a free, open-source diagnostic tool that
+> helps you test whether your recovery plan works.
+
+## 1. Status
+
+**Status: Ready** (score 100/100)
+
+No critical failures, no warnings.
+
+- Wallet type: singlesig — wpkh
+- Network: testnet
+
+## 2. What passed
+
+- Descriptor parsed successfully
+- Descriptor checksum is valid
+- Known address matched at receive index 0
+
+## 3. What needs attention
+
+_None._
+
+## 4. What failed
+
+_None._
+
+## 5. What is missing
+
+_None._
+
+## 6. What to do next
+
+_No actions required right now._
+
+## 7. What NOT to do
+
+- Do not email the descriptor.
+- Do not store the descriptor in cloud notes apps.
+- Do not photograph this report and send it on chat.
+
+## 8. When to run this again
+
+Run this readiness check again by **2027-05-28** — within 12 months, or sooner if your score is below 70.
+
+## 9. Disclaimer
+
+```
+This report is a diagnostic aid. It is not legal, tax, financial,
+or security advice. Bitcoin Lifeboat cannot guarantee that any
+wallet is recoverable.
+```
+
+## 10. Lifeboat version and report hash
+
+- Lifeboat version: 0.1.0
+- Scoring engine version: 0.1.0
+- Report schema version: 0.1.0
+- Generated (UTC): 2026-05-28T00:00:00Z
+- Input hash: sha256:c35ce4c8048e4a227c148b40fbd0b5192ca0d6aee43ee6f44f637ceecb780fdc
+- Report hash: sha256:64d3bdcfca44bf0c402ec1c92993d29225b16dd2aea4ccb57f1fc881cabe4ef4
+
+## What this report cannot tell you
+
+```
+What this report CANNOT tell you
+
+  - Whether your hardware wallets still work.
+    (Lifeboat did not power them on. Run a Disaster Drill in v0.3.)
+  - Whether your seed words are still legible on the paper/metal.
+    (Go check. In person. Today.)
+  - Whether the location you store backups in is still safe.
+    (Lifeboat cannot see your closet.)
+  - Whether your heirs can find the materials.
+    (Run a Heir Drill in v0.6, or talk to them now.)
+  - Whether your passphrase is correct.
+    (Lifeboat does not know your passphrase. Test it on a
+     low-value wallet first.)
+  - Whether the wallet software you depend on will still exist
+    when you need it.
+    (Print this report. Print the descriptor. Make recovery
+     possible without specific software.)
+```
+
+## About this document
+
+```
+About this document
+
+Bitcoin Lifeboat is an open-source diagnostic and rehearsal tool.
+This document reflects only the information you provided. It cannot
+detect missing materials Lifeboat was not asked to check, it cannot
+verify the physical location or condition of your backups, and it
+cannot predict the future condition of your hardware wallets.
+
+A "Ready" status means the metadata you provided appears complete
+for the scenarios Lifeboat tested. It does not mean your bitcoin
+is safe. It does not mean recovery will succeed in a real emergency.
+
+You are responsible for verifying recovery end-to-end on a test
+network before trusting your real wallet. Consult an attorney for
+estate planning. Consult a tax professional for tax implications.
+
+Bitcoin Lifeboat does not custody funds, does not contact you,
+does not call you, and does not ask for your seed phrase.
+
+If anyone claiming to be from Bitcoin Lifeboat contacts you, it
+is a scam. Hang up.
+```

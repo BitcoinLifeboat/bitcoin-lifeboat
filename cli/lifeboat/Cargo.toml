@@ -1,0 +1,57 @@
+[package]
+name = "lifeboat"
+description = "Bitcoin Lifeboat command-line interface."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[[bin]]
+name = "lifeboat"
+path = "src/main.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+# US-035: the CLI shell. `lifeboat-core` is the façade over every core crate
+# (US-034); the CLI consumes Bitcoin/scoring/report logic ONLY through it. `clap`
+# parses the global flags + subcommands.
+#
+# NOTE on human-panic (PRD §23.2 names it): NOT used. Its 2026 dependency tree is
+# incompatible with the hard-pinned MSRV 1.78 — every viable release pulls an
+# edition-2024 subtree (uuid→getrandom 0.4, toml→toml_writer/indexmap 2.14,
+# anstream 1.0) and/or rustc-1.81/1.82 crates (backtrace 0.3.76, addr2line),
+# needing ~6 fragile transitive pins. It is also a poor fit for this app's threat
+# model: human-panic writes a crash-report FILE containing the panic message,
+# which here could carry a descriptor/xpub and violate the "never persist
+# confidential data" invariant (§13.6). Instead `main.rs` installs a small
+# dependency-free panic hook (generic, payload-free message + exit 20) — same
+# precedent as US-031 hand-rolling `ScratchDir` over `tempfile`. Revisit adopting
+# human-panic when the toolchain channel moves past 1.78 (MSRV-RISK).
+lifeboat-core.workspace = true
+clap.workspace = true
+# US-039: `generate-runbook` renders through `runbook-engine` (PDF + Markdown,
+# reached via the `lifeboat-core` façade — see below). `clap_mangen` renders the
+# man page and `clap_complete` (+ `clap_complete_nushell` for nushell) renders the
+# shell-completion scripts, both off the same `build_command()` clap tree so they
+# can never drift from the real command surface.
+clap_complete.workspace = true
+clap_complete_nushell.workspace = true
+clap_mangen.workspace = true
+# US-036: the audit/report commands screen pasted input for secrets via the
+# detector's `detect_secret(SecretString)` entry (the sanctioned wrap-then-zeroize
+# path — never re-implement wrapping), and build small machine-readable JSON
+# objects for errors/refusals with `serde_json` (proper escaping, no hand-rolled
+# JSON).
+secrecy.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+
+[dev-dependencies]
+# US-036: insta snapshots for human + report-json output (golden tests). Pinned at
+# the workspace level to `=1.44.3` for MSRV 1.78 (see the INSTA SNAPSHOTS note in
+# progress.txt).
+insta.workspace = true

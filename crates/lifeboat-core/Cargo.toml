@@ -1,0 +1,30 @@
+[package]
+name = "lifeboat-core"
+description = "Public API facade re-exporting the Bitcoin Lifeboat core crates."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# US-034: the façade re-exports the stable public API of every core crate so the
+# CLI (cli/lifeboat, US-035+) and the Tauri desktop app (US-041+) build against
+# one identical surface. These are the eight crates of the PRD §20 dependency
+# graph. lifeboat-core adds NO logic of its own (re-exports only) and — per
+# §13.7/§20 — depends on NONE of the GUI layer; `tests/no_tauri.rs` enforces that.
+error-taxonomy.workspace = true
+descriptor-audit.workspace = true
+address-derive.workspace = true
+sensitive-input-detector.workspace = true
+psbt-tools.workspace = true
+qr-psbt.workspace = true
+miniscript-viz.workspace = true
+readiness-score.workspace = true
+wallet-imports.workspace = true
+report-engine.workspace = true
+runbook-engine.workspace = true

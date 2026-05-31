@@ -1,0 +1,43 @@
+[package]
+name = "runbook-engine"
+description = "PDF and Markdown recovery and inheritance runbooks."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# US-031: the base PDF pipeline. `printpdf` is the pure-Rust fallback renderer;
+# the preferred path shells out to a bundled `typst` binary (an out-of-process
+# subprocess, NOT a crate dependency). `report-engine` supplies the verbatim
+# §15.6 disclaimer, the §17.7 RedactionMode, and the §16.8 anti-overclaim lint
+# (the footer reuses these — never re-transcribe). `error-taxonomy` types the
+# E-DEP-001 (typst missing) / E-FS-* / E-INTERNAL-* failures. `time` builds the
+# fixed creation/mod dates printpdf needs for byte-deterministic output.
+printpdf = { workspace = true }
+time = { workspace = true }
+report-engine.workspace = true
+error-taxonomy.workspace = true
+serde_json.workspace = true
+
+[dev-dependencies]
+# US-031: the criterion bench (`render`) measures the <3 s render budget; the
+# `cargo test` gate enforces the same bound deterministically via
+# `largest_template_renders_under_3s`. `sha2` pins the rendered PDF by SHA256.
+# clap_builder/half are version pins only (criterion's subtree on 1.78) — see the
+# comment in the root [workspace.dependencies]. `insta` snapshot-tests the
+# US-032 owner-runbook Markdown in both export modes.
+criterion.workspace = true
+sha2.workspace = true
+clap_builder.workspace = true
+half.workspace = true
+insta.workspace = true
+
+[[bench]]
+name = "render"
+harness = false

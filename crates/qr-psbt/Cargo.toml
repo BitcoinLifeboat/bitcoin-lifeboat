@@ -1,0 +1,41 @@
+[package]
+name = "qr-psbt"
+description = "UR QR PSBT transport helpers for Bitcoin Lifeboat."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[features]
+default = []
+camera = ["dep:nokhwa"]
+
+[dependencies]
+bbqr.workspace = true
+# Version pin only (not used in code): keep `ur`'s crc subtree on Rust 1.78.
+crc.workspace = true
+error-taxonomy.workspace = true
+# Version pin only (not used in code): keep `nokhwa`'s camera subtree on Cargo 1.78.
+home.workspace = true
+# Version pin only (not used in code): keep image-based QR/camera transitive deps on Rust 1.78.
+image.workspace = true
+qrcode = { workspace = true, features = ["svg"] }
+rqrr.workspace = true
+ur.workspace = true
+
+[target.'cfg(target_os = "linux")'.dependencies]
+nokhwa = { workspace = true, optional = true, features = ["input-v4l"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+nokhwa = { workspace = true, optional = true, features = ["input-avfoundation"] }
+
+[target.'cfg(target_os = "windows")'.dependencies]
+nokhwa = { workspace = true, optional = true, features = ["input-msmf"] }
+
+[dev-dependencies]
+base64.workspace = true

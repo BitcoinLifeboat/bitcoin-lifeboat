@@ -1,0 +1,136 @@
+---
+source: crates/report-engine/src/lib.rs
+expression: warn_multisig_report().to_markdown()
+---
+# Bitcoin Lifeboat — Recovery Readiness Report
+
+> Bitcoin Lifeboat is not a wallet, not a custody service, not a
+> seed phrase manager, not an inheritance legal service, and not a
+> recovery company. It is a free, open-source diagnostic tool that
+> helps you test whether your recovery plan works.
+
+## 1. Status
+
+**Status: Not Ready** (score 25/100)
+
+No critical failures, 10 warnings.
+
+- Wallet type: multisig — wsh(sortedmulti), 2-of-3
+- Network: testnet
+- Survives loss of 1 signer: yes
+- Survives loss of 2 signers: no — the remaining signers would fall below the threshold
+- Survives loss of the descriptor backup: yes, if the xpubs are retained
+
+## 2. What passed
+
+- Descriptor parsed successfully
+- Descriptor checksum is valid
+- Multisig threshold identified as 2-of-3
+
+## 3. What needs attention
+
+- **No recovery drill in the last 12 months** — A recovery plan that has never been rehearsed end-to-end is untested. Hardware, software, and memory all change over time. _(W-NO-RECENT-DRILL)_
+- **Hardware wallet not exercised recently** — A hardware signer that has not signed anything in over a year may have a dead battery, corrupted firmware, or a forgotten PIN. _(W-NO-HW-TEST)_
+
+## 4. What failed
+
+_None._
+
+## 5. What is missing
+
+- **Change descriptor missing** — A complete recovery backup should include both receive and change descriptors. Without the change descriptor, an empty wallet restore will not see funds returned to change addresses. _(W-NO-CHANGE-DESC)_
+- **No wallet birth height documented** — Without a creation date or block height, a recovery wallet must scan the whole chain, which is slow and can miss funds if the gap limit is exceeded. _(W-NO-BIRTH-HEIGHT)_
+- **Gap limit not documented** — If you have used many addresses, a default gap limit (20) may stop a recovery wallet before it finds all your funds. _(W-NO-GAP-LIMIT)_
+- **No known address provided** — You did not provide a known address to compare against the derived range, so Lifeboat could not confirm the descriptor produces addresses you recognize. _(W-NO-KNOWN-ADDRESS)_
+- **No printed descriptor backup** — A descriptor stored only on a computer can be lost with the device. A printed or stamped copy survives disk failure and software changes. _(W-NO-PRINTED-BACKUP)_
+- **No heir instructions written** — Without written instructions, the people you intend to inherit your bitcoin may not know the materials exist or how to use them. _(W-NO-HEIR-INSTRUCTIONS)_
+- **No emergency contact named** — No trusted person is recorded to help an heir who gets stuck during recovery. _(W-NO-EMERGENCY-CONTACT)_
+- **Wallet software not documented** — If you do not record which wallet software your setup depends on, an heir may not know how to load the descriptor. _(W-WALLET-SW-UNDOCUMENTED)_
+
+## 6. What to do next
+
+1. Export your change descriptor. _(est. 5 min)_
+2. Write down your wallet's creation date or block height. _(est. 5 min)_
+3. Document your wallet's gap limit. _(est. 5 min)_
+4. Provide one known address from this wallet to compare. _(est. 2 min)_
+5. Print two copies of the descriptor backup. _(est. 10 min)_
+6. Run a Disaster Drill in Lifeboat v0.3 when available. _(est. future)_
+7. Write recovery instructions for your heirs. _(est. 30 min)_
+8. Name a trusted emergency contact. _(est. 5 min)_
+9. Sign a test transaction with each hardware device. _(est. 20 min)_
+10. Document which wallet software your setup needs. _(est. 5 min)_
+
+## 7. What NOT to do
+
+- Do not email the descriptor.
+- Do not store the descriptor in cloud notes apps.
+- Do not photograph this report and send it on chat.
+
+## 8. When to run this again
+
+Run this readiness check again by **2026-11-28** — within 12 months, or sooner if your score is below 70.
+
+## 9. Disclaimer
+
+```
+This report is a diagnostic aid. It is not legal, tax, financial,
+or security advice. Bitcoin Lifeboat cannot guarantee that any
+wallet is recoverable.
+```
+
+## 10. Lifeboat version and report hash
+
+- Lifeboat version: 0.1.0
+- Scoring engine version: 0.1.0
+- Report schema version: 0.1.0
+- Generated (UTC): 2026-05-28T00:00:00Z
+- Input hash: sha256:28d33fe07c86f87fe5607587cf0059c7d4618b7cb712b440ab03117658cf18fa
+- Report hash: sha256:d2162c04405c991fc622334df538fb35dcc59fbaa0e74aa874b3a81da01e6029
+
+## What this report cannot tell you
+
+```
+What this report CANNOT tell you
+
+  - Whether your hardware wallets still work.
+    (Lifeboat did not power them on. Run a Disaster Drill in v0.3.)
+  - Whether your seed words are still legible on the paper/metal.
+    (Go check. In person. Today.)
+  - Whether the location you store backups in is still safe.
+    (Lifeboat cannot see your closet.)
+  - Whether your heirs can find the materials.
+    (Run a Heir Drill in v0.6, or talk to them now.)
+  - Whether your passphrase is correct.
+    (Lifeboat does not know your passphrase. Test it on a
+     low-value wallet first.)
+  - Whether the wallet software you depend on will still exist
+    when you need it.
+    (Print this report. Print the descriptor. Make recovery
+     possible without specific software.)
+```
+
+## About this document
+
+```
+About this document
+
+Bitcoin Lifeboat is an open-source diagnostic and rehearsal tool.
+This document reflects only the information you provided. It cannot
+detect missing materials Lifeboat was not asked to check, it cannot
+verify the physical location or condition of your backups, and it
+cannot predict the future condition of your hardware wallets.
+
+A "Ready" status means the metadata you provided appears complete
+for the scenarios Lifeboat tested. It does not mean your bitcoin
+is safe. It does not mean recovery will succeed in a real emergency.
+
+You are responsible for verifying recovery end-to-end on a test
+network before trusting your real wallet. Consult an attorney for
+estate planning. Consult a tax professional for tax implications.
+
+Bitcoin Lifeboat does not custody funds, does not contact you,
+does not call you, and does not ask for your seed phrase.
+
+If anyone claiming to be from Bitcoin Lifeboat contacts you, it
+is a scam. Hang up.
+```

@@ -1,0 +1,20 @@
+{
+  "chain": "XTN",
+  "xfp": "71348C8A",
+  "account": 0,
+  "bip44": {
+    "name": "p2pkh",
+    "deriv": "m/44'/1'/0'",
+    "xpub": "tpubDDQ4QMVqUvUTtdttiA5scX1xZeYncsVSGkGQvBfbboywvsLkTE5pLnstHuWqAbvgwjEzVo7fa4WVgNFWF6bc7keZ4p5qGT6ad7J1qNWLxtr"
+  },
+  "bip49": {
+    "name": "p2sh-p2wpkh",
+    "deriv": "m/49'/1'/0'",
+    "xpub": "tpubDC4cRypn5w4uVn9E8GTjCnw9g1K9rraPSwfrFTTFriXBGBHe6oDCeGgcbWELw1Mpe5A1r2Hutpm8AriXD8jGqJhht7RMctGtJjmoBcjUaeh"
+  },
+  "bip84": {
+    "name": "p2wpkh",
+    "deriv": "m/84'/1'/0'",
+    "xpub": "tpubDCTb5JhwTc9S3pfEMNMajVPCEgCDxHTiBwmJgzLa2Znne2pPQ4dh1CjpS7ibiPBEXeJRJxddRaW1ZxxWyDvrndrQk8vqfco9Uvr7Eseo55L"
+  }
+}

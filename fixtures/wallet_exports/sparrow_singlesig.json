@@ -1,0 +1,25 @@
+{
+  "label": "Lifeboat Test Single",
+  "network": "testnet",
+  "policyType": "SINGLE",
+  "scriptType": "P2WPKH",
+  "defaultPolicy": {
+    "name": "Default",
+    "script": "wpkh(@0)",
+    "numSignaturesRequired": 1
+  },
+  "keystores": [
+    {
+      "label": "Keystore 1",
+      "source": "HW_USB",
+      "walletModel": "COLDCARD",
+      "keyDerivation": {
+        "masterFingerprint": "71348c8a",
+        "derivationPath": "m/84'/1'/0'"
+      },
+      "extendedPublicKey": "tpubDCTb5JhwTc9S3pfEMNMajVPCEgCDxHTiBwmJgzLa2Znne2pPQ4dh1CjpS7ibiPBEXeJRJxddRaW1ZxxWyDvrndrQk8vqfco9Uvr7Eseo55L"
+    }
+  ],
+  "birthDate": 1705276800000,
+  "gapLimit": 20
+}

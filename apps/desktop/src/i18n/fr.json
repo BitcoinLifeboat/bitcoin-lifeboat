@@ -1,0 +1,1258 @@
+{
+  "app": {
+    "name": "Bitcoin Lifeboat",
+    "tagline": "Préparation de récupération en local"
+  },
+  "a11y": {
+    "skipToContent": "Aller au contenu principal",
+    "primaryNavigation": "Navigation principale"
+  },
+  "nav": {
+    "home": "Accueil",
+    "readinessCheck": "Lancer une vérification de préparation",
+    "auditMultisig": "Auditer la configuration multisig",
+    "heirRunbook": "Créer un guide pour héritiers",
+    "heirWalkthrough": "Faire un exercice héritier",
+    "generateRunbook": "Générer un guide",
+    "disasterDrill": "Exercice de crise",
+    "hardwareWalletDrill": "Exercice avec hardware wallet",
+    "learn": "Apprendre",
+    "settings": "Réglages"
+  },
+  "pages": {
+    "home": {
+      "title": "Accueil",
+      "body": "Choisissez une tâche pour vérifier si votre plan de récupération Bitcoin fonctionne vraiment.",
+      "cards": {
+        "checkBackup": {
+          "title": "Vérifier mon plan de sauvegarde",
+          "description": "Testez si vous pourriez récupérer votre portefeuille à signature unique depuis sa sauvegarde.",
+          "time": "~5 minutes",
+          "materials": "Il vous faut : le descripteur de votre portefeuille"
+        },
+        "auditMultisig": {
+          "title": "Auditer ma configuration multisig",
+          "description": "Vérifiez votre quorum multisig, vos clés et si assez de signataires survivent à une perte.",
+          "time": "~10 minutes",
+          "materials": "Il vous faut : votre descripteur multisig"
+        },
+        "heirRunbook": {
+          "title": "Créer un guide familial / héritiers",
+          "description": "Créez un plan de récupération imprimable que votre famille peut répéter sans votre aide.",
+          "time": "~15 minutes",
+          "materials": "Il vous faut : le descripteur de votre portefeuille"
+        },
+        "heirWalkthrough": {
+          "title": "Faire un exercice héritier",
+          "description": "Suivez une liste simple avec un paquet de pratique et seulement du faux bitcoin.",
+          "time": "~20 minutes",
+          "materials": "Il vous faut : le paquet d’exercice héritier"
+        },
+        "printRunbook": {
+          "title": "Imprimer un guide de récupération",
+          "description": "Générez un guide étape par étape à partir de n’importe quel modèle de portefeuille.",
+          "time": "~5 minutes",
+          "materials": "Il vous faut : le descripteur de votre portefeuille"
+        },
+        "hardwareWalletDrill": {
+          "title": "Tester un hardware wallet",
+          "description": "Répétez la signature PSBT par fichier, QR ou sidecar HWI optionnel.",
+          "time": "~10 minutes",
+          "materials": "Il vous faut : un signataire de test ou un émulateur"
+        },
+        "practice": {
+          "title": "S’entraîner à récupérer sans risque",
+          "description": "Répétez une récupération complète sur un réseau de test jetable, sans fonds réels.",
+          "time": "~5 minutes",
+          "materials": "Utilise seulement une seed de test documentée"
+        }
+      }
+    },
+    "practiceMode": {
+      "title": "Practice Mode",
+      "body": "Use the documented test seed below to rehearse recovery steps without entering a real wallet backup.",
+      "practiceOnly": "PRACTICE-ONLY",
+      "practiceOnlyHelp": "This is the only BIP39 seed field in Bitcoin Lifeboat.",
+      "warning": "Do not paste your real recovery words here. Practice Mode stays locked to documented test seeds.",
+      "seed": {
+        "label": "Practice seed words",
+        "help": "Pre-filled with the canonical BIP39 test mnemonic. Pasted text is screened before the field accepts it.",
+        "checking": "Checking pasted text…",
+        "accepted": "Documented practice seed loaded.",
+        "ignored": "Only documented practice seeds can be loaded here.",
+        "error": "Could not check the pasted text. The practice seed was left unchanged."
+      },
+      "drill": {
+        "title": "Receive/send drill",
+        "body": "Derive a test receive address, then create, sign, and finalize a small practice transaction. Signet broadcast is a separate confirmation.",
+        "start": "Start receive step",
+        "starting": "Deriving address…",
+        "error": "The practice drill could not run. Try again.",
+        "network": {
+          "label": "Practice network",
+          "badge": {
+            "regtest": "REGTEST",
+            "signet": "SIGNET"
+          },
+          "regtest": {
+            "title": "Regtest (offline)",
+            "body": "Use local test funds from the drill engine."
+          },
+          "signet": {
+            "title": "Signet (browser faucet)",
+            "body": "Use a public test network and open the faucet yourself."
+          }
+        },
+        "receive": {
+          "label": "Receive address",
+          "index": "Address index {{index}}"
+        },
+        "faucet": {
+          "title": "Fund from a Signet faucet",
+          "body": "Open the faucet in your browser and paste the address there. Lifeboat does not call the faucet.",
+          "open": "Open Signet faucet",
+          "opening": "Opening faucet…",
+          "opened": "Faucet opened in your browser.",
+          "error": "The faucet link could not be opened."
+        },
+        "send": {
+          "title": "Send step",
+          "body": "Use the local drill engine to create, sign, and finalize a test transaction from this practice wallet.",
+          "run": "Create, sign, finalize",
+          "sending": "Creating PSBT and finalizing…"
+        },
+        "result": {
+          "title": "Drill result",
+          "sent": "Payment",
+          "sentValue": "{{amount}} sats to {{address}}",
+          "fee": "Fee",
+          "feeValue": "{{fee}} sats",
+          "txid": "Finalized transaction ID",
+          "psbt": "PSBT created and signed locally.",
+          "noBroadcast": "No broadcast was made. Signet broadcast is unavailable for regtest.",
+          "broadcastReady": "No broadcast has been made yet. Signet broadcast requires the confirmation below."
+        },
+        "save": {
+          "button": "Save this drill result",
+          "saving": "Saving drill result…",
+          "saved": "Saved locally: {{path}}",
+          "error": "The drill result could not be saved."
+        },
+        "broadcast": {
+          "badge": "SIGNET",
+          "title": "Optional broadcast",
+          "endpoint": "Network call to {{endpoint}} only after confirmation.",
+          "button": "Broadcast on Signet",
+          "error": "The Signet endpoint did not accept the transaction.",
+          "complete": "Signet broadcast accepted: {{txid}}"
+        },
+        "fileExchange": {
+          "title": "File-based PSBT exchange",
+          "body": "Save the unsigned PSBT, sign it with an external signer, then import the signed .psbt for Lifeboat to validate and finalize.",
+          "saveTitle": "Save unsigned PSBT",
+          "openTitle": "Import signed PSBT",
+          "saveUnsigned": "Save unsigned PSBT",
+          "savingUnsigned": "Saving unsigned PSBT…",
+          "savedUnsigned": "Unsigned PSBT saved: {{path}}",
+          "saveCancelled": "Save cancelled.",
+          "saveError": "The unsigned PSBT could not be saved.",
+          "importSigned": "Import signed PSBT",
+          "importingSigned": "Importing signed PSBT…",
+          "importCancelled": "Import cancelled.",
+          "importError": "The signed PSBT could not be finalized.",
+          "finalized": "Signed PSBT validated and finalized.",
+          "importedPath": "Imported from: {{path}}",
+          "txid": "Finalized transaction ID",
+          "fee": "Fee",
+          "feeValue": "{{fee}} sats",
+          "feeRate": "Fee rate",
+          "feeRateValue": "{{feeRate}} sat/vB"
+        },
+        "qrExchange": {
+          "title": "QR PSBT exchange",
+          "body": "Show the unsigned PSBT as animated QR frames, scan the signed PSBT back from a QR signer, then validate and finalize it locally.",
+          "format": {
+            "label": "QR format",
+            "ur": "UR",
+            "bbqr": "BBQr"
+          },
+          "generate": "Generate QR frames",
+          "generating": "Generating QR frames…",
+          "generated": "{{count}} QR frame(s) ready.",
+          "generateError": "The unsigned PSBT could not be converted to QR frames.",
+          "scan": "Scan camera frame",
+          "scanning": "Scanning…",
+          "noPayload": "No QR payload was found in that camera frame.",
+          "incomplete": "{{count}} scanned frame(s) accepted. Remaining parts: {{remaining}}.",
+          "unknownRemaining": "unknown",
+          "scanError": "The signed PSBT QR could not be decoded or finalized.",
+          "finalized": "Signed QR PSBT validated and finalized.",
+          "instructions": "Point your QR signer at the animated frames. After signing, scan the signer's QR output back here.",
+          "frame": "Frame {{index}} of {{total}}",
+          "alt": "Unsigned PSBT QR frame {{index}} of {{total}}",
+          "previous": "Previous",
+          "next": "Next"
+        }
+      }
+    },
+    "disasterDrill": {
+      "title": "Disaster Drill",
+      "body": "Run a no-signing rehearsal for common recovery failures using your descriptor and checklist answers.",
+      "scenarioLabel": "Choose a disaster scenario",
+      "scenarios": {
+        "ds1": {
+          "title": "I lost my hardware wallet",
+          "body": "Check whether the backup materials and written notes would let you replace the device."
+        },
+        "ds2": {
+          "title": "My laptop died",
+          "body": "Check whether the wallet can be rebuilt without the old computer."
+        },
+        "ds3": {
+          "title": "My wallet app disappeared",
+          "body": "Check whether a neutral watch-only wallet can be restored from the descriptor."
+        },
+        "ds4": {
+          "title": "I have my seed but not my wallet file",
+          "body": "Check whether the derivation details and software notes are documented."
+        },
+        "ds5": {
+          "title": "I have my descriptor but not all signers",
+          "body": "Check whether the remaining signers still meet the multisig threshold."
+        },
+        "ds6": {
+          "title": "One multisig signer is unavailable",
+          "body": "Check the M-of-N survivability model without creating or signing a PSBT."
+        },
+        "ms2of3": {
+          "title": "2-of-3 multisig survivability",
+          "body": "Simulate losing one signer, two signers, and the descriptor backup."
+        },
+        "ms3of5": {
+          "title": "3-of-5 multisig survivability",
+          "body": "Simulate losing one signer, two signers, and the descriptor backup."
+        },
+        "missingSigner": {
+          "title": "Missing signer drill",
+          "body": "Pick one signer to lose and check whether the remaining signers still meet quorum on regtest or Signet."
+        },
+        "ds7": {
+          "title": "My spouse needs to recover",
+          "body": "Run a fake-funds PSBT signing drill that another person could follow."
+        },
+        "ds8": {
+          "title": "I need to verify my hardware wallet can still sign",
+          "body": "Move a test PSBT to a signer by file or QR and confirm the destination on the device."
+        },
+        "ds9": {
+          "title": "I want to test a PSBT signing workflow",
+          "body": "Create, sign, import, and finalize a test PSBT without touching real funds."
+        },
+        "ds10": {
+          "title": "I want to simulate restoring on a clean machine",
+          "body": "Use the same file or QR signing path you would need on a replacement computer."
+        }
+      },
+      "descriptor": {
+        "heading": "Descriptor audit",
+        "help": "Paste a watch-only output descriptor. The detector runs before the drill command processes the text.",
+        "useSample": "Use sample descriptor",
+        "label": "Output descriptor",
+        "placeholder": "wsh(sortedmulti(2,[...]tpub.../0/*,...))#checksum"
+      },
+      "network": {
+        "label": "Address network",
+        "mainnet": "Mainnet",
+        "testnet": "Testnet",
+        "signet": "Signet",
+        "regtest": "Regtest"
+      },
+      "knownAddress": {
+        "label": "Known receive address",
+        "placeholder": "tb1q...",
+        "help": "Required for a passing drill because the descriptor must derive an address you recognize."
+      },
+      "questionnaire": {
+        "heading": "Questionnaire",
+        "help": "Answer only whether each item is documented or available. Do not type seed words, passphrases, signer locations, or private keys."
+      },
+      "signing": {
+        "heading": "Signing drill",
+        "help": "Lifeboat creates a fake-funds PSBT. Move it to the signer, bring back the signed PSBT, and confirm the destination shown on the device.",
+        "practiceOnly": "Practice-only",
+        "network": {
+          "label": "Practice network",
+          "regtest": {
+            "title": "Regtest",
+            "body": "Offline local rehearsal with synthetic funding."
+          },
+          "signet": {
+            "title": "Signet",
+            "body": "Public test network. Broadcasting still stays separate."
+          },
+          "mainnet": {
+            "title": "Mainnet file",
+            "body": "Real bitcoin PSBTs. File import is locked behind a session-only warning."
+          }
+        },
+        "transport": {
+          "label": "PSBT transport",
+          "file": {
+            "title": "File",
+            "body": "Save an unsigned .psbt file, sign it elsewhere, then import the signed file."
+          },
+          "qr": {
+            "title": "QR",
+            "body": "Show animated PSBT QR frames and scan the signed PSBT back in."
+          }
+        },
+        "actions": {
+          "start": "Start signing drill",
+          "starting": "Starting drill...",
+          "startError": "The signing drill could not start.",
+          "completeError": "The signed PSBT could not be checked."
+        },
+        "package": {
+          "receive": "Practice funding address",
+          "destination": "Destination to confirm",
+          "amount": "Amount",
+          "amountValue": "{{amount}} sats",
+          "required": "Required signatures",
+          "requiredValue": "{{count}}"
+        },
+        "confirmDestination": "I verified this destination address on the signing device.",
+        "file": {
+          "heading": "File PSBT exchange",
+          "help": "Save the unsigned PSBT, sign it with your test signer, then import the signed PSBT.",
+          "saveTitle": "Save unsigned disaster-drill PSBT",
+          "openTitle": "Open signed disaster-drill PSBT",
+          "saveUnsigned": "Save unsigned PSBT",
+          "saving": "Saving unsigned PSBT...",
+          "importSigned": "Import signed PSBT",
+          "importing": "Importing signed PSBT...",
+          "saved": "Unsigned PSBT saved: {{path}}",
+          "saveCancelled": "Save cancelled.",
+          "saveError": "The unsigned PSBT could not be saved.",
+          "importCancelled": "Import cancelled.",
+          "importError": "The signed PSBT could not be imported.",
+          "imported": "Signed PSBT imported from: {{path}}"
+        },
+        "mainnet": {
+          "badge": "MAINNET",
+          "heading": "Mainnet PSBT file flow",
+          "help": "Use this only for a PSBT you created elsewhere. Lifeboat reads the file, validates local PSBT details, and does not offer mainnet broadcast.",
+          "acknowledge": "I want to sign a mainnet PSBT in the file-based flow and understand Lifeboat will not broadcast it.",
+          "ackRequired": "Acknowledge the mainnet warning to import a file.",
+          "openTitle": "Open mainnet PSBT",
+          "import": "Import mainnet PSBT",
+          "importing": "Importing mainnet PSBT...",
+          "importCancelled": "Import cancelled.",
+          "importError": "The mainnet PSBT could not be validated.",
+          "imported": "Mainnet PSBT validated from: {{path}}",
+          "noBroadcast": "No broadcast was made or offered.",
+          "txid": "PSBT transaction ID",
+          "fee": "Fee",
+          "feeValue": "{{fee}} sats",
+          "finalized": "Finalized",
+          "yes": "Yes",
+          "no": "No"
+        },
+        "qr": {
+          "heading": "QR PSBT exchange",
+          "help": "Show the unsigned PSBT as QR frames, then scan signed PSBT frames from the signer.",
+          "format": {
+            "label": "QR format",
+            "ur": "UR",
+            "bbqr": "BBQr"
+          },
+          "generate": "Generate QR frames",
+          "generating": "Generating QR frames...",
+          "scan": "Scan camera frame",
+          "scanning": "Scanning...",
+          "previous": "Previous",
+          "next": "Next",
+          "frame": "Frame {{index}} of {{total}}",
+          "alt": "Disaster drill unsigned PSBT QR frame {{index}} of {{total}}",
+          "instructions": "Scan this payload with the signing device. When the signer shows signed PSBT frames, scan them back here.",
+          "encodeError": "The QR frames could not be generated.",
+          "noPayload": "No PSBT QR payload was found.",
+          "incomplete": "{{count}} signed QR payloads scanned. Keep scanning.",
+          "scanError": "The signed QR PSBT could not be scanned."
+        },
+        "results": {
+          "pass": "Signing drill passed",
+          "fail": "Signing drill did not pass"
+        }
+      },
+      "questions": {
+        "descriptorBackup": "I have the descriptor backed up somewhere I can access.",
+        "recoveryMaterials": "I can access the recovery materials without entering them here.",
+        "walletSoftware": "I have documented which wallet software is needed for recovery.",
+        "passphrase": "I have documented whether a passphrase exists.",
+        "gapOrBirth": "I have documented the gap limit, wallet birth height, or creation date.",
+        "signerLocations": "I can name where each signer is located without typing locations here."
+      },
+      "answers": {
+        "yes": "Yes",
+        "no": "No",
+        "unsure": "Unsure"
+      },
+      "availableSigners": {
+        "label": "Available signers",
+        "help": "For DS-5, enter how many signers you could use today."
+      },
+      "multisig": {
+        "actions": {
+          "run": "Run survivability simulation"
+        },
+        "results": {
+          "pass": "All simulated multisig losses remain above threshold",
+          "fail": "At least one simulated multisig loss falls below threshold"
+        },
+        "readinessScore": "Readiness score: {{score}}",
+        "survivability": {
+          "loseOne": "Lose 1 signer",
+          "loseTwo": "Lose 2 signers",
+          "loseDescriptor": "Lose descriptor backup",
+          "ok": "Quorum remains",
+          "fail": "Below threshold",
+          "descriptorOk": "Rebuild possible if xpubs are retained"
+        }
+      },
+      "missingSigner": {
+        "heading": "Missing signer",
+        "help": "Choose the signer that is unavailable. Lifeboat checks the M-of-N quorum and lists the materials to gather for a practice-chain recovery.",
+        "network": {
+          "label": "Practice chain",
+          "regtest": "Regtest",
+          "signet": "Signet"
+        },
+        "lostSigner": {
+          "label": "Lost signer number",
+          "help": "Signer numbers are 1-based, in descriptor order."
+        },
+        "actions": {
+          "run": "Run missing-signer drill"
+        },
+        "signerLabel": "Signer {{index}}",
+        "results": {
+          "pass": "Recovery remains possible with the remaining signers",
+          "fail": "The remaining signers do not meet quorum",
+          "summary": "Lost signer {{lost}} from a {{threshold}}-of-{{total}} wallet on {{network}}.",
+          "remaining": "Remaining signers",
+          "required": "Signatures required",
+          "requiredValue": "{{count}} signatures",
+          "outcome": "Recovery result",
+          "quorumOk": "The remaining set can meet quorum.",
+          "quorumFail": "The remaining set is below threshold.",
+          "none": "None"
+        },
+        "materials": {
+          "heading": "Materials required",
+          "descriptorBackup": "Descriptor backup",
+          "coordinatorWallet": "Coordinator wallet configured for the practice chain",
+          "practiceFunds": "Regtest or Signet test coins",
+          "remainingSigner": "Signer {{index}} device or seed backup",
+          "unknown": "Recovery material"
+        }
+      },
+      "userStopped": "I had to stop during this drill.",
+      "warn": {
+        "title": "Review this input before continuing",
+        "body": "The detector found secret-like text but could not confirm it. Continue only if this is public descriptor or address text.",
+        "confirm": "I confirm this is not a real secret"
+      },
+      "actions": {
+        "run": "Run questionnaire drill",
+        "running": "Running drill...",
+        "error": "The drill could not run. Check the descriptor and try again."
+      },
+      "results": {
+        "pass": "Drill passed for this scenario",
+        "fail": "Drill did not pass",
+        "step": {
+          "pass": "Pass",
+          "fail": "Fail"
+        }
+      },
+      "steps": {
+        "descriptorParse": "Descriptor parses and validates",
+        "deriveExpected": "Expected receive addresses derive",
+        "knownAddress": "Known address matches the derived range",
+        "multisigQuorum": "Multisig quorum is identified",
+        "availableSigners": "Available signers meet the threshold",
+        "survivesOneSigner": "The quorum survives losing one signer",
+        "templateMatchesDescriptor": "Descriptor matches the selected multisig template",
+        "readinessStatusAvailable": "Readiness status was computed",
+        "loseOneSignerSurvives": "The quorum survives losing one signer",
+        "loseTwoSignersSurvives": "The quorum survives losing two signers",
+        "loseDescriptorBackupSurvives": "Descriptor backup loss is recoverable from retained xpubs",
+        "lostSignerInRange": "Selected signer exists in the descriptor",
+        "remainingQuorumAvailable": "Remaining signers meet the threshold",
+        "practiceChainSelected": "Regtest or Signet practice chain is selected",
+        "descriptorBackup": "Descriptor backup is available",
+        "recoveryMaterials": "Recovery materials are available",
+        "walletSoftware": "Wallet software notes are documented",
+        "passphrase": "Passphrase status is documented",
+        "gapOrBirth": "Gap limit or birth date is documented",
+        "signerLocations": "Signer locations can be named offline",
+        "userDidNotStop": "The user did not stop the drill",
+        "psbtCreated": "PSBT was available for signing",
+        "requiredQuorumSigned": "Required quorum signed the PSBT",
+        "psbtFinalized": "PSBT finalized to a transaction",
+        "validTransaction": "Final transaction is valid",
+        "destinationConfirmed": "Destination was confirmed on the signing device",
+        "destinationOutputMatches": "Final transaction pays the confirmed destination",
+        "unknown": "Drill step"
+      },
+      "save": {
+        "button": "Save this drill result",
+        "saving": "Saving drill result...",
+        "saved": "Saved locally: {{path}}",
+        "error": "The drill result could not be saved."
+      }
+    },
+    "hardwareWalletDrill": {
+      "title": "Hardware Wallet Drill",
+      "body": "Create a fake-funds PSBT, move it through a hardware-wallet signing path, and record the result.",
+      "note": {
+        "title": "Device detected is not wallet recoverable.",
+        "body": "A device listing only proves the sidecar can see something. This drill also checks PSBT signing, destination confirmation, and signed-PSBT validation."
+      },
+      "setup": {
+        "heading": "Drill setup"
+      },
+      "network": {
+        "label": "Practice network",
+        "regtest": {
+          "title": "Regtest",
+          "body": "Offline local rehearsal with synthetic funding."
+        },
+        "signet": {
+          "title": "Signet",
+          "body": "Public test network. Broadcasting is not part of this drill."
+        }
+      },
+      "transport": {
+        "label": "Signing transport",
+        "file": {
+          "title": "File",
+          "body": "Save an unsigned .psbt, sign it on the device, then import the signed file."
+        },
+        "qr": {
+          "title": "QR",
+          "body": "Show animated PSBT QR frames and scan the signed PSBT back in."
+        },
+        "hwi": {
+          "title": "HWI sidecar",
+          "body": "Ask the bundled HWI sidecar to sign the practice PSBT by subprocess."
+        }
+      },
+      "actions": {
+        "start": "Start hardware drill",
+        "starting": "Starting drill...",
+        "startError": "The hardware drill could not start.",
+        "completeError": "The signed PSBT could not be checked."
+      },
+      "package": {
+        "heading": "Practice PSBT package",
+        "destination": "Destination to confirm",
+        "amount": "Amount",
+        "amountValue": "{{amount}} sats",
+        "network": "Network",
+        "transport": "Transport"
+      },
+      "confirmDestination": "I verified this destination address on the signing device.",
+      "userStopped": "I had to stop during this drill.",
+      "file": {
+        "heading": "File PSBT exchange",
+        "help": "Use the removable-storage workflow your signer supports.",
+        "saveTitle": "Save hardware-drill unsigned PSBT",
+        "openTitle": "Open hardware-drill signed PSBT",
+        "save": "Save unsigned PSBT",
+        "saving": "Saving unsigned PSBT...",
+        "import": "Import signed PSBT",
+        "importing": "Importing signed PSBT...",
+        "saved": "Unsigned PSBT saved: {{path}}",
+        "imported": "Signed PSBT imported from: {{path}}",
+        "cancelled": "File action cancelled.",
+        "error": "The file PSBT step could not finish."
+      },
+      "qr": {
+        "heading": "QR PSBT exchange",
+        "help": "Use UR or BBQr frames for devices that sign by camera.",
+        "format": {
+          "label": "QR format",
+          "ur": "UR",
+          "bbqr": "BBQr"
+        },
+        "generate": "Generate QR frames",
+        "generating": "Generating QR frames...",
+        "scan": "Scan camera frame",
+        "scanning": "Scanning...",
+        "previous": "Previous",
+        "next": "Next",
+        "frame": "Frame {{index}} of {{total}}",
+        "alt": "Hardware drill unsigned PSBT QR frame {{index}} of {{total}}",
+        "instructions": "Scan this payload with the signing device. After signing, scan the signer's PSBT output back here.",
+        "error": "The QR frames could not be generated.",
+        "noPayload": "No PSBT QR payload was found.",
+        "incomplete": "{{count}} signed QR payloads scanned. Keep scanning.",
+        "scanError": "The signed QR PSBT could not be scanned."
+      },
+      "hwi": {
+        "heading": "HWI sidecar signing",
+        "help": "HWI runs as a sidecar subprocess. Lifeboat does not add USB or HID code to the webview.",
+        "check": "Check connected devices",
+        "checking": "Checking devices...",
+        "sign": "Sign with HWI sidecar",
+        "signing": "Signing with HWI...",
+        "signed": "HWI returned a signed PSBT.",
+        "empty": "No HWI devices were reported.",
+        "error": "The HWI sidecar could not list devices.",
+        "signError": "The HWI sidecar could not sign this PSBT.",
+        "deviceLabel": "Connected device",
+        "noPath": "No device path reported",
+        "unsupported": "This HWI device family is not supported for USB signing in this release."
+      },
+      "steps": {
+        "psbtCreated": "PSBT was available for signing",
+        "requiredQuorumSigned": "Required quorum signed the PSBT",
+        "psbtFinalized": "PSBT finalized to a transaction",
+        "validTransaction": "Final transaction is valid",
+        "destinationConfirmed": "Destination was confirmed on the signing device",
+        "destinationOutputMatches": "Final transaction pays the confirmed destination",
+        "userDidNotStop": "The user did not stop the drill",
+        "unknown": "Drill step"
+      },
+      "results": {
+        "pass": "Hardware drill passed",
+        "fail": "Hardware drill did not pass",
+        "step": {
+          "pass": "Pass",
+          "fail": "Fail"
+        }
+      },
+      "save": {
+        "button": "Save this drill result",
+        "saving": "Saving drill result...",
+        "saved": "Saved locally: {{path}}",
+        "error": "The drill result could not be saved."
+      }
+    },
+    "readinessCheck": {
+      "title": "Run a Readiness Check",
+      "body": "Walk through a guided audit of your wallet's output descriptor.",
+      "wizard": {
+        "stepIndicator": "Step {{current}} of {{total}}",
+        "back": "Back",
+        "next": "Next",
+        "finish": "Finish",
+        "saveAndQuit": "Save and quit",
+        "saveAndQuitNote": "Nothing you enter is saved between sessions.",
+        "useSample": "Use sample descriptor",
+        "sampleBadge": "[ SAMPLE ]",
+        "sampleNote": "This is a documented test-network descriptor, loaded so you can walk through the flow without your own data.",
+        "optionalBadge": "Optional",
+        "walletType": {
+          "title": "What kind of wallet are you checking?",
+          "help": "Pick the closest match. If you are not sure, choose “I'm not sure” and we will work it out from your descriptor.",
+          "singlesig": "Single-signature (one key)",
+          "multisig": "Multisig (multiple keys)",
+          "liana": "Liana (timelock recovery)",
+          "unsure": "I'm not sure"
+        },
+        "inputMethod": {
+          "title": "How would you like to provide your descriptor?",
+          "help": "Your output descriptor is public wallet metadata — not a seed phrase and not a private key.",
+          "paste": "Paste a descriptor",
+          "file": "Load from a file",
+          "sample": "Use a sample descriptor"
+        },
+        "descriptor": {
+          "title": "Paste or load your descriptor",
+          "help": "Paste your output descriptor below. Never paste seed words, private keys, or passphrases.",
+          "label": "Output descriptor",
+          "placeholder": "wpkh([fingerprint/84h/1h/0h]tpub.../0/*)#checksum",
+          "fileNote": "You can paste your descriptor, choose a file, or drag a file onto the box below.",
+          "loadedSample": "A sample descriptor is loaded.",
+          "chooseFile": "Choose a file…",
+          "fileInputLabel": "Descriptor file",
+          "fileHint": "Accepts .txt, .json, .bed, or .descriptor files.",
+          "dropHere": "Drag a descriptor file here, or use the buttons above.",
+          "screening": "Checking for secrets…",
+          "warnNote": "This looks like it could contain secret-like text, but we could not confirm it. If you are sure this is only a public descriptor, confirm below to continue.",
+          "warnConfirm": "I confirm this is not a real secret"
+        },
+        "knownAddress": {
+          "title": "Add a known receive address",
+          "help": "Optional. If you provide an address you know belongs to this wallet, the check can compare it against the addresses derived from your descriptor.",
+          "label": "Known receive address",
+          "placeholder": "tb1q…",
+          "skipNote": "You can skip this step."
+        },
+        "passphrase": {
+          "title": "Does this wallet use a BIP39 passphrase?",
+          "help": "We never ask for the passphrase itself — only whether one exists. A forgotten passphrase is one of the most common reasons a recovery fails.",
+          "yes": "Yes, a passphrase exists",
+          "no": "No passphrase",
+          "skipNote": "You can skip this step."
+        },
+        "recovery": {
+          "title": "Recovery completeness",
+          "help": "Answer what you can. You can skip any question — each one you do not confirm is recorded as a warning in your report.",
+          "answerYes": "Yes",
+          "answerNo": "No",
+          "answerUnsure": "Unsure",
+          "clear": "Clear answer",
+          "multisigOnly": "Multisig only",
+          "notApplicable": "Not applicable to a single-signature wallet.",
+          "willWarn": "Not confirmed — recorded as a warning",
+          "questions": {
+            "h1": "I have at least two physical copies of my recovery materials.",
+            "h2": "I can name where each signer is located.",
+            "h3": "I have tested at least M of N signers in the last 12 months.",
+            "h4": "I have documented whether a passphrase exists.",
+            "h5": "I have documented which wallet software is needed for recovery.",
+            "h6": "I have documented my gap-limit setting.",
+            "h7": "I have documented my wallet's birth height or creation date.",
+            "h8": "I have written down instructions for my heir or executor.",
+            "h9": "I have run a recovery drill in the last 12 months."
+          }
+        },
+        "review": {
+          "title": "Review",
+          "help": "Here is a summary of what you entered, followed by your readiness report.",
+          "walletTypeLabel": "Wallet type",
+          "descriptorLabel": "Descriptor",
+          "descriptorSample": "Sample descriptor provided",
+          "descriptorProvided": "Descriptor provided",
+          "descriptorMissing": "No descriptor provided",
+          "knownAddressLabel": "Known receive address",
+          "passphraseLabel": "Passphrase",
+          "passphraseYes": "Exists",
+          "passphraseNo": "None",
+          "notProvided": "Not provided",
+          "warningsHeading": "Warnings that will be recorded",
+          "noWarnings": "Every applicable recovery question was confirmed.",
+          "generating": "Generating your readiness report…",
+          "reportError": "We could not generate a report from this descriptor. Go back and check your input."
+        },
+        "export": {
+          "title": "Export your report",
+          "help": "Choose a format and export mode. Public-safe is the default; private mode reveals your xpubs and asks you to confirm first.",
+          "format": {
+            "label": "Format",
+            "pdf": "PDF (print)",
+            "markdown": "Markdown",
+            "json": "JSON"
+          },
+          "pdfNote": "PDF prints the public-safe readiness summary (no xpubs) through your system print dialog, where you can save it as a PDF. To include your xpubs, export as Markdown or JSON in private mode.",
+          "mode": {
+            "label": "Export mode",
+            "publicSafeActive": "Public-safe: xpubs are redacted and only the first address is shown.",
+            "privateActive": "Private: this export reveals your full xpubs."
+          },
+          "privateToggle": "Private mode (reveals xpubs)",
+          "button": "Export",
+          "printButton": "Print / Save as PDF",
+          "needReport": "Go back to Review to generate the report first.",
+          "status": {
+            "saved": "Report saved.",
+            "cancelled": "Export cancelled.",
+            "error": "The report could not be saved. Please try again."
+          }
+        }
+      }
+    },
+    "auditMultisig": {
+      "title": "Audit Multisig Setup",
+      "body": "Review your multisig quorum, keys, and survivability."
+    },
+    "heirRunbook": {
+      "title": "Create Heir Runbook",
+      "body": "Build a printable recovery plan a family member can follow — without ever writing down a secret.",
+      "step": "Step {{current}} of {{total}}",
+      "back": "Back",
+      "next": "Next",
+      "steps": {
+        "template": "Choose a plan",
+        "details": "Wallet details",
+        "review": "Preview and print"
+      },
+      "template": {
+        "heading": "Which recovery plan fits your wallet?",
+        "help": "Pick the setup your heir will need to recover from. Each plan is written in plain language for someone who is not a Bitcoin expert.",
+        "options": {
+          "heir-singlesig-basic": "One hardware wallet, no passphrase",
+          "heir-singlesig-passphrase": "One hardware wallet, with a passphrase",
+          "heir-multisig-2of3": "2-of-3 multisig (any two of three keys)",
+          "heir-multisig-3of5": "3-of-5 multisig (any three of five keys)",
+          "liana-timelock": "Liana timelock inheritance plan"
+        }
+      },
+      "descriptor": {
+        "heading": "Pre-fill from a descriptor (optional)",
+        "help": "Paste a watch-only output descriptor to fill in the wallet details (signer fingerprints, wallet type). Leave it blank to print an empty plan you complete by hand.",
+        "label": "Output descriptor",
+        "placeholder": "wsh(sortedmulti(2,[...]xpub...)) — optional",
+        "useSample": "Use sample descriptor",
+        "apply": "Use this descriptor",
+        "clear": "Clear",
+        "screening": "Screening for secrets…",
+        "applied": "Descriptor applied. The wallet details are filled in below.",
+        "warnNote": "This input might contain secret material, so it was not applied.",
+        "warnConfirm": "I confirm this is not a real secret"
+      },
+      "locations": {
+        "heading": "Where your heir will find each item",
+        "intro": "Your heir needs to know where to find each signing device, your wallet backup, and who to call for help.",
+        "rule": "Write WHERE each item is — never WHAT it is.",
+        "neverSeed": "Never write your seed words, private keys, or passphrase — not in this app, and not on the printed page. Anyone who reads those can take your bitcoin.",
+        "byHand": "The printed plan leaves labeled blank lines — each signer's location, your trusted helper, your lawyer or executor. Fill those in by hand, on paper, after you print. That keeps the locations off your computer."
+      },
+      "mode": {
+        "label": "Export mode",
+        "privateToggle": "Private mode (reveals xpubs)",
+        "publicSafeActive": "Public-safe: xpubs are redacted and device models are hidden. This is the safe default for a document you hand to family.",
+        "privateActive": "Private mode: the full descriptor and device models are included. Store it where you store your seed backups."
+      },
+      "format": {
+        "label": "Export format",
+        "pdf": "PDF",
+        "markdown": "Markdown"
+      },
+      "export": {
+        "button": "Export runbook",
+        "exporting": "Generating…",
+        "publicSafeNote": "This plan exports in public-safe mode by default — safe to print and share with family.",
+        "status": {
+          "saved": "Runbook saved.",
+          "cancelled": "Export cancelled.",
+          "error": "Could not generate or save the runbook."
+        }
+      },
+      "preview": {
+        "heading": "Preview (with blanks for hand-completion)",
+        "help": "This is the plan your heir will read. The blank lines are filled in by hand after you print.",
+        "loading": "Generating preview…",
+        "error": "Could not generate a preview for this template."
+      }
+    },
+    "heirWalkthrough": {
+      "title": "Run Heir Drill",
+      "body": "Use a practice packet to prove you can follow the plan. This drill uses fake bitcoin only. It does not touch real funds.",
+      "stepCount": "Step {{current}} of {{total}}",
+      "back": "Back",
+      "next": "Next",
+      "scamReminder": "Scam check: if anyone says they are from Bitcoin Lifeboat, stop. Remember: we will never contact you. We do not know who you are.",
+      "finalScamReminder": "Scam check again: we will never contact you. Stop if a call, text, email, or web site asks for real seed words.",
+      "progress": {
+        "label": "Heir drill progress",
+        "heading": "Progress",
+        "done": "Done",
+        "notDone": "Not done"
+      },
+      "markDone": {
+        "label": "I did this step.",
+        "help": "Check this only after you finish the step on your own screen."
+      },
+      "steps": {
+        "start": {
+          "title": "Start with care",
+          "body": "Read the whole page first. This is a drill with fake coins. Keep your real seed words, passphrase, and private keys out of this app and every web site."
+        },
+        "packet": {
+          "title": "Find the packet",
+          "body": "Open the folder named bitcoin-lifeboat-heir-drill. Keep it on this computer while you practice. Do not move real wallet files into it."
+        },
+        "wallet": {
+          "title": "Open the practice wallet",
+          "body": "Load the wallet file from the packet. The app should show a test network. It may show an address where fake coins can be received."
+        },
+        "send": {
+          "title": "Send fake coins",
+          "body": "Send only the test amount shown in the packet. Check the address on screen. Sign only when the app says this is a test network."
+        },
+        "result": {
+          "title": "Write the result",
+          "body": "Write down what worked and what stopped you. If the next screen offers a receipt, print it and give it to the owner or trusted helper."
+        }
+      },
+      "terms": {
+        "heading": "Plain words",
+        "packet": {
+          "term": "Practice packet",
+          "meaning": "The folder the owner gave you for this drill. It holds files for practice only."
+        },
+        "testCoins": {
+          "term": "Test coins",
+          "meaning": "Fake bitcoin made for practice. Test coins have no cash value."
+        },
+        "practiceWallet": {
+          "term": "Practice wallet",
+          "meaning": "A fake wallet in the packet. It is not the owner's real wallet."
+        },
+        "import": {
+          "term": "Import",
+          "meaning": "Load a file so the app can show the practice wallet."
+        },
+        "address": {
+          "term": "Address",
+          "meaning": "A line of letters and numbers where fake coins can be received."
+        },
+        "sign": {
+          "term": "Sign",
+          "meaning": "Approve a fake spend with the device or wallet."
+        },
+        "testNetwork": {
+          "term": "Test network",
+          "meaning": "A Bitcoin practice chain. Coins on it are not real money."
+        },
+        "receipt": {
+          "term": "Receipt",
+          "meaning": "A short record of what you tried and what worked."
+        }
+      },
+      "stop": {
+        "heading": "Stop now if",
+        "items": {
+          "secretRequest": "Any app, web site, chat, call, or message asks for real seed words, a passphrase, or a private key.",
+          "contacted": "Someone says they are from Bitcoin Lifeboat. Remember: we will never contact you.",
+          "missingFiles": "The packet does not have manifest.json and wallet/practice-wallet.json.",
+          "wrongPacket": "The folder name or packet ID does not match what the owner gave you.",
+          "mainnet": "The app shows mainnet, real bitcoin, or a red mainnet warning.",
+          "payFee": "A web site or person asks you to pay a fee to unlock coins.",
+          "realBitcoin": "The device shows real bitcoin, a real balance, or a real fee.",
+          "newAddress": "The address on the device is not the one you chose on screen.",
+          "unsure": "You are unsure what a step means.",
+          "pressure": "Anyone rushes you, asks for money, or asks to see your screen."
+        }
+      },
+      "confidence": {
+        "heading": "Confidence checklist",
+        "body": "Before you finish, make sure each sentence is true.",
+        "items": {
+          "packet": "I found the packet folder and the practice wallet file.",
+          "fakeBitcoin": "I can explain why this drill uses fake bitcoin only.",
+          "realSeeds": "I know real seed words never go into this app or any web site.",
+          "contact": "I know to stop if anyone calls, texts, or emails about this drill."
+        },
+        "keepGoing": "Keep going until the steps and checks are done.",
+        "ready": "You finished the walkthrough. Save or print the family receipt when that step is ready."
+      },
+      "receiptExport": {
+        "heading": "Family receipt",
+        "body": "Save a PDF for the owner. It records the checklist result only. It does not include wallet details.",
+        "button": "Save receipt PDF",
+        "saving": "Preparing receipt…",
+        "fileType": "PDF",
+        "status": {
+          "saved": "Receipt saved. Hash: {{hash}}",
+          "cancelled": "Receipt was not saved.",
+          "error": "The receipt could not be saved."
+        }
+      }
+    },
+    "generateRunbook": {
+      "title": "Generate Runbook",
+      "body": "Generate a recovery runbook from any template, then print it or save it as a PDF.",
+      "templateLabel": "Runbook template",
+      "templateGroups": {
+        "owner": "Owner recovery runbooks",
+        "heir": "Heir and education runbooks"
+      },
+      "templates": {
+        "singlesig-basic": "Singlesig recovery",
+        "singlesig-passphrase": "Singlesig recovery (with passphrase)",
+        "multisig-2of3": "2-of-3 multisig recovery",
+        "multisig-3of5": "3-of-5 multisig recovery",
+        "heir-singlesig-basic": "Heir plan — singlesig",
+        "heir-singlesig-passphrase": "Heir plan — singlesig (with passphrase)",
+        "heir-multisig-2of3": "Heir plan — 2-of-3 multisig",
+        "heir-multisig-3of5": "Heir plan — 3-of-5 multisig",
+        "liana-timelock": "Liana timelock runbook",
+        "meetup-workshop": "Meetup workshop kit",
+        "business-treasury": "Business treasury runbook"
+      },
+      "descriptor": {
+        "heading": "Pre-fill from a descriptor (optional)",
+        "help": "Paste a watch-only output descriptor to fill in the wallet details. Leave it blank to print an empty template you complete by hand.",
+        "label": "Output descriptor",
+        "placeholder": "wpkh([...]xpub.../0/*) — optional",
+        "useSample": "Use sample descriptor",
+        "apply": "Use this descriptor",
+        "clear": "Clear",
+        "screening": "Screening for secrets…",
+        "applied": "Descriptor applied. The wallet details are filled in below.",
+        "warnNote": "This input might contain secret material, so it was not applied.",
+        "warnConfirm": "I confirm this is not a real secret",
+        "blankNote": "Where you keep your seed, passphrase, and devices is never typed here. The printed runbook leaves labeled blanks for you to complete by hand."
+      },
+      "mode": {
+        "label": "Export mode",
+        "privateToggle": "Private mode (reveals xpubs)",
+        "publicSafeActive": "Public-safe: xpubs are redacted and device models are hidden.",
+        "privateActive": "Private mode: the full descriptor and device models are included. Store it where you store your seed backups."
+      },
+      "format": {
+        "label": "Export format",
+        "pdf": "PDF",
+        "markdown": "Markdown"
+      },
+      "export": {
+        "button": "Export runbook",
+        "exporting": "Generating…",
+        "status": {
+          "saved": "Runbook saved.",
+          "cancelled": "Export cancelled.",
+          "error": "Could not generate or save the runbook."
+        }
+      },
+      "preview": {
+        "heading": "Live preview",
+        "help": "A Markdown preview of the runbook in the selected mode. The exported file uses the same content.",
+        "loading": "Generating preview…",
+        "error": "Could not generate a preview for this template."
+      }
+    },
+    "learn": {
+      "title": "Learn",
+      "body": "Read offline guides about descriptors, backups, and recovery safety.",
+      "intro": "These guides are bundled with the app and work fully offline. Nothing here is fetched over the network.",
+      "navLabel": "Documentation pages",
+      "externalNote": "Links to outside pages open in your web browser.",
+      "docs": {
+        "overview": "What Bitcoin Lifeboat is",
+        "descriptors": "What a descriptor is",
+        "xpub": "What an xpub reveals",
+        "glossary": "Glossary",
+        "safety": "Staying safe",
+        "practiceSeeds": "Practice seeds"
+      }
+    },
+    "settings": {
+      "title": "Réglages",
+      "body": "Thème, langue et autres préférences.",
+      "theme": {
+        "label": "Thème",
+        "options": {
+          "system": "Système",
+          "light": "Clair",
+          "dark": "Sombre"
+        }
+      },
+      "textSize": {
+        "label": "Taille du texte",
+        "help": "Agrandit tout le texte et les contrôles pour faciliter la lecture.",
+        "options": {
+          "normal": "Normale",
+          "large": "Grande (1.5×)",
+          "larger": "Très grande (2×)"
+        }
+      },
+      "language": {
+        "label": "Langue",
+        "english": "English",
+        "spanish": "Español",
+        "german": "Deutsch",
+        "french": "Français"
+      },
+      "display": {
+        "label": "Affichage"
+      },
+      "advanced": {
+        "label": "Afficher les détails techniques avancés"
+      },
+      "diagnostics": {
+        "label": "Journalisation de diagnostic",
+        "help": "Les journaux de diagnostic restent sur votre appareil et ne sont jamais envoyés ailleurs. Désactivé par défaut."
+      },
+      "clearData": {
+        "label": "Effacer toutes les données locales",
+        "help": "Supprime vos préférences enregistrées de cet appareil. Cette action est irréversible.",
+        "button": "Effacer toutes les données locales",
+        "confirm": "Supprimer toutes les préférences enregistrées ?",
+        "confirmYes": "Oui, effacer",
+        "cancel": "Annuler",
+        "done": "Données locales effacées.",
+        "error": "Impossible d’effacer les données locales."
+      },
+      "about": {
+        "label": "À propos",
+        "version": "Version",
+        "license": "Licence",
+        "releases": "Voir les versions sur GitHub",
+        "unavailable": "Les informations de l’application ne sont pas disponibles."
+      }
+    }
+  },
+  "onboarding": {
+    "common": {
+      "ariaLabel": "Accueil initial",
+      "continue": "Continuer",
+      "back": "Retour",
+      "skip": "Ignorer",
+      "step": "Étape {{current}} sur {{total}}"
+    },
+    "welcome": {
+      "title": "Bitcoin Lifeboat",
+      "intro": "Bitcoin Lifeboat vous aide à vérifier si votre plan de récupération Bitcoin fonctionne avant une urgence.",
+      "notWallet": "Ce n'est pas un portefeuille.",
+      "notCustody": "Il ne garde pas de fonds.",
+      "notSeed": "Il n'a pas besoin de votre vraie phrase de récupération.",
+      "notAWallet": "Bitcoin Lifeboat n'est pas un portefeuille, pas un service de garde, pas un gestionnaire de phrase de récupération, pas un service juridique de succession et pas une société de récupération. C'est un outil de diagnostic gratuit et open source qui vous aide à vérifier si votre plan de récupération fonctionne."
+    },
+    "safety": {
+      "heading": "Avant de commencer, nos quatre promesses :",
+      "promise1": "Nous ne demandons jamais votre vraie phrase de récupération.",
+      "promise2": "Nous ne nous connectons jamais à internet sans votre action.",
+      "promise3": "Nous ne stockons jamais les métadonnées de votre portefeuille.",
+      "promise4": "Nous ne prétendons jamais que vos fonds sont en sécurité.",
+      "understand": "Je comprends."
+    },
+    "goal": {
+      "heading": "Que voulez-vous faire ?",
+      "checkBackup": "Vérifier mon plan de sauvegarde",
+      "auditMultisig": "Auditer ma configuration multisig",
+      "heirRunbook": "Créer un guide familial ou pour héritiers",
+      "generateRunbook": "Générer un guide de récupération",
+      "learn": "Apprendre comment fonctionne la récupération (mode pratique — v0.2)",
+      "cli": "Utiliser les outils développeur (CLI)"
+    },
+    "mode": {
+      "intro": "Ce mode utilise uniquement des métadonnées publiques du portefeuille.",
+      "publicMetadata": "Métadonnées publiques = descripteurs, xpubs, empreintes et chemins de dérivation.",
+      "doNotPaste": "Ne collez pas :",
+      "doNotPasteSeed": "Mots de récupération / mnémonique",
+      "doNotPastePrivateKeys": "Clés privées (WIF, hex)",
+      "doNotPasteXprv": "Clés privées étendues (xprv, yprv, zprv)",
+      "doNotPastePassphrases": "Phrases secrètes",
+      "detect": "Si vous collez un secret par erreur, Lifeboat le détectera, refusera de le traiter et videra le champ."
+    }
+  },
+  "dialogs": {
+    "sensitiveInput": {
+      "title": "This looks like a real Bitcoin secret",
+      "body1": "Bitcoin Lifeboat does not need seed phrases, private keys, or passphrases for this check.",
+      "body2": "For your safety, what you pasted has been cleared. The app did not store or transmit it.",
+      "detectedLabel": "What we detected:",
+      "detected": {
+        "bip39": "a {{count}}-word BIP39 seed phrase",
+        "wif": "a WIF private key",
+        "xprv": "an extended private key",
+        "rawHex": "a raw private key",
+        "slip39": "one or more SLIP-39 backup shares",
+        "codex32": "a codex32 secret",
+        "generic": "Bitcoin secret material"
+      },
+      "whatToDo": "What to do:",
+      "step1": "Close this dialog",
+      "step2": "Open your wallet software",
+      "step3": "Export the output descriptor (not the seed)",
+      "step4": "Paste the descriptor here",
+      "help": "Need help? Most wallets can export an output descriptor — for example Sparrow, Bitcoin Core, Specter, and Coldcard.",
+      "acknowledge": "I understand"
+    },
+    "practiceSeedBlock": {
+      "title": "Practice Mode blocked that seed phrase",
+      "body": "This looks like a real mnemonic, not a practice one. Practice Mode only accepts the documented test seeds. See practice-seeds.md.",
+      "action": "The pasted text was not stored. The field remains on the canonical practice seed.",
+      "acknowledge": "I understand"
+    },
+    "signetBroadcast": {
+      "title": "Confirm Signet broadcast",
+      "body": "This sends the finalized practice transaction to a public Signet Esplora endpoint.",
+      "networkCall": "Network call to",
+      "network": "Network: SIGNET. Mainnet broadcast is not available in Bitcoin Lifeboat.",
+      "cancel": "Cancel",
+      "confirm": "Broadcast on Signet",
+      "broadcasting": "Broadcasting…"
+    },
+    "exportPrivacy": {
+      "title": "Reveal your xpubs in this export?",
+      "warning": "This export contains your wallet's public-key material. xpubs reveal your full transaction history. Only store this where you store your seed backups.",
+      "confirm": "I understand, use private mode",
+      "cancel": "Keep public-safe"
+    }
+  },
+  "banners": {
+    "network": {
+      "mainnet": "MAINNET",
+      "testnet": "TESTNET",
+      "signet": "SIGNET",
+      "regtest": "REGTEST"
+    },
+    "safety": {
+      "warning": "Do not paste seed words, private keys, or passphrases.",
+      "detail": "This mode needs only your public wallet metadata (descriptor, xpubs, derivation paths)."
+    }
+  },
+  "status": {
+    "ready": "Ready",
+    "mostlyReady": "Mostly Ready",
+    "needsAttention": "Needs Attention",
+    "notReady": "Not Ready",
+    "cannotDetermine": "Cannot Determine"
+  },
+  "policyTree": {
+    "title": "Policy tree",
+    "lianaTitle": "Recovery path tree",
+    "loading": "Rendering policy tree...",
+    "error": "The policy tree could not be rendered for this descriptor.",
+    "ariaTitle": "Miniscript policy tree",
+    "ariaDescription": "Redacted spending-policy tree returned by the Rust Miniscript visualizer.",
+    "liana": {
+      "keyCount": "Keys required: {{count}}",
+      "currentBlockLabel": "Current block height",
+      "currentBlockPlaceholder": "900000",
+      "availableNow": "Available now",
+      "relativeBlocks": "Recovery path activates after {{blocks}} blocks, about {{days}} days.",
+      "relativeTime": "Recovery path activates after {{intervals}} time intervals, about {{days}} days.",
+      "absoluteHeight": "Recovery path activates after block {{height}}.",
+      "absoluteTimestamp": "Recovery path activates after timestamp {{timestamp}}.",
+      "countdownBlocks": "Based on current block {{height}}, recovery path is active in {{blocks}} blocks.",
+      "countdownNow": "Based on current block {{height}}, recovery path is active now."
+    }
+  },
+  "report": {
+    "ariaLabel": "Readiness report",
+    "title": "Your readiness report",
+    "summary": "Status: {{headline}} — score {{numeric}} out of 100. Warnings: {{warnings}}. Critical issues: {{criticals}}.",
+    "copyExplanation": "Copy explanation",
+    "learnMore": "Learn more",
+    "recommendedFix": "Recommended fix:",
+    "effortLabel": "Effort:",
+    "runAgainUnknown": "Run another readiness check within 12 months.",
+    "appVersionLabel": "Lifeboat version",
+    "reportHashLabel": "Report hash",
+    "cannotTellLabel": "What this report cannot tell you",
+    "sections": {
+      "passed": "What passed",
+      "needsAttention": "What needs attention",
+      "failed": "What failed",
+      "missing": "What is missing",
+      "nextSteps": "What to do next",
+      "antiActions": "What NOT to do",
+      "runAgain": "When to run this again",
+      "disclaimer": "Disclaimer",
+      "version": "Version and report hash"
+    },
+    "none": {
+      "passed": "No checks passed yet.",
+      "needsAttention": "Nothing needs your attention right now.",
+      "failed": "No critical failures.",
+      "missing": "Nothing essential appears to be missing from what Lifeboat could check."
+    },
+    "technical": {
+      "toggle": "Show technical details",
+      "walletType": "Wallet type",
+      "scriptType": "Script type",
+      "network": "Network",
+      "descriptor": "Canonical descriptor",
+      "checks": "Detailed checks",
+      "inputHash": "Input hash"
+    },
+    "cannotTell": "What this report CANNOT tell you\n\n  - Whether your hardware wallets still work.\n    (Lifeboat did not power them on. Run a Disaster Drill in v0.3.)\n  - Whether your seed words are still legible on the paper/metal.\n    (Go check. In person. Today.)\n  - Whether the location you store backups in is still safe.\n    (Lifeboat cannot see your closet.)\n  - Whether your heirs can find the materials.\n    (Run a Heir Drill in v0.6, or talk to them now.)\n  - Whether your passphrase is correct.\n    (Lifeboat does not know your passphrase. Test it on a\n     low-value wallet first.)\n  - Whether the wallet software you depend on will still exist\n    when you need it.\n    (Print this report. Print the descriptor. Make recovery\n     possible without specific software.)"
+  }
+}

@@ -1,0 +1,25 @@
+[package]
+name = "wallet-imports"
+description = "Wallet-export importers normalizing to a shared struct."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# US-023: importers normalize wallet exports into `NormalizedWalletExport`.
+# `serde_json` parses the export files (strict, `deny_unknown_fields`); `serde`
+# derives the normalized output type (it crosses the Tauri→JS boundary).
+# `descriptor-audit` extracts each descriptor's key origins, wallet type, and
+# quorum (the importer reuses those facts, never re-parsing by hand) and is also
+# how a descriptor carrying private-key material is refused (E-PARSE-005).
+# `error-taxonomy` supplies the stable error codes.
+serde = { workspace = true }
+serde_json.workspace = true
+descriptor-audit.workspace = true
+error-taxonomy.workspace = true

@@ -1,0 +1,3 @@
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0009"
+reason = "time >=0.3.47 requires rustc 1.88.0; root MSRV is pinned to 1.78. The printpdf fallback uses only UNIX_EPOCH metadata, not untrusted date parsing."

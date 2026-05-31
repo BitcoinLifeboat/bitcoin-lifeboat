@@ -1,0 +1,7 @@
+# Formatting is enforced by `cargo fmt --check` in CI. Only stable rustfmt
+# options are used here so formatting is identical on the pinned 1.78 toolchain.
+edition = "2021"
+max_width = 100
+tab_spaces = 4
+newline_style = "Unix"
+use_small_heuristics = "Default"

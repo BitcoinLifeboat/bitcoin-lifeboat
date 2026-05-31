@@ -1,0 +1,63 @@
+# cargo-fuzz harness for `sensitive-input-detector` (PRD §13.5.10).
+#
+# This is a DETACHED workspace (note the empty `[workspace]` table at the end):
+# it depends on `libfuzzer-sys`, which only builds under a nightly toolchain, so
+# it must never be pulled into the stable quality gate
+# (`cargo build/clippy/test --workspace`). The parent workspace also lists `fuzz`
+# in its `exclude`. Build/run with the nightly toolchain via `cargo +nightly`.
+#
+# The four targets and their invariants (PRD §13.5.10 / §27 acceptance gate):
+#   fuzz_detector_arbitrary       random bytes → must not panic
+#   fuzz_detector_false_positive  clean English/dictionary corpus → zero Block
+#   fuzz_detector_false_negative  minted valid secrets → must Block
+#   fuzz_descriptor_with_xprv     descriptors with an embedded xprv → must Block
+#
+# The same four invariants are also checked deterministically under the standard
+# `cargo test` gate by `crates/sensitive-input-detector/tests/fuzz_properties.rs`.
+[package]
+name = "sensitive-input-detector-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+sensitive-input-detector = { path = "../crates/sensitive-input-detector" }
+# `fuzz_detector_false_negative` mints checksum-valid BIP39 mnemonics from the
+# fuzzer bytes (used as entropy) across all ten wordlists, so each input is a
+# real secret by construction. Pinned to the same major as the workspace.
+bip39 = { version = "2", features = ["all-languages"] }
+
+[[bin]]
+name = "fuzz_detector_arbitrary"
+path = "fuzz_targets/fuzz_detector_arbitrary.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_detector_false_positive"
+path = "fuzz_targets/fuzz_detector_false_positive.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_detector_false_negative"
+path = "fuzz_targets/fuzz_detector_false_negative.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "fuzz_descriptor_with_xprv"
+path = "fuzz_targets/fuzz_descriptor_with_xprv.rs"
+test = false
+doc = false
+bench = false
+
+# Detach from the parent workspace: this crate is nightly-only.
+[workspace]

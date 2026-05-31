@@ -1,0 +1,36 @@
+# DETACHED workspace. PSBT drill logic depends on `bdk_wallet 3.x` through the
+# Signet/regtest practice-wallet stack, so this crate pins its own toolchain and
+# stays excluded from the root Rust 1.78 core workspace.
+[workspace]
+
+[package]
+name = "psbt-drill"
+description = "BIP174 PSBT v0 lifecycle helpers for local recovery signing drills."
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+license = "MIT"
+repository = "https://github.com/__GH_ORG__/bitcoin-lifeboat"
+authors = ["Bitcoin Lifeboat Contributors"]
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }
+
+[dependencies]
+address-derive = { path = "../address-derive" }
+base64 = "0.21"
+bdk_chain = "0.23.3"
+bdk_wallet = "=3.0.0"
+descriptor-audit = { path = "../descriptor-audit" }
+ed25519-dalek = { version = "2", features = ["rand_core"] }
+error-taxonomy = { path = "../error-taxonomy" }
+rand = "0.8"
+readiness-score = { path = "../readiness-score" }
+report-engine = { path = "../report-engine" }
+runbook-engine = { path = "../runbook-engine" }
+secrecy = "0.10"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+sensitive-input-detector = { path = "../sensitive-input-detector" }
+signet-lab = { path = "../signet-lab" }

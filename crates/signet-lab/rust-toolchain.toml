@@ -1,0 +1,6 @@
+# `bdk_wallet 3.0.0` declares rust-version 1.85.0. Keep that bump scoped to
+# this detached practice-wallet crate; the repo-root core workspace remains
+# pinned to Rust 1.78.0.
+[toolchain]
+channel = "1.85.0"
+components = ["rustfmt", "clippy"]

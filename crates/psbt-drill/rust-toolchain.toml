@@ -1,0 +1,6 @@
+# `psbt-drill` depends on the same BDK 3.x wallet stack as `signet-lab`, which
+# declares rust-version 1.85. Keep that bump scoped to the detached drill crates;
+# the repo-root core workspace remains pinned to Rust 1.78.0.
+[toolchain]
+channel = "1.85.0"
+components = ["rustfmt", "clippy"]

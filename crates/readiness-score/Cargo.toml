@@ -1,0 +1,32 @@
+[package]
+name = "readiness-score"
+description = "Recovery-readiness checks, scoring, and status mapping."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# US-019: run the §9.1 analysis checks A–G over a parsed descriptor. Parsing,
+# normalization, multisig/key-origin facts, and network inference come from
+# `descriptor-audit`; address derivation and known-address comparison from
+# `address-derive`; `miniscript` is needed only to name `DescriptorType` for the
+# C4 script-type-vs-derivation-scheme cross-check.
+descriptor-audit.workspace = true
+address-derive.workspace = true
+miniscript.workspace = true
+serde = { workspace = true }
+# US-020: the §16.3 critical-failure evaluator inspects the `ErrorCode` of a parse
+# failure to pick the precise critical (E-PARSE-003 → C-DESC-CHECKSUM-INVALID,
+# E-PARSE-005 → C-DESC-CONTAINS-XPRV, E-PARSE-007 → C-KEY-COUNT-BELOW-THRESHOLD).
+# This does NOT make the crate fallible — `run_checks`/`evaluate_critical_failures`
+# still return values, never `Result` (same precedent as the detector in US-016).
+error-taxonomy.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true

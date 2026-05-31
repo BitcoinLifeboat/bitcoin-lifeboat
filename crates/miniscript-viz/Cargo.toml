@@ -1,0 +1,21 @@
+[package]
+name = "miniscript-viz"
+description = "GraphViz DOT rendering for Miniscript spending policies."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+# US-087: lift descriptor spending policies with rust-miniscript and render a
+# GUI-agnostic GraphViz DOT tree. descriptor-audit supplies the single validated
+# parse spine; output labels intentionally redact key material.
+descriptor-audit.workspace = true
+error-taxonomy.workspace = true
+miniscript.workspace = true
+serde = { workspace = true }

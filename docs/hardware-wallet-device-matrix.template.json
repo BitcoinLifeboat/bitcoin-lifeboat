@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "app_version": "1.0.0",
+  "build_id": "v1.0.0",
+  "tested_at": "YYYY-MM-DD",
+  "manual_tests": [
+    {
+      "device": "trezor",
+      "firmware_tested": "firmware version",
+      "host_os": "host OS and version",
+      "path_tested": "HWI sidecar",
+      "result": "pass",
+      "tester": "tester name or handle",
+      "date": "YYYY-MM-DD",
+      "evidence_ref": "issue, PR, artifact, or internal test record URL",
+      "notes": "Use testnet, Signet, regtest, or throwaway practice funds only."
+    },
+    {
+      "device": "coldcard",
+      "firmware_tested": "firmware version",
+      "host_os": "host OS and version",
+      "path_tested": "File PSBT",
+      "result": "pass",
+      "tester": "tester name or handle",
+      "date": "YYYY-MM-DD",
+      "evidence_ref": "issue, PR, artifact, or internal test record URL",
+      "notes": "Use testnet, Signet, regtest, or throwaway practice funds only."
+    },
+    {
+      "device": "bitbox02",
+      "firmware_tested": "firmware version",
+      "host_os": "host OS and version",
+      "path_tested": "HWI sidecar",
+      "result": "pass",
+      "tester": "tester name or handle",
+      "date": "YYYY-MM-DD",
+      "evidence_ref": "issue, PR, artifact, or internal test record URL",
+      "notes": "Use testnet, Signet, regtest, or throwaway practice funds only."
+    },
+    {
+      "device": "jade",
+      "firmware_tested": "firmware version",
+      "host_os": "host OS and version",
+      "path_tested": "QR PSBT",
+      "result": "pass",
+      "tester": "tester name or handle",
+      "date": "YYYY-MM-DD",
+      "evidence_ref": "issue, PR, artifact, or internal test record URL",
+      "notes": "Use testnet, Signet, regtest, or throwaway practice funds only."
+    },
+    {
+      "device": "ledger",
+      "firmware_tested": "firmware version",
+      "host_os": "host OS and version",
+      "path_tested": "HWI sidecar",
+      "result": "pass",
+      "tester": "tester name or handle",
+      "date": "YYYY-MM-DD",
+      "evidence_ref": "issue, PR, artifact, or internal test record URL",
+      "notes": "Use testnet, Signet, regtest, or throwaway practice funds only."
+    }
+  ]
+}

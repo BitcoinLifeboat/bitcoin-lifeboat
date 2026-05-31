@@ -1,0 +1,5 @@
+---
+source: cli/lifeboat/src/commands.rs
+expression: out.stdout
+---
+{"addresses":[{"address":"tb1qaqg0encvurl7rzt52g94d7nqrp3v7a6dhadv8f00jprrhqavtlns2x705w","chain":"receive","index":0},{"address":"tb1qn5x44rzqjc9vgzt5ldfz4r0s7kczzxxvj5w0j4d25jprajqrdetsrdtthv","chain":"receive","index":1},{"address":"tb1q8ke5xqhsyqydxk9jkkrn83f6ltp7edst4xv2ar2xlqdry2g8588qpqjjdj","chain":"receive","index":2},{"address":"tb1qza22f2uhjpr62kcvqft9yfhnd8tfwm2fkllp3fuerm7u74wtty5qttt23f","chain":"change","index":0},{"address":"tb1qght0ll9yqxu8djltjsa9m30ajjj789cklughgqff9agqf58kfvvsn76tzs","chain":"change","index":1},{"address":"tb1qmk4hgulk4t0vnhsws8xq78dma8sc322m37md72ze0448rdtjpzvqnu43jc","chain":"change","index":2}],"network":"testnet"}

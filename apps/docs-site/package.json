@@ -1,0 +1,25 @@
+{
+  "name": "bitcoin-lifeboat-docs-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Static Astro Starlight documentation site for Bitcoin Lifeboat.",
+  "scripts": {
+    "sync": "node scripts/sync-docs.mjs",
+    "dev": "npm run sync && astro dev",
+    "typecheck": "npm run sync && astro check",
+    "build": "npm run sync && astro check && astro build && npm run check:links && npm run check:launch-kit",
+    "preview": "astro preview",
+    "check:links": "node scripts/check-site-links.mjs",
+    "check:launch-kit": "node scripts/verify-launch-kit.mjs",
+    "create:hero-image": "node scripts/create-hero-image.mjs"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.39.2",
+    "astro": "^6.4.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "typescript": "^5.6.3"
+  }
+}
