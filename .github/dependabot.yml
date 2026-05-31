@@ -19,6 +19,8 @@ updates:
       - dependency-name: crc
       - dependency-name: home
       - dependency-name: image
+      - dependency-name: base64
+      - dependency-name: sha2
       - dependency-name: fluent-bundle
       - dependency-name: unic-langid
       - dependency-name: clap_complete
@@ -30,6 +32,7 @@ updates:
       - dependency-name: half
       - dependency-name: printpdf
       - dependency-name: time
+      - dependency-name: thiserror
 
   - package-ecosystem: cargo
     directory: /apps/desktop/src-tauri
