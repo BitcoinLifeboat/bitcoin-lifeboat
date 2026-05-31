@@ -1210,7 +1210,7 @@ version = "0.1.0"
 dependencies = [
  "fluent-bundle",
  "serde",
- "thiserror 1.0.69",
+ "thiserror 2.0.18",
  "unic-langid",
 ]
 
