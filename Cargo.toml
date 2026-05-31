@@ -126,7 +126,7 @@ clap = { version = "4", features = ["derive"] }
 # (clap_mangen adds only `roff`). Per the MSRV-RISK rule: if a re-resolve ever
 # selects a patch needing rustc > 1.78, step back with
 # `cargo update -p <crate> --precise <ver>`; revisit with the toolchain channel.
-clap_complete = "=4.5.38"
+clap_complete = "=4.6.5"
 clap_mangen = "=0.2.24"
 clap_complete_nushell = "=4.5.5"
 # Testing / benchmarks
