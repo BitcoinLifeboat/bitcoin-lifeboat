@@ -276,7 +276,7 @@ checksum = "11301df0b06f22dea7bb1916403fdd88a371031e495c49b8f96931b28189e175"
 name = "bitcoin-lifeboat"
 version = "0.1.0"
 dependencies = [
- "base64 0.21.7",
+ "base64 0.22.1",
  "desktop-commands",
  "hwi-bridge",
  "psbt-drill",
@@ -3453,7 +3453,7 @@ name = "psbt-drill"
 version = "0.1.0"
 dependencies = [
  "address-derive",
- "base64 0.21.7",
+ "base64 0.22.1",
  "bdk_chain",
  "bdk_wallet",
  "descriptor-audit",
@@ -3475,7 +3475,7 @@ dependencies = [
 name = "psbt-tools"
 version = "0.1.0"
 dependencies = [
- "base64 0.21.7",
+ "base64 0.22.1",
  "error-taxonomy",
  "miniscript 13.0.0",
  "serde",

@@ -43,7 +43,7 @@ tauri-plugin-process = "2"
 tauri-plugin-shell = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-base64 = "0.21"
+base64 = "0.22"
 # US-042: the §21.3 command logic lives in this GUI-agnostic core crate (a member
 # of the repo-root workspace). The `#[tauri::command]` wrappers in `src/commands.rs`
 # delegate to it; keeping the logic out of this (detached, webkit-linking) crate
