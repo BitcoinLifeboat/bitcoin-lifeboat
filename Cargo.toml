@@ -137,7 +137,7 @@ clap_complete_nushell = "=4.5.5"
 # + the optional `console`); it requires `similar ^2.1.0`, which caps `similar`
 # below the rust-1.85 `similar 3.x`, and `console ^0.15.4`, both 1.78-safe. Per
 # the MSRV-RISK rule, revisit this pin together with the toolchain channel.
-insta = "=1.44.3"
+insta = "=1.47.2"
 # `default-features = false` drops criterion's `rayon` (rust 1.80) and `plotters`
 # subtrees, which the pinned Rust 1.78 toolchain cannot build and which a simple
 # timing benchmark does not need. `cargo_bench_support` keeps `cargo bench`
