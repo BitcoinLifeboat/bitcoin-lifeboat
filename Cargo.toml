@@ -164,7 +164,7 @@ half = "=2.4.1"
 # `default-features = false` drops printpdf's wasm-only `js-sys` default. Per the
 # MSRV-RISK rule, revisit these pins together with the toolchain channel.
 printpdf = { version = "=0.7.0", default-features = false }
-time = { version = "=0.3.36", default-features = false }
+time = { version = "=0.3.47", default-features = false }
 
 # Internal crates (path members), available for inter-crate wiring in later stories.
 lifeboat-core = { version = "0.1.0", path = "crates/lifeboat-core" }
