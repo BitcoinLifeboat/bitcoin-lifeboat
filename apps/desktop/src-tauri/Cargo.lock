@@ -8,7 +8,7 @@ version = "0.1.0"
 dependencies = [
  "descriptor-audit",
  "error-taxonomy",
- "miniscript 13.0.0",
+ "miniscript 13.0.1",
  "serde",
 ]
 
@@ -961,7 +961,7 @@ name = "descriptor-audit"
 version = "0.1.0"
 dependencies = [
  "error-taxonomy",
- "miniscript 13.0.0",
+ "miniscript 13.0.1",
 ]
 
 [[package]]
@@ -2599,9 +2599,9 @@ dependencies = [
 
 [[package]]
 name = "miniscript"
-version = "13.0.0"
+version = "13.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "867b1f11e0545ad5ebbddd8a9f18756d9657a6758bf10d96cf15ddd0b726b650"
+checksum = "7cfb042402e95bb8a7a2f476bb8896ee1552c2f14224b3d680ac809fb20ff29d"
 dependencies = [
  "bech32",
  "bitcoin",
@@ -2614,7 +2614,7 @@ version = "0.1.0"
 dependencies = [
  "descriptor-audit",
  "error-taxonomy",
- "miniscript 13.0.0",
+ "miniscript 13.0.1",
  "serde",
 ]
 
@@ -3477,7 +3477,7 @@ version = "0.1.0"
 dependencies = [
  "base64 0.21.7",
  "error-taxonomy",
- "miniscript 13.0.0",
+ "miniscript 13.0.1",
  "serde",
 ]
 
@@ -3590,7 +3590,7 @@ dependencies = [
  "address-derive",
  "descriptor-audit",
  "error-taxonomy",
- "miniscript 13.0.0",
+ "miniscript 13.0.1",
  "serde",
 ]
 
@@ -3675,7 +3675,7 @@ version = "0.1.0"
 dependencies = [
  "address-derive",
  "descriptor-audit",
- "miniscript 13.0.0",
+ "miniscript 13.0.1",
  "readiness-score",
  "serde",
  "serde_json",
@@ -3952,7 +3952,7 @@ dependencies = [
  "bip39",
  "codex32",
  "error-taxonomy",
- "miniscript 13.0.0",
+ "miniscript 13.0.1",
  "regex-lite",
  "secrecy",
  "serde",

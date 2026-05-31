@@ -56,7 +56,7 @@ authors = ["Bitcoin Lifeboat Contributors"]
 [workspace.dependencies]
 # Bitcoin / output descriptors
 bitcoin = "=0.32.5"
-miniscript = "=13.0.0"
+miniscript = "=13.0.1"
 # Secret hygiene
 zeroize = "1.8"
 secrecy = "0.10"
