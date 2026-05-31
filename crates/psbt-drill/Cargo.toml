@@ -24,7 +24,7 @@ bdk_wallet = "=3.0.0"
 descriptor-audit = { path = "../descriptor-audit" }
 ed25519-dalek = { version = "2", features = ["rand_core"] }
 error-taxonomy = { path = "../error-taxonomy" }
-rand = "0.8"
+rand = "0.10"
 readiness-score = { path = "../readiness-score" }
 report-engine = { path = "../report-engine" }
 runbook-engine = { path = "../runbook-engine" }
