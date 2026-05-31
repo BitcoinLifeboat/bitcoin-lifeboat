@@ -142,7 +142,7 @@ insta = "=1.44.3"
 # subtrees, which the pinned Rust 1.78 toolchain cannot build and which a simple
 # timing benchmark does not need. `cargo_bench_support` keeps `cargo bench`
 # working. A future story that wants HTML/plot output can opt features back in.
-criterion = { version = "0.5", default-features = false, features = ["cargo_bench_support"] }
+criterion = { version = "0.8", default-features = false, features = ["cargo_bench_support"] }
 # 1.78 build pins for criterion's (and the future CLI's) transitive tree. The
 # latest clap 4.6 / clap_lex 1.1 / half 2.7 raise their MSRV to 1.81–1.85, which
 # the pinned Rust 1.78 toolchain cannot build (clap_lex 1.1 even uses edition
