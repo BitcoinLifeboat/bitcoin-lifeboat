@@ -5,6 +5,10 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 2
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
 
   - package-ecosystem: cargo
     directory: /
@@ -12,6 +16,9 @@ updates:
       interval: weekly
     open-pull-requests-limit: 2
     ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
       # Root Rust stays pinned to 1.78. These dependencies are intentionally
       # capped to avoid newer MSRVs, edition-2024 manifests, or snapshot churn.
       - dependency-name: bitcoin
@@ -40,6 +47,9 @@ updates:
       interval: weekly
     open-pull-requests-limit: 2
     ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
       # The detached Tauri lockfile pulls the root path crates. Keep the same
       # MSRV and deterministic-output pins from the root workspace intact here.
       - dependency-name: bitcoin
@@ -61,12 +71,17 @@ updates:
       - dependency-name: base64
       - dependency-name: sha2
       - dependency-name: rand
+      - dependency-name: thiserror
 
   - package-ecosystem: npm
     directory: /apps/desktop
     schedule:
       interval: weekly
     open-pull-requests-limit: 2
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
     groups:
       npm-minor-patch:
         patterns:
@@ -80,6 +95,10 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 2
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
     groups:
       npm-minor-patch:
         patterns:
