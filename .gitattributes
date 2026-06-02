@@ -1,2 +1,3 @@
 *.rs text eol=lf
 crates/sensitive-input-detector/wordlists/**/*.txt text eol=lf
+fixtures/reports/*.json text eol=lf
