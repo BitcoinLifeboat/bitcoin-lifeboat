@@ -5,7 +5,7 @@
 # disclosure route, or PGP key. See docs/CONFIGURATION.md for the meaning of
 # each value and the exact placeholder-swap procedure.
 #
-# Placeholder tokens (__GH_ORG__, __MAINTAINER_PGP_FINGERPRINT__,
+# Placeholder tokens (__MAINTAINER_PGP_FINGERPRINT__,
 # __MAINTAINER_PGP_KEY_BLOCK__) are used verbatim until you replace them. Builds
 # proceed normally with placeholders in place. US-099 blocks any public
 # (non-alpha/beta) release while any placeholder remains.
@@ -13,9 +13,9 @@
 schema_version = "1.0.0"
 
 [github]
-org = "__GH_ORG__"
+org = "BitcoinLifeboat"
 repo = "bitcoin-lifeboat"
-url_base = "https://github.com/__GH_ORG__/bitcoin-lifeboat"
+url_base = "https://github.com/BitcoinLifeboat/bitcoin-lifeboat"
 
 [site]
 domain = "bitcoinlifeboat.org"
@@ -43,5 +43,6 @@ host = "github-pages"
 channel_default = "alpha"
 
 [placeholders]
-# Tokens that block a public (non-alpha/beta) release until replaced (enforced by US-099).
-tokens = ["__GH_ORG__", "__MAINTAINER_PGP_FINGERPRINT__", "__MAINTAINER_PGP_KEY_BLOCK__"]
+# Additional tokens that block a public (non-alpha/beta) release until replaced.
+# US-099 also scans its built-in release-template tokens.
+tokens = ["__MAINTAINER_PGP_FINGERPRINT__", "__MAINTAINER_PGP_KEY_BLOCK__"]
