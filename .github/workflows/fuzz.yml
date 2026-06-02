@@ -13,6 +13,7 @@ permissions:
 env:
   CARGO_TERM_COLOR: always
   FUZZ_MAX_TOTAL_TIME: ${{ startsWith(github.ref, 'refs/tags/v') && '3600' || '300' }}
+  FUZZ_TARGET_TRIPLE: x86_64-unknown-linux-gnu
 
 jobs:
   fuzz:
@@ -41,11 +42,11 @@ jobs:
 
       - name: Build fuzz target
         working-directory: fuzz
-        run: cargo +nightly fuzz build ${{ matrix.target }}
+        run: cargo +nightly fuzz build --target "$FUZZ_TARGET_TRIPLE" ${{ matrix.target }}
 
       - name: Run fuzz target
         working-directory: fuzz
         shell: bash
         run: |
           timeout "$((FUZZ_MAX_TOTAL_TIME + 120))s" \
-            cargo +nightly fuzz run "${{ matrix.target }}" -- -max_total_time="$FUZZ_MAX_TOTAL_TIME"
+            cargo +nightly fuzz run --target "$FUZZ_TARGET_TRIPLE" "${{ matrix.target }}" -- -max_total_time="$FUZZ_MAX_TOTAL_TIME"
