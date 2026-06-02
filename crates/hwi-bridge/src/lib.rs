@@ -965,10 +965,13 @@ fn is_unsupported_firmware_error(err: &LifeboatError) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[cfg(unix)]
     use std::sync::atomic::{AtomicU64, Ordering};
 
+    #[cfg(unix)]
     static NEXT_DIR: AtomicU64 = AtomicU64::new(0);
 
+    #[cfg(unix)]
     fn unique_test_dir(tag: &str) -> PathBuf {
         let dir = std::env::temp_dir().join(format!(
             "lifeboat-hwi-bridge-{tag}-{}-{}",
