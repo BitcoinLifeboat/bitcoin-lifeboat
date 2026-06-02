@@ -26,6 +26,7 @@ apps/desktop/src-tauri/binaries/hwi-lifeboat-*
 .env.*
 !.env.example
 
+
 # Fuzzing artifacts (added in US-016)
 **/fuzz/corpus/
 **/fuzz/artifacts/
