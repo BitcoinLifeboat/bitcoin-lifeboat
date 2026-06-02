@@ -1,0 +1,1 @@
+crates/sensitive-input-detector/wordlists/**/*.txt text eol=lf
