@@ -99,7 +99,7 @@ jobs:
 
       - name: Install Rust toolchain
         shell: bash
-        run: rustup toolchain install "$RUSTUP_TOOLCHAIN" --profile minimal --component clippy rustfmt
+        run: rustup toolchain install "$RUSTUP_TOOLCHAIN" --profile minimal --component clippy --component rustfmt
 
       - name: Configure deterministic Rust paths
         shell: bash
