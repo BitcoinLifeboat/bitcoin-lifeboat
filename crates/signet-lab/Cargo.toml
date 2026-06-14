@@ -17,7 +17,7 @@ authors = ["Bitcoin Lifeboat Contributors"]
 all = { level = "warn", priority = -1 }
 
 [dependencies]
-bdk_wallet = "=3.0.0"
+bdk_wallet = "=3.1.0"
 error-taxonomy = { path = "../error-taxonomy" }
 rand = "0.8"
 serde_json = "1"
